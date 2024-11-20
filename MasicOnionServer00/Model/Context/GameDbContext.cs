@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MasicOnionServer00.Model.Context
 {
-    public class GameDbContextcs : DbContext
+    public class GameDbContext : DbContext
     {
         public DbSet<User>Users { get; set; }
 

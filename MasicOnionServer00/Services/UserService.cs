@@ -8,9 +8,9 @@ namespace MasicOnionServer00.Services
 {
     public class UserService : ServiceBase<IUserService>, IUserService
     {
-        public async UnaryResult<int> ResistUserAsync(string name)
+        public async UnaryResult<int> RegistUserAsync(string name)
         {
-            using var context = new GameDbContextcs();
+            using var context = new GameDbContext();
 
             //バリデーションチェック
             if (context.Users.Where(user => user.Name == name).Count() > 0)
@@ -26,7 +26,7 @@ namespace MasicOnionServer00.Services
             user.Updated_at = DateTime.Now;
             context.Users.Add(user);
             await context.SaveChangesAsync();
-            return user.id;
+            return user.Id;
         }
     }
 }

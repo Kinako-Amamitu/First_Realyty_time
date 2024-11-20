@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Shared.Interfaces.StreamingHubs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Shared.Interfaces.StreamingHubs
+namespace StreamingHubs
 {
     public class RoomData
     {

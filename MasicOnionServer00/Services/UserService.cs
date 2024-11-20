@@ -6,11 +6,17 @@ using Shared.Interfaces.Services;
 
 namespace MasicOnionServer00.Services
 {
-    public class UserService : ServiceBase<IUserService>,IUserService
+    public class UserService : ServiceBase<IUserService>, IUserService
     {
         public async UnaryResult<int> ResistUserAsync(string name)
         {
             using var context = new GameDbContextcs();
+
+            //バリデーションチェック
+            if (context.Users.Where(user => user.Name == name).Count() > 0)
+            {
+                throw new ReturnStatusException(Grpc.Core.StatusCode.InvalidArgument, "");
+            }
 
             //テーブルにレコードを追加
             User user=new User();

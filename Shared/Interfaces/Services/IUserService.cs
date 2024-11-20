@@ -12,7 +12,7 @@ namespace Shared.Interfaces.Services
         /// </summary>
         /// <param name="name">ユーザーの名前</param>
         /// <returns></returns>
-        UnaryResult<int> ResistUserAsync(string name);
+        UnaryResult<int> RegistUserAsync(string name);
     }
 
 }

@@ -43,18 +43,18 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     }
 
     //入室
-    public async UniTask JoinAsync(string roomName, int userId)
+    public async UniTask JoinedAsync(string roomName, int userId)
     {
-        JoinedUser[] users = await roomHub.JoinAsync(roomName, userId);
+        JoinedUser[] users = await roomHub.JoinedAsync(roomName, userId);
         foreach(var user in users)
         {
-            if (user.UserData.id == userId) this.ConnectionId = user.ConnectionId;
+            if (user.UserData.Id == userId) this.ConnectionId = user.ConnectionId;
             OnJoinedUser(user);
         }
     }
 
     //入室通知(IRoomHubReceiverインターフェイスの実装)
-    public void OnJoin(JoinedUser user)
+    public void Onjoin(JoinedUser user)
     {
         OnJoinedUser(user);
     }

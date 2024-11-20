@@ -33,7 +33,12 @@ namespace StreamingHubs
 
             RoomData[] roomDataList = roomStorage.AllValues.ToArray<RoomData>();
             //参加中のユーザー情報を返す
-            JoinedUser[] joinedUserList = new JoinedUser[5];
+            JoinedUser[] joinedUserList = new JoinedUser[roomDataList.Length];
+            for (int i = 0; i < roomDataList.Length; i++)
+            {
+                joinedUserList[i] = roomDataList[i].JoinedUser;
+            }
+          
 
             return joinedUserList;
         }

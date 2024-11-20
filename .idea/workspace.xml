@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/RoomModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/RoomModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" afterDir="false" />
@@ -77,7 +78,7 @@
       <workItem from="1731385515263" duration="2441000" />
       <workItem from="1731390419633" duration="863000" />
       <workItem from="1731980922308" duration="632000" />
-      <workItem from="1732083166714" duration="318000" />
+      <workItem from="1732083166714" duration="929000" />
     </task>
     <servers />
   </component>

@@ -20,7 +20,7 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     public Action<JoinedUser> OnJoinedUser { get; set; }
 
     //ユーザー退室通知
-    public Action<JoinedUser> OnLeavedUser { get; set; }
+    public Action OnLeavedUser { get; set; }
 
     //MagicOnion接続処理
     public async UniTask ConnectAsync()
@@ -68,8 +68,8 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     }
 
 
-    public void OnLeave(JoinedUser user)
+    public void OnLeave()
     {
-        OnLeavedUser(user);
+        OnLeavedUser();
     }
 }

@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void OnLeavedUser()
+    public void OnLeavedUser(JoinedUser user)
     {
-        Destroy(characterList[])
+        Destroy(characterList[user.ConnectionId]);
     }
 }

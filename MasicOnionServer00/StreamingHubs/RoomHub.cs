@@ -43,7 +43,7 @@ namespace StreamingHubs
             return joinedUserList;
         }
 
-        public async Task<JoinedUser[]> LeavedAsync(string roomName, int userId)
+        public async Task LeavedAsync()
         {
   
 
@@ -54,17 +54,8 @@ namespace StreamingHubs
             await room.RemoveAsync(this.Context);
 
             //ルーム参加者全員に、ユーザーの退室通知を送信
-            this.BroadcastExceptSelf(room).OnLeave(roomName,userId);
+            this.BroadcastExceptSelf(room).OnLeave();
 
-            //参加中のユーザー情報を返す
-            JoinedUser[] joinedUserList = new JoinedUser[this.Context];
-            for (int i = 0; i < this.Context; i++)
-            {
-                joinedUserList[i] = this.Context;
-            }
-
-
-            return joinedUserList;
         }
     }
 }

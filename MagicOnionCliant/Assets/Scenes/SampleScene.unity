@@ -474,7 +474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &507691213
 RectTransform:
   m_ObjectHideFlags: 0
@@ -650,6 +650,7 @@ MonoBehaviour:
   characterPrefab: {fileID: 3160030335923008741, guid: 0dfd1562364140648a5c881e46b4813e,
     type: 3}
   roomModel: {fileID: 1577764777}
+  leaveButton: {fileID: 507691212}
 --- !u!1 &778191106
 GameObject:
   m_ObjectHideFlags: 0

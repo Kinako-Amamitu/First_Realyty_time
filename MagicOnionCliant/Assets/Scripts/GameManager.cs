@@ -2,6 +2,7 @@ using Shared.Interfaces.StreamingHubs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
@@ -10,12 +11,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject characterPrefab;
     [SerializeField] RoomModel roomModel;
     [SerializeField] GameObject leaveButton;
+    [SerializeField] GameObject joinButton;
 
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
     async void Start()
     {
         //ユーザーが入室した時にOnJoinedUserメソッドを実行するよう、モデルに登録
         roomModel.OnJoinedUser += this.OnJoinedUser;
+        roomModel.OnLeavedUser += this.OnLeavedUser;
         //接続
         await roomModel.ConnectAsync();
     }
@@ -23,12 +26,14 @@ public class GameManager : MonoBehaviour
         // 入室
         await roomModel.JoinedAsync("sampleRoom", 1);
         leaveButton.SetActive(true);
+        joinButton.SetActive(false);
     }
     public async void LeaveRoom()
     {
         //退室
         await roomModel.LeaveAsync();
         leaveButton.SetActive(false);
+        joinButton.SetActive(true);
     }
     //ユーザーが入室したときの処理
     private void OnJoinedUser(JoinedUser user)
@@ -39,8 +44,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //ユーザーが退出したときの処理
     public void OnLeavedUser(JoinedUser user)
     {
-        Destroy(characterList[user.ConnectionId]);
+        foreach(var id in characterList)
+        {
+            Destroy(id.Value);
+        }
     }
 }

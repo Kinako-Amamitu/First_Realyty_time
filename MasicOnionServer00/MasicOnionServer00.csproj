@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\MyFirstService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.66.0" />
     <PackageReference Include="MagicOnion.Server" Version="6.1.5" />
     <PackageReference Include="MagicOnion.Server.HttpGateway" Version="6.1.5" />

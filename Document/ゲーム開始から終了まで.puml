@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Aさん->MagicOnion:入室
+Aさん<--MagicOnion:ゲーム開始
+Aさん -> MagicOnion: 移動(A,pos)
+Bさん->MagicOnion:入室
+Bさん<--MagicOnion:ゲーム開始
+MagicOnion-->Aさん:Bさんの入室を受信
+Aさん->MagicOnion:移動
+MagicOnion --> Bさん: Aさんの移動を受信
+Aさん->MagicOnion:回収地点に到達して退出、所持アイテムを保存
+MagicOnion-->Bさん:Aさんの退出を受信
+Bさん->MagicOnion:回収地点に到達して退出、所持アイテムを保存
+@enduml

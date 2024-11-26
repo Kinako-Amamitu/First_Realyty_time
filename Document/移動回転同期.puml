@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Aさん -> MagicOnion: 移動(A,pos)
+MagicOnion --> Bさん: Aさんの移動を受信
+Aさん -> MagicOnion: 移動(A,pos)
+MagicOnion --> Bさん: Aさんの移動を受信
+Aさん -> MagicOnion: 移動(A,pos)
+MagicOnion --> Bさん: Aさんの移動を受信
+Aさん -> MagicOnion: 移動(A,pos)
+MagicOnion --> Bさん: Aさんの移動を受信
+
+@enduml

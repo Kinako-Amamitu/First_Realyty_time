@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Aさん -> MagicOnion: 入室
+MagicOnion <- Bさん: 入室
+
+Aさん <-- MagicOnion: Bさんの入室通知を送信
+Aさん->MagicOnion:退出
+Bさん<--MagicOnion:Aさんの退出通知を送信
+Bさん->MagicOnion:退出
+@enduml

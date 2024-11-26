@@ -51,5 +51,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(id.Value);
         }
+       
     }
 }

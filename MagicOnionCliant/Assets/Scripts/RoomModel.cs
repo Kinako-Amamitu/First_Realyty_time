@@ -62,15 +62,15 @@ public class RoomModel : BaseModel, IRoomHubReceiver
         OnJoinedUser(user);
     }
 
+    //‘ÞŽº
     public async UniTask LeaveAsync()
     {
-        OnLeavedUser(null);
         await roomHub.LeavedAsync();
     }
 
     //‘ÞŽº’Ê’m
-    public void OnLeave(JoinedUser joinedUser)
+    public void OnLeave(JoinedUser user)
     {
-        OnLeavedUser(joinedUser);
+        OnLeavedUser(user);
     }
 }

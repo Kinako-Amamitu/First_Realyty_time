@@ -3,11 +3,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] InputField InputField;
+    [SerializeField] InputField inputField;
     [SerializeField] GameObject characterPrefab;
     [SerializeField] RoomModel roomModel;
     [SerializeField] GameObject leaveButton;
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
     async void Start()
     {
+        //Componentを扱えるようにする
+        inputField = inputField.GetComponent<InputField>();
         //ユーザーが入室した時にOnJoinedUserメソッドを実行するよう、モデルに登録
         roomModel.OnJoinedUser += this.OnJoinedUser;
         roomModel.OnLeavedUser += this.OnLeavedUser;
@@ -24,7 +27,10 @@ public class GameManager : MonoBehaviour
     }
     public async void JoinRoom() {
         // 入室
-        await roomModel.JoinedAsync("sampleRoom", 1);
+        int id;
+        string pid = inputField.text;
+        int.TryParse(pid, out id);
+        await roomModel.JoinedAsync("sampleRoom", id);
         leaveButton.SetActive(true);
         joinButton.SetActive(false);
     }
@@ -47,10 +53,19 @@ public class GameManager : MonoBehaviour
     //ユーザーが退出したときの処理
     public void OnLeavedUser(JoinedUser user)
     {
-        foreach(var id in characterList)
+        if(user.ConnectionId==roomModel.ConnectionId)
         {
-            Destroy(id.Value);
+            foreach (var cube in characterList)
+            {
+                Destroy(cube.Value);
+            }
+           
         }
+        else
+        {
+            Destroy(characterList[user.ConnectionId]);
+        }
+ 
        
     }
 }

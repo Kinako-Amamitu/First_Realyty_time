@@ -45,7 +45,19 @@ public class GameManager : MonoBehaviour
     private void OnJoinedUser(JoinedUser user)
     {
         GameObject characterObject = Instantiate(characterPrefab);//インスタンス生成
-        characterObject.transform.position = new Vector3(UnityEngine.Random.Range(-8,8), UnityEngine.Random.Range(-3, 3), 0);
+        if(characterList.Count==0)
+        {
+            characterObject.transform.position = new Vector3(0, 0, 0);
+
+        }
+        else if(characterList.Count==1)
+        {
+            characterObject.transform.position = new Vector3(-3, 0, 0);
+        }
+        else
+        {
+            characterObject.transform.position = new Vector3(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(-3, 3), 0);
+        }
         characterList[user.ConnectionId] = characterObject; //フィールドで保持
 
     }

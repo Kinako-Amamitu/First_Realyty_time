@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/Document/ゲーム開始から終了まで.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Document/入室退出.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Document/移動回転同期.puml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/GameManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +79,8 @@
       <workItem from="1732163867623" duration="630000" />
       <workItem from="1732497680415" duration="857000" />
       <workItem from="1732579723622" duration="1608000" />
-      <workItem from="1732582889225" duration="2525000" />
+      <workItem from="1732582889225" duration="3172000" />
+      <workItem from="1732675464715" duration="4000" />
     </task>
     <servers />
   </component>

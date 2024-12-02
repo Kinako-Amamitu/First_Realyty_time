@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using System.Text;
 using MagicOnion;
 
@@ -14,5 +15,8 @@ namespace Shared.Interfaces.StreamingHubs
 
         //ユーザーの退室通知
         void OnLeave(JoinedUser user);
+
+        //プレイヤーの位置同期
+        void OnMove(JoinedUser user,Vector3 pos,Quaternion rot);
     }
 }

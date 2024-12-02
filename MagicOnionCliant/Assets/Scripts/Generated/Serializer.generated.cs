@@ -47,11 +47,12 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(3)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(4)
             {
                 { typeof(global::MasicOnionServer00.Model.Entity.User), 0 },
                 { typeof(global::Shared.Interfaces.Services.Number), 1 },
                 { typeof(global::Shared.Interfaces.StreamingHubs.JoinedUser), 2 },
+                { typeof(global::Shared.Interfaces.StreamingHubs.Poslot), 3 },
             };
         }
 
@@ -68,6 +69,7 @@ namespace MessagePack.Resolvers
                 case 0: return new MessagePack.Formatters.MasicOnionServer00.Model.Entity.UserFormatter();
                 case 1: return new MessagePack.Formatters.Shared.Interfaces.Services.NumberFormatter();
                 case 2: return new MessagePack.Formatters.Shared.Interfaces.StreamingHubs.JoinedUserFormatter();
+                case 3: return new MessagePack.Formatters.Shared.Interfaces.StreamingHubs.PoslotFormatter();
                 default: return null;
             }
         }
@@ -317,6 +319,56 @@ namespace MessagePack.Formatters.Shared.Interfaces.StreamingHubs
                         break;
                     case 2:
                         ____result.JoinOrder = reader.ReadInt32();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            reader.Depth--;
+            return ____result;
+        }
+    }
+
+    public sealed class PoslotFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Shared.Interfaces.StreamingHubs.Poslot>
+    {
+
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Shared.Interfaces.StreamingHubs.Poslot value, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (value == null)
+            {
+                writer.WriteNil();
+                return;
+            }
+
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            writer.WriteArrayHeader(2);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::UnityEngine.Vector3>(formatterResolver).Serialize(ref writer, value.Pos, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::UnityEngine.Quaternion>(formatterResolver).Serialize(ref writer, value.Lot, options);
+        }
+
+        public global::Shared.Interfaces.StreamingHubs.Poslot Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        {
+            if (reader.TryReadNil())
+            {
+                return null;
+            }
+
+            options.Security.DepthStep(ref reader);
+            global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
+            var length = reader.ReadArrayHeader();
+            var ____result = new global::Shared.Interfaces.StreamingHubs.Poslot();
+
+            for (int i = 0; i < length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        ____result.Pos = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::UnityEngine.Vector3>(formatterResolver).Deserialize(ref reader, options);
+                        break;
+                    case 1:
+                        ____result.Lot = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::UnityEngine.Quaternion>(formatterResolver).Deserialize(ref reader, options);
                         break;
                     default:
                         reader.Skip();

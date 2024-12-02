@@ -1,6 +1,7 @@
 ﻿using MagicOnion;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,5 +16,8 @@ namespace Shared.Interfaces.StreamingHubs
 
         //ユーザー退室
         Task LeavedAsync();
+
+        //位置・回転をサーバーに送信
+        Task MoveAsync(Vector3 pos, Quaternion rot);
     }
 }

@@ -5,6 +5,7 @@ using Shared.Interfaces.StreamingHubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,6 +56,22 @@ namespace StreamingHubs
 
             //ルーム内のメンバーから自分を削除
             await room.RemoveAsync(this.Context);
+
+        }
+
+        public async Task MoveAsync(Vector3 pos,Quaternion rot)
+        {
+            //グループストレージからRoomData取得
+            var roomStorage = this.room.GetInMemoryStorage<RoomData>();
+            var roomData = roomStorage.Get(this.ConnectionId);
+            //位置と回転を保存
+            roomData.Poslot = new Poslot() { Pos = pos, Lot = rot };
+
+            //参加ユーザーを取得
+            var joinedUser = new JoinedUser() { ConnectionId = this.ConnectionId };
+
+            //ルーム参加者全員に、ユーザーの移動回転を送信
+            this.BroadcastExceptSelf(room).OnMove(joinedUser,pos,rot);
 
         }
 

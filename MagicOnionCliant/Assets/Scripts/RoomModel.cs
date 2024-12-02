@@ -22,6 +22,9 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     //ユーザー退室通知
     public Action<JoinedUser> OnLeavedUser { get; set; }
 
+    //位置回転同期
+    public Action<JoinedUser,Vector3,Quaternion> OnMoveCharacter {  get; set; }
+
     //MagicOnion接続処理
     public async UniTask ConnectAsync()
     {
@@ -72,5 +75,17 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     public void OnLeave(JoinedUser user)
     {
         OnLeavedUser(user);
+    }
+
+    //移動
+    public async Task MoveAsync(Vector3 pos,Quaternion rot)
+    {
+       await roomHub.MoveAsync(pos,rot);
+    }
+
+    //移動通知
+    public void OnMove(JoinedUser user,Vector3 pos,Quaternion rot)
+    {
+        OnMoveCharacter(user, pos, rot);
     }
 }

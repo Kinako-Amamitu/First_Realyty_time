@@ -3,8 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;	//DOTweenを使うときはこのusingを入れる
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject joinButton;
 
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
+    Player player;
+
+    bool isjoin=false;
     async void Start()
     {
         //Componentを扱えるようにする
@@ -22,17 +27,24 @@ public class GameManager : MonoBehaviour
         //ユーザーが入室した時にOnJoinedUserメソッドを実行するよう、モデルに登録
         roomModel.OnJoinedUser += this.OnJoinedUser;
         roomModel.OnLeavedUser += this.OnLeavedUser;
+        roomModel.OnMoveCharacter += this.OnMoveCharacter;
         //接続
         await roomModel.ConnectAsync();
     }
+
+
+
     public async void JoinRoom() {
         // 入室
         int id;
         string pid = inputField.text;
+        if (pid == null) { return; }
         int.TryParse(pid, out id);
+        if(id <= 0) { return; }
         await roomModel.JoinedAsync("sampleRoom", id);
         leaveButton.SetActive(true);
         joinButton.SetActive(false);
+        InvokeRepeating("SendPos", 0.1f, 0.1f);
     }
     public async void LeaveRoom()
     {
@@ -40,12 +52,25 @@ public class GameManager : MonoBehaviour
         await roomModel.LeaveAsync();
         leaveButton.SetActive(false);
         joinButton.SetActive(true);
+        isjoin = false;
     }
+
+    public async void SendPos()
+    {
+        //移動同期
+        GameObject characterOblect = characterList[roomModel.ConnectionId];
+        await roomModel.MoveAsync(characterOblect.transform.position,characterOblect.transform.rotation);
+    }
+
     //ユーザーが入室したときの処理
     private void OnJoinedUser(JoinedUser user)
     {
+        
         GameObject characterObject = Instantiate(characterPrefab);//インスタンス生成
-        if(characterList.Count==0)
+
+       player= characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
+
+        if (characterList.Count==0)
         {
             characterObject.transform.position = new Vector3(0, 0, 0);
 
@@ -60,6 +85,14 @@ public class GameManager : MonoBehaviour
         }
         characterList[user.ConnectionId] = characterObject; //フィールドで保持
 
+        if (user.ConnectionId == roomModel.ConnectionId)
+        {
+            player.Me();
+        }
+        else
+        {
+            player.NotMe();
+        }
     }
 
     //ユーザーが退出したときの処理
@@ -79,5 +112,14 @@ public class GameManager : MonoBehaviour
         }
  
        
+    }
+
+    //プレイヤーの移動
+    void OnMoveCharacter(JoinedUser user,Vector3 pos,Quaternion rot)
+    {
+        GameObject characterObject = characterList[user.ConnectionId];
+
+        characterObject.transform.DOLocalMove(pos, 0.1f);
+        characterObject.transform.DORotateQuaternion(rot,0.1f);
     }
 }

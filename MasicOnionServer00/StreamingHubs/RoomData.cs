@@ -8,5 +8,7 @@ namespace StreamingHubs
     public class RoomData
     {
         public JoinedUser JoinedUser { get; set; }
+
+        public Poslot Poslot { get; set; }
     }
 }

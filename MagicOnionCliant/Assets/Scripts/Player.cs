@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    GameManager gameManager;
+
+
     //移動速度
-    private float _speed = 3.0f;
+    public float _speed;
+
+    Rigidbody rigidbody;
+    FixedJoystick joystick;
 
     //x軸方向の入力を保存
     private float _input_x;
@@ -14,6 +20,13 @@ public class Player : MonoBehaviour
 
     //自分のプレイヤーかどうか
     public bool me;
+    bool goal=false;
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        rigidbody=GetComponent<Rigidbody>();
+        joystick = GameObject.Find("Fixed Joystick").GetComponent< FixedJoystick > ();
+    }
 
     void Update()
     {
@@ -21,6 +34,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
+        if (goal==true) { return; }
         //x軸方向、z軸方向の入力を取得
         //Horizontal、水平、横方向のイメージ
         _input_x = Input.GetAxis("Horizontal");
@@ -41,15 +55,36 @@ public class Player : MonoBehaviour
         transform.LookAt(destination);
         //移動先の座標を設定
         transform.position = destination;
+
+        // エンターキーが入力された場合「true」
+        if (Input.GetKey(KeyCode.Return))
+        {
+          
+        }
+
+        Vector3 move = (Camera.main.transform.forward * joystick.Vertical +
+            Camera.main.transform.right * joystick.Horizontal) * _speed;
+        move.y=rigidbody.velocity.y;
+        rigidbody.velocity = move;
     }
 
     public void Me()
     {
         me = true;
+        
     }
 
     public void NotMe()
     {
         me=false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Goal")
+        {
+            gameManager.Escape();
+            goal = true;
+        }
     }
 }

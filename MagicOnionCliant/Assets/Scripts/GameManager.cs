@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] RoomModel roomModel;
     [SerializeField] GameObject leaveButton;
     [SerializeField] GameObject joinButton;
+    [SerializeField] Text goalText;
 
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
     Player player;
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
         int.TryParse(pid, out id);
         if(id <= 0) { return; }
         await roomModel.JoinedAsync("sampleRoom", id);
-        leaveButton.SetActive(true);
+        
         joinButton.SetActive(false);
         InvokeRepeating("SendPos", 0.1f, 0.1f);
     }
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         leaveButton.SetActive(false);
         joinButton.SetActive(true);
         isjoin = false;
+        CancelInvoke("SendPos");
     }
 
     public async void SendPos()
@@ -121,5 +123,11 @@ public class GameManager : MonoBehaviour
 
         characterObject.transform.DOLocalMove(pos, 0.1f);
         characterObject.transform.DORotateQuaternion(rot,0.1f);
+    }
+
+    public void Escape()
+    {
+        leaveButton.SetActive(true);
+        goalText.text = "GOAL!!";
     }
 }

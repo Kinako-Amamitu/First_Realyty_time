@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] GameObject snow;
     GameManager gameManager;
 
 
@@ -56,10 +57,10 @@ public class Player : MonoBehaviour
         //移動先の座標を設定
         transform.position = destination;
 
-        // エンターキーが入力された場合「true」
-        if (Input.GetKey(KeyCode.Return))
+        // エンターキーが入力された場合雪玉を投げる
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-          
+          Instantiate(snow,gameObject.transform.position,Quaternion.identity);
         }
 
         Vector3 move = (Camera.main.transform.forward * joystick.Vertical +

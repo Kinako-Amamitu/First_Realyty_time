@@ -50,11 +50,12 @@ public class GameManager : MonoBehaviour
     public async void LeaveRoom()
     {
         //‘ÞŽº
+        CancelInvoke("SendPos");
         await roomModel.LeaveAsync();
         leaveButton.SetActive(false);
         joinButton.SetActive(true);
         isjoin = false;
-        CancelInvoke("SendPos");
+       
     }
 
     public async void SendPos()

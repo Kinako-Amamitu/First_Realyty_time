@@ -75,19 +75,6 @@ namespace StreamingHubs
 
         }
 
-        public async Task GoalAsync()
-        {
-            //グループデータ
-            var roomStorage = this.room.GetInMemoryStorage<RoomData>();
-            var roomData = roomStorage.Get(this.ConnectionId);
-
-            //参加ユーザーを取得
-            var joinedUser = new JoinedUser() { ConnectionId = this.ConnectionId };
-
-            //ルーム参加者全員に、ユーザーの状況を送信
-            this.BroadcastExceptSelf(room).OnEscape(joinedUser);
-        }
-
         protected override ValueTask OnDisconnected()
         {
             if (this.room != null) 

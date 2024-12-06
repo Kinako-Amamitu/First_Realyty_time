@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8764925226761507246}
   m_Layer: 0
   m_Name: OthoerPlayer
-  m_TagString: Player
+  m_TagString: AthorPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,3 +149,4 @@ MonoBehaviour:
   snow: {fileID: 4206868241966701608, guid: 6fc03579f96f78a49973755bf789fbdc, type: 3}
   _speed: 10
   me: 0
+  goal: 0

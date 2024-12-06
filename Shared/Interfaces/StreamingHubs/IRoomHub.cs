@@ -20,7 +20,5 @@ namespace Shared.Interfaces.StreamingHubs
         //位置・回転をサーバーに送信
         Task MoveAsync(Vector3 pos, Quaternion rot);
 
-        //ユーザーがゴールしたのを通知
-        Task GoalAsync();
     }
 }

@@ -92,14 +92,4 @@ public class RoomModel : BaseModel, IRoomHubReceiver
         OnMoveCharacter(user, pos, rot);
     }
 
-    //íEèoí ím
-    public void OnEscape(JoinedUser user) 
-    {
-        OnEscapeCharacter(user);
-    }
-
-    public async Task GoalAsync()
-    {
-        await roomHub.GoalAsync();
-    }
 }

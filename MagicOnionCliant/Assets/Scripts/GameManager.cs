@@ -61,10 +61,6 @@ public class GameManager : MonoBehaviour
         goalText.text = "";
     }
 
-    public async void Escape()
-    {
-        await roomModel.GoalAsync();
-    }
 
     public async void SendPos()
     {
@@ -144,14 +140,11 @@ public class GameManager : MonoBehaviour
     }
 
     //プレイヤーがゴールに到達したとき
-    public void OnEscapeCharacter(JoinedUser user)
+    public void Escape()
     {
-        if  (roomModel.ConnectionId == user.ConnectionId)
-        {
+       
             leaveButton.SetActive(true);
-            goalText.text = "GOAL!!";
-
-        }            
+            goalText.text = "GOAL!!";            
            
     }
 }

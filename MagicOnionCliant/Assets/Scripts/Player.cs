@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     //©•ª‚ÌƒvƒŒƒCƒ„[‚©‚Ç‚¤‚©
     public bool me;
-    bool goal = false;
+    public bool goal = false;
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -95,8 +95,7 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.tag == "Goal")
         {
-            goal = true;
-            gameManager.Escape();
+        
         }
     }
 }

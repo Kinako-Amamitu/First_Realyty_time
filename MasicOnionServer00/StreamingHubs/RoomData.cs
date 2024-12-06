@@ -10,5 +10,6 @@ namespace StreamingHubs
         public JoinedUser JoinedUser { get; set; }
 
         public Poslot Poslot { get; set; }
+
     }
 }

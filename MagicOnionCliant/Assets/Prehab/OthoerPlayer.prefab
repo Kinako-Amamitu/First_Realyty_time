@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 7150451690529138332}
   - component: {fileID: 6567202330826215518}
   - component: {fileID: 1011158698817006689}
-  - component: {fileID: 7995627263877632066}
   - component: {fileID: 1136456079153422069}
+  - component: {fileID: 8764925226761507246}
   m_Layer: 0
-  m_Name: Player
+  m_Name: OthoerPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,21 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7995627263877632066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2745605151159931620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 350ab70dc90f9b3439ec2ea6d6de008e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  snow: {fileID: 4206868241966701608, guid: 6fc03579f96f78a49973755bf789fbdc, type: 3}
-  _speed: 10
-  me: 0
 --- !u!54 &1136456079153422069
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,3 +134,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &8764925226761507246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2745605151159931620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350ab70dc90f9b3439ec2ea6d6de008e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snow: {fileID: 4206868241966701608, guid: 6fc03579f96f78a49973755bf789fbdc, type: 3}
+  _speed: 10
+  me: 0

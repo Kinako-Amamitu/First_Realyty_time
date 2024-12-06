@@ -7,12 +7,12 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject snow;
     GameManager gameManager;
 
-
     //移動速度
     public float _speed;
 
     Rigidbody rigidbody;
     FixedJoystick joystick;
+    Camera cam;
 
     //x軸方向の入力を保存
     private float _input_x;
@@ -21,21 +21,32 @@ public class Player : MonoBehaviour
 
     //自分のプレイヤーかどうか
     public bool me;
-    bool goal=false;
+    bool goal = false;
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        rigidbody=GetComponent<Rigidbody>();
-        joystick = GameObject.Find("Fixed Joystick").GetComponent< FixedJoystick > ();
+        rigidbody = GetComponent<Rigidbody>();
+        joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
+
+
+        if (me = false)
+        {
+
+        }
+        else if (me = true)
+        {
+            //自分のプレイヤーでカメラがあることを探す
+            cam = GameObject.Find("MainCamera").GetComponent<Camera>();
+        }
     }
 
     void Update()
     {
-        if (me==false)
+        if (me == false)
         {
             return;
         }
-        if (goal==true) { return; }
+        if (goal == true) { return; }
         //x軸方向、z軸方向の入力を取得
         //Horizontal、水平、横方向のイメージ
         _input_x = Input.GetAxis("Horizontal");
@@ -60,32 +71,32 @@ public class Player : MonoBehaviour
         // エンターキーが入力された場合雪玉を投げる
         if (Input.GetKeyDown(KeyCode.Return))
         {
-          Instantiate(snow,gameObject.transform.position,Quaternion.identity);
+            Instantiate(snow, gameObject.transform.position, Quaternion.identity);
         }
 
-        Vector3 move = (Camera.main.transform.forward * joystick.Vertical +
-            Camera.main.transform.right * joystick.Horizontal) * _speed;
-        move.y=rigidbody.velocity.y;
+        Vector3 move = (cam.transform.forward * joystick.Vertical +
+            cam.transform.right * joystick.Horizontal) * _speed;
+        move.y = rigidbody.velocity.y;
         rigidbody.velocity = move;
     }
 
     public void Me()
     {
         me = true;
-        
+
     }
 
     public void NotMe()
     {
-        me=false;
+        me = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Goal")
         {
-            gameManager.Escape();
             goal = true;
+            gameManager.Escape();
         }
     }
 }

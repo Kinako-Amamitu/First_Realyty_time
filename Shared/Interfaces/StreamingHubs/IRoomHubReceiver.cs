@@ -18,5 +18,8 @@ namespace Shared.Interfaces.StreamingHubs
 
         //プレイヤーの位置同期
         void OnMove(JoinedUser user,Vector3 pos,Quaternion rot);
+
+        //プレイヤーのゴール通知
+        void OnEscape(JoinedUser user);
     }
 }

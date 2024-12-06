@@ -8,19 +8,22 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;	//DOTweenを使うときはこのusingを入れる
 using UnityEngine.UI;
+using MasicOnionServer00.Model.Entity;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] InputField inputField;
-    [SerializeField] GameObject characterPrefab;
+    [SerializeField] GameObject[] characterPrefab;
     [SerializeField] RoomModel roomModel;
     [SerializeField] GameObject leaveButton;
     [SerializeField] GameObject joinButton;
     [SerializeField] Text goalText;
+    JoinedUser joinedUser;
 
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
     Player player;
 
     bool isjoin=false;
+    bool mine = false;
     async void Start()
     {
         //Componentを扱えるようにする
@@ -55,7 +58,12 @@ public class GameManager : MonoBehaviour
         leaveButton.SetActive(false);
         joinButton.SetActive(true);
         isjoin = false;
-       
+        goalText.text = "";
+    }
+
+    public async void Escape()
+    {
+        await roomModel.GoalAsync();
     }
 
     public async void SendPos()
@@ -68,8 +76,17 @@ public class GameManager : MonoBehaviour
     //ユーザーが入室したときの処理
     private void OnJoinedUser(JoinedUser user)
     {
+        GameObject characterObject;
+        joinedUser = user;
+        if (user.ConnectionId == roomModel.ConnectionId)
+        {
+            characterObject = Instantiate(characterPrefab[0]);//インスタンス生成
+        }
+        else
+        {
+            characterObject = Instantiate(characterPrefab[1]);//インスタンス生成
+        }
         
-        GameObject characterObject = Instantiate(characterPrefab);//インスタンス生成
 
        player= characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
 
@@ -126,9 +143,15 @@ public class GameManager : MonoBehaviour
         characterObject.transform.DORotateQuaternion(rot,0.1f);
     }
 
-    public void Escape()
+    //プレイヤーがゴールに到達したとき
+    public void OnEscapeCharacter(JoinedUser user)
     {
-        leaveButton.SetActive(true);
-        goalText.text = "GOAL!!";
+        if  (roomModel.ConnectionId == user.ConnectionId)
+        {
+            leaveButton.SetActive(true);
+            goalText.text = "GOAL!!";
+
+        }            
+           
     }
 }

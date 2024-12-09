@@ -1059,6 +1059,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549998130}
   m_CullTransparentMesh: 1
+--- !u!1 &561551242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 561551244}
+  - component: {fileID: 561551243}
+  m_Layer: 0
+  m_Name: RoomModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &561551243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561551242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0376ea46a7e3d4a9a458362b3fc59a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &561551244
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561551242}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 80, y: 15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &565477035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,7 +1385,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 620498683}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 687753120}
+        m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
+        m_MethodName: ItemGetChallenge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &620498683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,6 +1445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 687753119}
+  - component: {fileID: 687753120}
   m_Layer: 0
   m_Name: HomeGenerater
   m_TagString: Untagged
@@ -1411,6 +1468,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &687753120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687753118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552ec64de8d6e4a4eb58e0ce3d81c42f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputField: {fileID: 812362043}
+  roomModel: {fileID: 561551243}
+  leaveButton: {fileID: 565477035}
+  joinButton: {fileID: 521287398}
 --- !u!1 &757709936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1836,7 +1909,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 852999013}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 687753120}
+        m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
+        m_MethodName: Weponup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &852999013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2236,7 +2321,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1180939680}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 687753120}
+        m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
+        m_MethodName: Map1Fade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1180939680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2955,7 +3052,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1723447601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 687753120}
+        m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
+        m_MethodName: Ranking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1723447601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3240,3 +3349,4 @@ SceneRoots:
   - {fileID: 213763383}
   - {fileID: 191174253}
   - {fileID: 687753119}
+  - {fileID: 561551244}

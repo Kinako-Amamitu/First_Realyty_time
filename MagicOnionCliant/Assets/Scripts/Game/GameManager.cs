@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
         inputField = inputField.GetComponent<InputField>();
         //ユーザーが入室した時にOnJoinedUserメソッドを実行するよう、モデルに登録
         roomModel.OnJoinedUser += this.OnJoinedUser;
+        //ユーザーが退室した時にOnLeavedUserメソッドを実行するよう、モデルに登録
         roomModel.OnLeavedUser += this.OnLeavedUser;
+        //ユーザーが移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMoveCharacter += this.OnMoveCharacter;
         //接続
         await roomModel.ConnectAsync();
@@ -59,6 +61,10 @@ public class GameManager : MonoBehaviour
         joinButton.SetActive(true);
         isjoin = false;
         goalText.text = "";
+
+        //画面遷移
+        Initiate.DoneFading();
+        Initiate.Fade("Home", Color.black, 0.5f);
     }
 
 
@@ -146,5 +152,21 @@ public class GameManager : MonoBehaviour
             leaveButton.SetActive(true);
             goalText.text = "GOAL!!";            
            
+    }
+
+    //デバッグ用プレイヤーにダメージ
+    public void Damege()
+    {
+       
+        player.UpdateHP();
+    }
+
+    //プレイヤーのHPが0
+    public void GameOver()
+    {
+
+        leaveButton.SetActive(true);
+        goalText.text = "GameOver!!";
+
     }
 }

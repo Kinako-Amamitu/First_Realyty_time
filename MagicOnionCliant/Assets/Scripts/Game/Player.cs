@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject snow;
     GameManager gameManager;
+
+    public Slider hpSlider;
+
+    int maxHp = 100;
+    int hp;
+    bool isDie;
 
     //移動速度
     public float _speed;
@@ -27,7 +35,8 @@ public class Player : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rigidbody = GetComponent<Rigidbody>();
         joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
-
+        hpSlider=GameObject.Find("HpSlider").GetComponent<Slider>();
+        hp = maxHp;
 
         if (me = false)
         {
@@ -35,7 +44,7 @@ public class Player : MonoBehaviour
         }
         else if (me = true)
         {
-            //自分のプレイヤーでカメラがあることを探す
+            //自分のプレイヤーに着いてるカメラを探す
             cam = GameObject.Find("MainCamera").GetComponent<Camera>();
         }
     }
@@ -91,11 +100,16 @@ public class Player : MonoBehaviour
         me = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void UpdateHP()
     {
-        if (collision.collider.tag == "Goal")
+        hp -= 20;
+        //hpSlider.value = hp;
+        hpSlider.DOValue(hp, 0.5f);
+
+        if (hp <= 0)
         {
-        
+            goal = true;
+            gameManager.GameOver();
         }
     }
 }

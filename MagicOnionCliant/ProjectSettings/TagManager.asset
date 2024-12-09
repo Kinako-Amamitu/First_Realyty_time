@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Goal
   - AthorPlayer
+  - EnemySnow
+  - Enemy
+  - Snow
   layers:
   - Default
   - TransparentFX

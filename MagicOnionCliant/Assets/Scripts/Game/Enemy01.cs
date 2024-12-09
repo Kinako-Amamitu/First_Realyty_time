@@ -37,12 +37,13 @@ public class Enemy01 : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag=="Player")
+        if(collision.gameObject.tag=="Snow")
         {
 
 
             Instantiate(itemPrehab[0], gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
+            Destroy(collision.gameObject);
             
         }
     }

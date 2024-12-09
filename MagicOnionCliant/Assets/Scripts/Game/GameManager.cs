@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         await roomModel.JoinedAsync("sampleRoom", id);
         
         joinButton.SetActive(false);
+        
         InvokeRepeating("SendPos", 0.1f, 0.1f);
     }
     public async void LeaveRoom()
@@ -168,5 +169,11 @@ public class GameManager : MonoBehaviour
         leaveButton.SetActive(true);
         goalText.text = "GameOver!!";
 
+    }
+
+    //ƒvƒŒƒCƒ„[‚ªUŒ‚
+    public void Attack()
+    {
+        player.SlowSnow();
     }
 }

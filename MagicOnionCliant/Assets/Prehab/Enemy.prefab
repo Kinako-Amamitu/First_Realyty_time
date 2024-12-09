@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7959274943919807358}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,4 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrehab: []
-  snow: {fileID: 4206868241966701608, guid: 6fc03579f96f78a49973755bf789fbdc, type: 3}
+  snow: {fileID: 4206868241966701608, guid: b43c1c44efa3cfc4e92019f1486ba0f1, type: 3}

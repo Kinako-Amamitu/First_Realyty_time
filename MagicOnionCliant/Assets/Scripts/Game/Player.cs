@@ -6,10 +6,11 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] GameObject snow;
+    [SerializeField] GameObject snowball;
     GameManager gameManager;
 
     public Slider hpSlider;
+    Snow snow;
 
     int maxHp = 100;
     int hp;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     Rigidbody rigidbody;
     FixedJoystick joystick;
     Camera cam;
+    GameObject shootPoint;
 
     //x軸方向の入力を保存
     private float _input_x;
@@ -46,6 +48,8 @@ public class Player : MonoBehaviour
         {
             //自分のプレイヤーに着いてるカメラを探す
             cam = GameObject.Find("MainCamera").GetComponent<Camera>();
+
+            shootPoint = GameObject.Find("ShootPoint");
         }
     }
 
@@ -110,6 +114,24 @@ public class Player : MonoBehaviour
         {
             goal = true;
             gameManager.GameOver();
+        }
+    }
+
+    public void SlowSnow()
+    {
+        Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
+        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.tag=="EnemySnow") 
+        {
+            UpdateHP();
+        } 
+        else if(collision.collider.tag=="Enemy") 
+        {
+            UpdateHP();
         }
     }
 }

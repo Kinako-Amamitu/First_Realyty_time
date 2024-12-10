@@ -9,6 +9,7 @@ TagManager:
   - EnemySnow
   - Enemy
   - Snow
+  - Object
   layers:
   - Default
   - TransparentFX

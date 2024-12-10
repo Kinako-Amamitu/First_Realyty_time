@@ -114,7 +114,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+
             player.NotMe();
+            player.enabled = false;
         }
     }
 
@@ -175,5 +177,19 @@ public class GameManager : MonoBehaviour
     public void Attack()
     {
         player.SlowSnow();
+    }
+
+    //プレイヤーが走る、歩く
+    public void Run()
+    {
+        if(player.run==false)
+        {
+            player.run = true;
+        }
+        else
+        {
+            player.run = false;
+        }
+       
     }
 }

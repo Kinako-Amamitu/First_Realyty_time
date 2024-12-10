@@ -12,14 +12,14 @@ public class UserModel : BaseModel
 {
     const string ServerURL = "http://localhost:7000";
     private int userId; //ìoò^ÉÜÅ[ÉUÅ[ID
-    public async UniTask<bool>RegistAsync(string name)
+    public async UniTask<bool>RegistAsync(string name,string password)
     {
         var handler = new YetAnotherHttpHandler() { Http2Only = true };
-        var channel = GrpcChannel.ForAddress(ServerURL);
+        var channel = GrpcChannel.ForAddress(ServerURL, new GrpcChannelOptions() { HttpHandler = handler });
         var client = MagicOnionClient.Create<IUserService>(channel);
         try
         {//ìoò^ê¨å˜
-            userId = await client.RegistUserAsync(name);
+            userId = await client.RegistUserAsync(name,password);
             return true;
         }catch(RpcException e)
         {//ìoò^ÇµÇ¡ÇœÇ¢

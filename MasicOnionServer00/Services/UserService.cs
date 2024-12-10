@@ -8,7 +8,7 @@ namespace MasicOnionServer00.Services
 {
     public class UserService : ServiceBase<IUserService>, IUserService
     {
-        public async UnaryResult<int> RegistUserAsync(string name)
+        public async UnaryResult<int> RegistUserAsync(string name, string password)
         {
             using var context = new GameDbContext();
 
@@ -21,12 +21,14 @@ namespace MasicOnionServer00.Services
             //テーブルにレコードを追加
             User user=new User();
             user.Name = name;
+            user.Password = password;
             user.Token = "";
             user.Created_at = DateTime.Now;
             user.Updated_at = DateTime.Now;
             context.Users.Add(user);
             await context.SaveChangesAsync();
             return user.Id;
+            
         }
     }
 }

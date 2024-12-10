@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.ProBuilder.Shapes;
 
 public class Player : MonoBehaviour
 {
@@ -18,11 +19,12 @@ public class Player : MonoBehaviour
 
     //移動速度
     public float _speed;
+    public float speed;
 
     Rigidbody rigidbody;
     FixedJoystick joystick;
     Camera cam;
-    GameObject shootPoint;
+    [SerializeField]GameObject shootPoint;
 
     //x軸方向の入力を保存
     private float _input_x;
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
     //自分のプレイヤーかどうか
     public bool me;
     public bool goal = false;
+    public bool run = false;
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -40,16 +43,16 @@ public class Player : MonoBehaviour
         hpSlider=GameObject.Find("HpSlider").GetComponent<Slider>();
         hp = maxHp;
 
-        if (me = false)
+        if (me == false)
         {
 
         }
-        else if (me = true)
+        else if (me == true)
         {
             //自分のプレイヤーに着いてるカメラを探す
             cam = GameObject.Find("MainCamera").GetComponent<Camera>();
 
-            shootPoint = GameObject.Find("ShootPoint");
+            
         }
     }
 
@@ -81,16 +84,24 @@ public class Player : MonoBehaviour
         //移動先の座標を設定
         transform.position = destination;
 
-        // エンターキーが入力された場合雪玉を投げる
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            Instantiate(snow, gameObject.transform.position, Quaternion.identity);
-        }
+        
+        //ジョイスティック移動処理
 
-        Vector3 move = (cam.transform.forward * joystick.Vertical +
-            cam.transform.right * joystick.Horizontal) * _speed;
-        move.y = rigidbody.velocity.y;
-        rigidbody.velocity = move;
+        if (run==false) 
+        {
+            Vector3 move = (cam.transform.forward * joystick.Vertical +
+                        cam.transform.right * joystick.Horizontal) * _speed;
+            move.y = rigidbody.velocity.y;
+            rigidbody.velocity = move;
+        }
+        else if(run==true) 
+        {
+            Vector3 move = (cam.transform.forward * joystick.Vertical +
+            cam.transform.right * joystick.Horizontal) * _speed*1.3f;
+            move.y = rigidbody.velocity.y;
+            rigidbody.velocity = move;
+        }
+        
     }
 
     public void Me()
@@ -119,17 +130,21 @@ public class Player : MonoBehaviour
 
     public void SlowSnow()
     {
-        Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
-        
+        //Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
+
+        GameObject snow = (GameObject)Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
+        Rigidbody snowRigidbody = snow.GetComponent<Rigidbody>();
+        snowRigidbody.AddForce(transform.forward * speed);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.tag=="EnemySnow") 
+        if(collision.gameObject.tag=="EnemySnow") 
         {
+            Destroy(collision.gameObject);
             UpdateHP();
         } 
-        else if(collision.collider.tag=="Enemy") 
+        else if(collision.gameObject.tag=="Enemy") 
         {
             UpdateHP();
         }

@@ -10,6 +10,9 @@ public class HomeManager : MonoBehaviour
     [SerializeField] RoomModel roomModel;
     [SerializeField] GameObject leaveButton;
     [SerializeField] GameObject joinButton;
+    [SerializeField] GameObject pwPanel;
+    [SerializeField] GameObject rankingPanel;
+    [SerializeField] GameObject gatchaPanel;
 
 
     // Start is called before the first frame update
@@ -78,18 +81,18 @@ public class HomeManager : MonoBehaviour
     //装備強化
     public void Weponup()
     {
-        
+        pwPanel.SetActive(true);
     }
 
     //ランキング表示
     public void Ranking() 
     {
-
+        rankingPanel.SetActive(true);
     }
 
     //ガチャ
     public void ItemGetChallenge()
     {
-
+        gatchaPanel.SetActive(true);
     }
 }

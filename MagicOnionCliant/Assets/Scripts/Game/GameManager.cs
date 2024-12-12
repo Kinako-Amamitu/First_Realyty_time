@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] InputField inputField;
     [SerializeField] GameObject[] characterPrefab;
+    [SerializeField] GameObject enemyPrefab;
     [SerializeField] RoomModel roomModel;
     [SerializeField] GameObject leaveButton;
     [SerializeField] GameObject joinButton;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
     Player player;
 
+    int num = 0;
     bool isjoin=false;
     bool mine = false;
     async void Start()
@@ -36,6 +38,18 @@ public class GameManager : MonoBehaviour
         roomModel.OnMoveCharacter += this.OnMoveCharacter;
         //接続
         await roomModel.ConnectAsync();
+    }
+
+    void Update()
+    {
+        num++;
+        if(num%5000==0)
+        {
+            GameObject enemy;
+           enemy= Instantiate(enemyPrefab);
+
+            enemy.transform.position=new Vector3(UnityEngine.Random.Range(-8, 8),4 , UnityEngine.Random.Range(-3, 3));
+        }
     }
 
 
@@ -81,14 +95,9 @@ public class GameManager : MonoBehaviour
     {
         GameObject characterObject;
         joinedUser = user;
-        if (user.ConnectionId == roomModel.ConnectionId)
-        {
+ 
             characterObject = Instantiate(characterPrefab[0]);//インスタンス生成
-        }
-        else
-        {
-            characterObject = Instantiate(characterPrefab[1]);//インスタンス生成
-        }
+
         
 
        player= characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得

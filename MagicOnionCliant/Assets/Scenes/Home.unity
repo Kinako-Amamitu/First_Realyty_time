@@ -1508,6 +1508,9 @@ MonoBehaviour:
   roomModel: {fileID: 561551243}
   leaveButton: {fileID: 565477035}
   joinButton: {fileID: 521287398}
+  pwPanel: {fileID: 1423454991}
+  rankingPanel: {fileID: 1723447598}
+  gatchaPanel: {fileID: 1499773822}
 --- !u!1 &757709936
 GameObject:
   m_ObjectHideFlags: 0

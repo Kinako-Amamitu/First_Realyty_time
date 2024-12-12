@@ -49,9 +49,8 @@ public class Player : MonoBehaviour
         }
         else if (me == true)
         {
-            //自分のプレイヤーに着いてるカメラを探す
-            cam = GameObject.Find("MainCamera").GetComponent<Camera>();
-
+            //カメラを探す
+            cam = GameObject.Find("Virtual Camera").GetComponent<Camera>();
             
         }
     }

@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/MyPlayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/MyPlayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Home.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Home.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/VirtualCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/VirtualCamera.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +97,7 @@
       <workItem from="1733790662329" duration="1692000" />
       <workItem from="1733882997023" duration="1211000" />
       <workItem from="1733979004845" duration="659000" />
+      <workItem from="1734047806117" duration="620000" />
     </task>
     <servers />
   </component>

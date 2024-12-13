@@ -10,7 +10,8 @@ public class EnemyScope : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy01 = GameObject.Find("Enemy").GetComponent<Enemy01>();
+        
+        enemy01 = GameObject.Find("Enemy(Clone)").GetComponent<Enemy01>();
 
     }
 

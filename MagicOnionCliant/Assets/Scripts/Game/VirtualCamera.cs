@@ -1,14 +1,21 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class VirtualCamera : MonoBehaviour
 {
-    Player player;
-    // Start is called before the first frame update
+    CinemachineVirtualCamera cinemachine;
+    //ÉvÉåÉCÉÑÅ[Çäiî[Ç∑ÇÈïœêî
+    public GameObject player;
+
+    bool isCamera=false;
+
+    // Use this for initialization
     void Start()
     {
-        
+        cinemachine=GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
     }
 
     // Update is called once per frame
@@ -16,9 +23,12 @@ public class VirtualCamera : MonoBehaviour
     {
         
     }
-
     public void CameraStart()
     {
-        player = GameObject.Find("MyPlayer").GetComponent<Player>();
+        player = GameObject.Find("MyPlayer(Clone)");
+        
+        cinemachine.Follow=player.transform; 
+        cinemachine.LookAt=player.transform;
+        //isCamera = true;
     }
 }

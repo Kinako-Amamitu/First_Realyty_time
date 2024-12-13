@@ -34,6 +34,7 @@ public class Enemy01 : MonoBehaviour
 
     public void Shoot(Vector3 pos,float speed)
     {
+        if (shotPoint == null) { return; }
        //ƒvƒŒƒCƒ„[‚ğí‚ÉŒ©‚é
         transform.LookAt(pos);
 

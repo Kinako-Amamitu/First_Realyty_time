@@ -19,5 +19,11 @@ namespace Shared.Interfaces.StreamingHubs
         //プレイヤーの位置同期
         void OnMove(JoinedUser user,Vector3 pos,Quaternion rot);
 
+        //敵のスポーン
+        void OnSpawn();
+
+        //敵の移動同期
+        void OnMoveEnemy(Vector3 pos, Quaternion rot);
+
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.ProBuilder.Shapes;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     FixedJoystick joystick;
     VirtualCamera cam;
     Camera mainCamera;
+
     [SerializeField]GameObject shootPoint;
 
 
@@ -41,25 +43,28 @@ public class Player : MonoBehaviour
         hpSlider=GameObject.Find("HpSlider").GetComponent<Slider>();
         hp = maxHp;
 
+
+        //カメラを探す
+        cam = GameObject.Find("Virtual Camera").GetComponent<VirtualCamera>();
+        cam.CameraStart();
+        mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
+
         if (me == false)
         {
 
         }
         else if (me == true)
         {
-            //カメラを探す
-            cam = GameObject.Find("Virtual Camera").GetComponent<VirtualCamera>();
-            cam.CameraStart();
-            mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
+            
         }
     }
 
     void Update()
     {
-        if (me == false)
+        /*if (me == false)
         {
             return;
-        }
+        }*/
         if (goal == true)
         {
             return; 
@@ -68,16 +73,16 @@ public class Player : MonoBehaviour
         //ジョイスティック移動処理
         if (run==false) 
         {
-            Vector3 move = (mainCamera.transform.forward *joystick.Vertical +
-                        mainCamera.transform.right * joystick.Horizontal) * player_speed;
+            Vector3 move = (joystick.transform.forward *joystick.Vertical +
+                        joystick.transform.right * joystick.Horizontal) * player_speed;
             move.y = rigidbody.velocity.y;
             rigidbody.velocity = move;
 
             //移動の向きなど座標関連はVector3で扱う
-            Vector3 velocity = new Vector3(move.x,move.y,move.z);
+            Vector3 velocity = new Vector3(move.x,0,move.z);
 
             //ベクトルの向きを取得
-            Vector3 direction = velocity.normalized;
+            Vector3 direction =velocity.normalized;
 
             //移動距離を計算
             float distance = player_speed * Time.deltaTime;
@@ -95,7 +100,7 @@ public class Player : MonoBehaviour
             rigidbody.velocity = move;
 
             //移動の向きなど座標関連はVector3で扱う
-            Vector3 velocity = new Vector3(move.x, move.y, move.z);
+            Vector3 velocity = new Vector3(move.x, 0, move.z);
 
             //ベクトルの向きを取得
             Vector3 direction = velocity.normalized;
@@ -124,6 +129,7 @@ public class Player : MonoBehaviour
 
     public void UpdateHP()
     {
+       // if(me == false) { return; }
         hp -= 20;
         //hpSlider.value = hp;
         hpSlider.DOValue(hp, 0.5f);
@@ -137,9 +143,10 @@ public class Player : MonoBehaviour
 
     public void SlowSnow()
     {
+        //if (me == false) { return; }
         //Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
 
-        GameObject snow = (GameObject)Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
+        GameObject snow = (GameObject)Instantiate(snowball, gameObject.transform.position, Quaternion.identity);
         Rigidbody snowRigidbody = snow.GetComponent<Rigidbody>();
         snowRigidbody.AddForce(gameObject.transform.forward * snowball_speed,ForceMode.Impulse);
     }

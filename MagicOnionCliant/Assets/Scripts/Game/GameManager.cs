@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         await roomModel.ConnectAsync();
     }
 
-    void Update()
+    async void Update()
     {
         num++;
         if(num%5000==0)
@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
            enemy= Instantiate(enemyPrefab);
 
             enemy.transform.position=new Vector3(UnityEngine.Random.Range(-8, 8),4 , UnityEngine.Random.Range(-3, 3));
+
+            await roomModel.SponeAsync();
         }
     }
 
@@ -96,11 +98,11 @@ public class GameManager : MonoBehaviour
         GameObject characterObject;
         joinedUser = user;
  
-            characterObject = Instantiate(characterPrefab[0]);//インスタンス生成
+        characterObject = Instantiate(characterPrefab[0]);//インスタンス生成
 
-        
 
-       player= characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
+        player = characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
+        characterList[user.ConnectionId] = characterObject; //フィールドで保持
 
         if (characterList.Count==0)
         {
@@ -115,16 +117,18 @@ public class GameManager : MonoBehaviour
         {
             characterObject.transform.position = new Vector3(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(-3, 3), 0);
         }
-        characterList[user.ConnectionId] = characterObject; //フィールドで保持
+        
 
         if (user.ConnectionId == roomModel.ConnectionId)
         {
-            player.Me();
+            
+           // player.Me();
+            
         }
         else
         {
 
-            player.NotMe();
+           // player.NotMe();
             player.enabled = false;
         }
     }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyScope : MonoBehaviour
 {
-    Enemy01 enemy01;
+    [SerializeField] Enemy01 enemy01;
     float speed = 300.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         
-        enemy01 = GameObject.Find("Enemy(Clone)").GetComponent<Enemy01>();
+        //enemy01 = GameObject.Find("Enemy(Clone)").GetComponent<Enemy01>();
 
     }
 

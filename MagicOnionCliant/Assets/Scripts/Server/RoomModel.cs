@@ -28,6 +28,12 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     //’Eo’Ê’m
     public Action<JoinedUser> OnEscapeCharacter {  get; set; }
 
+    //“G‚ÌoŒ»ˆ—
+    public Action OnSpawnEnemy { get; set; }
+
+    //“G‚ÌˆÚ“®“¯Šú
+    public Action OnmoveEnemy { get; set; }
+
     //MagicOnionÚ‘±ˆ—
     public async UniTask ConnectAsync()
     {

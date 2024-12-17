@@ -75,6 +75,11 @@ namespace StreamingHubs
 
         }
 
+        public async Task SpawnAsync()
+        {
+
+        }
+
         protected override ValueTask OnDisconnected()
         {
             if (this.room != null) 

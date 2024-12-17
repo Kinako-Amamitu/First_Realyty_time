@@ -6,20 +6,15 @@ using UnityEngine.ProBuilder.Shapes;
 public class Enemy01 : MonoBehaviour
 {
     [SerializeField] GameObject[] itemPrehab;
-    [SerializeField] GameObject zonePrefab;
     [SerializeField] GameObject snow;
     [SerializeField] GameObject shotPoint;
-    GameObject zone;
     //待機時間
     int num=0;
     
     // Start is called before the first frame update
     void Start()
     {
-        shotPoint = GameObject.Find("Enemy");
-
-        //ゾーン生成
-        zone=Instantiate(zonePrefab);
+       // shotPoint = GameObject.Find("ShotPoint");
         
     }
 
@@ -27,8 +22,7 @@ public class Enemy01 : MonoBehaviour
     void Update()
     {
         num++;
-        //ゾーン位置を常に更新
-        zone.transform.position = gameObject.transform.position;
+   
     }
 
 
@@ -49,18 +43,16 @@ public class Enemy01 : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag == "Snow")
+        if (collision.gameObject.tag=="Snow")
         {
 
 
             Instantiate(itemPrehab[0], gameObject.transform.position, Quaternion.identity);
-            Destroy(gameObject);
-            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+            Destroy(collision.gameObject);
 
         }
-    }
-        
-
+    }   
 }

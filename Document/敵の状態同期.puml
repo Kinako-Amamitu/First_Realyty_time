@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Aさん -> MagicOnion: 入室
+MagicOnion <- Bさん: 入室
+Aさん <-- MagicOnion: Bさんの入室通知を送信
+
+敵 -> MagicOnion:出現
+Bさん <-- MagicOnion:出現通知
+Aさん <-- MagicOnion:出現通知
+敵 -> MagicOnion:移動、回転
+Bさん <-- MagicOnion:移動回転通知
+Aさん <-- MagicOnion:移動回転通知
+
+Aさん -> 敵 :倒す
+MagicOnion <- 敵 :倒された
+Bさん <-- MagicOnion:敵撃破通知
+Aさん <-- MagicOnion:敵撃破通知
+@enduml

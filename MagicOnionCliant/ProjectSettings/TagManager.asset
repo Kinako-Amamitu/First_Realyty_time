@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Snow
   - Object
+  - Item
   layers:
   - Default
   - TransparentFX

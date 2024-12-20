@@ -23,7 +23,7 @@ namespace Shared.Interfaces.StreamingHubs
         void OnSpawn();
 
         //敵の移動同期
-        void OnMoveEnemy(Vector3 pos, Quaternion rot);
+        void OnMoveEnemy( string enemyName,Vector3 pos, Quaternion rot);
 
     }
 }

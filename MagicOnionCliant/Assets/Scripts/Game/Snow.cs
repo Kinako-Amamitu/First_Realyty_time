@@ -28,16 +28,18 @@ public class Snow : MonoBehaviour
        // GetComponent<Rigidbody>().AddForce(0,0,150.0f);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag == "Object")
+
+        if (collision.gameObject.tag == "Object")
         {
 
 
-            
+
             Destroy(gameObject);
-            
+
 
         }
     }
+    
 }

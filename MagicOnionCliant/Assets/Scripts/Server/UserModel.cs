@@ -23,15 +23,23 @@ public class UserModel : BaseModel
 
     private static UserModel instance;
     public static UserModel Instance
-    {        get { return instance; } }
+    {
+        get
+        {
+            if (instance == null)
+            {
+                GameObject gameObj = new GameObject("UserModel");
+                instance = gameObj.AddComponent<UserModel>();
+                DontDestroyOnLoad(gameObj);
+            }
+            return instance;
+        }
+    }
 
     //ÉÜÅ[ÉUÅ[IDÇÉçÅ[ÉJÉãÉtÉ@ÉCÉãÇ…ï€ë∂Ç∑ÇÈ
     public void SaveUserData()
     {
         SaveData saveData = new SaveData();
-        saveData.authToken = this.authToken;
-        saveData.userName = this.userName;
-        
         saveData.userID = userId;
         
         string json = JsonConvert.SerializeObject(saveData);
@@ -54,20 +62,20 @@ public class UserModel : BaseModel
         string json = reader.ReadToEnd();
         reader.Close();
         SaveData saveData = JsonConvert.DeserializeObject<SaveData>(json);
-        authToken = saveData.authToken;
+        //authToken = saveData.authToken;
         userId = saveData.userID;
-        userName = saveData.userName;
+        //userName = saveData.userName;
         
 
-        if (authToken == null)
-        {
+        //if (authToken == null)
+        //{
 
-            StartCoroutine(Instance.CreateToken(result =>
-            {
-                SaveUserData();
-            }));
+        //    StartCoroutine(Instance.CreateToken(result =>
+        //    {
+        //        SaveUserData();
+        //    }));
 
-        }
+        //}
 
         return true;
     }
@@ -96,18 +104,20 @@ public class UserModel : BaseModel
         responce?.Invoke(request.result == UnityWebRequest.Result.Success);
     }
 
-    public async UniTask<bool> RegistAsync(string name, string password)
+    public async UniTask<bool> RegistAsync(string name)
     {
         var handler = new YetAnotherHttpHandler() { Http2Only = true };
         var channel = GrpcChannel.ForAddress(ServerURL, new GrpcChannelOptions() { HttpHandler = handler });
         var client = MagicOnionClient.Create<IUserService>(channel);
         try
         {//ìoò^ê¨å˜
-            userId = await client.RegistUserAsync(name, password);
+            userId = await client.RegistUserAsync(name);
+            SaveUserData();
+            Debug.Log("ìoò^ê¨å˜");
             return true;
         } catch (RpcException e)
         {//ìoò^ÇµÇ¡ÇœÇ¢
-            Debug.Log(e);
+            Debug.Log("ìoò^é∏îs");
             return false;
         }
     }

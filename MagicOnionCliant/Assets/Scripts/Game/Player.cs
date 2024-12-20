@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject snowball;
+    [SerializeField] GameObject[] itemPrefab;
     GameManager gameManager;
     
 
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
 
 
     //é©ï™ÇÃÉvÉåÉCÉÑÅ[Ç©Ç«Ç§Ç©
-    public bool me;
+    public bool isself=false;
     public bool goal = false;
     public bool run = false;
     private void Start()
@@ -49,14 +50,14 @@ public class Player : MonoBehaviour
         cam.CameraStart();
         mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
 
-        if (me == false)
+        /*if (me == false)
         {
 
         }
         else if (me == true)
         {
             
-        }
+        }*/
     }
 
     void Update()
@@ -116,7 +117,7 @@ public class Player : MonoBehaviour
         
     }
 
-    public void Me()
+   /* public void Me()
     {
         me = true;
 
@@ -125,19 +126,28 @@ public class Player : MonoBehaviour
     public void NotMe()
     {
         me = false;
-    }
+    }*/
 
     public void UpdateHP()
     {
-       // if(me == false) { return; }
+        // if(me == false) { return; }
         hp -= 20;
         //hpSlider.value = hp;
         hpSlider.DOValue(hp, 0.5f);
 
         if (hp <= 0)
         {
+           
             goal = true;
             gameManager.GameOver();
+            for (int i = 0; i < itemPrefab.Length; i++) 
+            {
+                itemPrefab[i].transform.position = gameObject.transform.position
+                    + new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+                itemPrefab[i].SetActive(true);
+                
+            }
+            gameObject.SetActive(false);
         }
     }
 
@@ -153,8 +163,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-       
-        if(collision.gameObject.tag=="Enemy") 
+        if (goal == true)
+        {
+            return;
+        }
+        if (collision.gameObject.tag=="Enemy") 
         {
             UpdateHP();
         }
@@ -162,10 +175,29 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (goal == true)
+        {
+            return;
+        }
         if (other.gameObject.tag == "EnemySnow")
         {
             Destroy(other.gameObject);
             UpdateHP();
+        }
+        else if(other.gameObject.tag=="Item")
+        {
+          
+                for (int i = 0; i <= itemPrefab.Length; i++)
+                {
+
+
+                    if (itemPrefab[i] == null)
+                    {
+                        itemPrefab[i] = GameObject.Find("Item(Clone)");
+                        other.gameObject.SetActive(false);
+                    break;
+                    }
+                }
         }
     }
 }

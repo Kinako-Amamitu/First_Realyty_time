@@ -8,14 +8,16 @@ public class Enemy01 : MonoBehaviour
     [SerializeField] GameObject[] itemPrehab;
     [SerializeField] GameObject snow;
     [SerializeField] GameObject shotPoint;
+    private GameManager gameManager;
     //‘Ò‹@ŽžŠÔ
     int num=0;
     
     // Start is called before the first frame update
     void Start()
     {
-       // shotPoint = GameObject.Find("ShotPoint");
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        // shotPoint = GameObject.Find("ShotPoint");
+       
     }
 
     // Update is called once per frame
@@ -54,5 +56,10 @@ public class Enemy01 : MonoBehaviour
             Destroy(collision.gameObject);
 
         }
-    }   
+    }
+
+    public void SpawnEnemy()
+    {
+        gameManager.EnemyMoveAsync(gameObject.name,gameObject.transform.position,gameObject.transform.rotation);
+    }
 }

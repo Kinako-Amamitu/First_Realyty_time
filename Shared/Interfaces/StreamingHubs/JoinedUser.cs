@@ -18,12 +18,4 @@ namespace Shared.Interfaces.StreamingHubs
         public int JoinOrder { get; set; } //参加順番
     }
 
-    [MessagePackObject]
-    public class Poslot
-    {
-        [Key(0)]
-        public Vector3 Pos { get; set; } //位置
-        [Key(1)]
-        public Quaternion Lot { get; set; } //回転
-    }
 }

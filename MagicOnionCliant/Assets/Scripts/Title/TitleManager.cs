@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class TitleManager : MonoBehaviour
+public class TitleManager : BaseModel
 {
     [SerializeField] GameObject accountPanel;
     [SerializeField] InputField nameSpace;
@@ -26,21 +26,21 @@ public class TitleManager : MonoBehaviour
         
     }
 
-    public void AccountMake()
-    {
-        accountPanel.SetActive(true);
-    }
+
 
     public async void OnMakeAccount()
     {
         string name;
-        string password;
         name = nameSpace.text;
-        password = passwordSpace.text;
 
-        await userModel.RegistAsync(name, password);
+        await userModel.RegistAsync(name);
 
         accountPanel.SetActive(false);
+
+        userModel.SaveUserData();
+        //‰æ–Ê‘JˆÚ
+        Initiate.DoneFading();
+        Initiate.Fade("Home", Color.black, 0.5f);
     }
 
 
@@ -63,12 +63,8 @@ public class TitleManager : MonoBehaviour
         if (!isSuccess)
         {
             //ƒ†[ƒU[ƒf[ƒ^‚ª•Û‘¶‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í“o˜^
-            StartCoroutine("AccountMake()");
-            {
-                //‰æ–Ê‘JˆÚ
-                Initiate.DoneFading();
-                Initiate.Fade("Home", Color.black, 0.5f);
-            }
+            accountPanel.SetActive(true);
+
         }
         else
         {
@@ -76,7 +72,7 @@ public class TitleManager : MonoBehaviour
             //‰æ–Ê‘JˆÚ
             Initiate.DoneFading();
             Initiate.Fade("Home", Color.black, 0.5f);
-        };
+        }
     }
 
     /// <summary>

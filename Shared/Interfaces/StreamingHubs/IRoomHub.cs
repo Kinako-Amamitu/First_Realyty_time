@@ -20,8 +20,8 @@ namespace Shared.Interfaces.StreamingHubs
         //位置・回転をサーバーに送信
         Task MoveAsync(Vector3 pos, Quaternion rot);
 
-        //
-        Task SpawnAsync();
+        //敵の位置回転
+        Task EnemyMoveAsync(string enemyName,Vector3 pos,Quaternion rot);
 
     }
 }

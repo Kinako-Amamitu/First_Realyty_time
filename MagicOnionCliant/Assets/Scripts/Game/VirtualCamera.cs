@@ -25,7 +25,7 @@ public class VirtualCamera : MonoBehaviour
     }
     public void CameraStart()
     {
-        player = GameObject.Find("MyPlayer(Clone)");
+        player = GameObject.Find("Exo Gray@Walking(Clone)");
         
         cinemachine.Follow=player.transform; 
         cinemachine.LookAt=player.transform;

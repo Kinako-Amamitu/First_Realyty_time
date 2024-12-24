@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject snowball;
     [SerializeField] GameObject[] itemPrefab;
     GameManager gameManager;
-    
+    Animator animator;
 
     public Slider hpSlider;
     Snow snow;
@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     public bool isself=false;
     public bool goal = false;
     public bool run = false;
+
+    
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
         joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
         hpSlider=GameObject.Find("HpSlider").GetComponent<Slider>();
         hp = maxHp;
+        animator = GetComponent<Animator>();
 
 
         //ƒJƒƒ‰‚ð’T‚·
@@ -92,6 +95,15 @@ public class Player : MonoBehaviour
 
             //ˆÚ“®æ‚ÉŒü‚¯‚Ä‰ñ“]
             transform.LookAt(destination);
+
+            if(move.magnitude>0.01f)
+            {
+                animator.SetInteger("Speed", 1);
+            }
+            else
+            {
+                animator.SetInteger("Speed", 0);
+            }
         }
         else if(run==true) 
         {
@@ -113,8 +125,18 @@ public class Player : MonoBehaviour
 
             //ˆÚ“®æ‚ÉŒü‚¯‚Ä‰ñ“]
             transform.LookAt(destination);
+
+            if (move.magnitude > 0.01f)
+            {
+                animator.SetInteger("Speed", 1);
+            }
+            else
+            {
+                animator.SetInteger("Speed", 0);
+            }
         }
         
+
     }
 
    /* public void Me()
@@ -157,6 +179,8 @@ public class Player : MonoBehaviour
         //Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
 
         GameObject snow = (GameObject)Instantiate(snowball, gameObject.transform.position, Quaternion.identity);
+        snow.name = "Snow" + gameManager.snowCount;
+        gameManager.snowCount++;
         Rigidbody snowRigidbody = snow.GetComponent<Rigidbody>();
         snowRigidbody.AddForce(gameObject.transform.forward * snowball_speed,ForceMode.Impulse);
     }

@@ -16,8 +16,8 @@ namespace Shared.Interfaces.StreamingHubs
         //ユーザーの退室通知
         void OnLeave(JoinedUser user);
 
-        //プレイヤーの位置同期
-        void OnMove(JoinedUser user,Vector3 pos,Quaternion rot);
+        //プレイヤーの位置・回転・アニメーション同期
+        void OnMove(JoinedUser user,Vector3 pos,Quaternion rot,int anim);
 
         //敵のスポーン
         void OnSpawn();

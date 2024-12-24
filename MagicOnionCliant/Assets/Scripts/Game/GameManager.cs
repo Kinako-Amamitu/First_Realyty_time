@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
 
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
     Player player;
-    [SerializeField] Enemy01 enemy01;
 
+    public int snowCount = 0;
     int num = 0;
     int enemyid = 0;
     bool isjoin = false;
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         roomModel.OnLeavedUser += this.OnLeavedUser;
         //ユーザーが移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMoveCharacter += this.OnMoveCharacter;
-        //敵がが移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
+        //敵が移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMovedEnemy += this.OnMoveEnemy;
         //接続
         await roomModel.ConnectAsync();
@@ -99,7 +99,9 @@ public class GameManager : MonoBehaviour
     {
         //移動同期
         GameObject characterOblect = characterList[roomModel.ConnectionId];
-        await roomModel.MoveAsync(characterOblect.transform.position, characterOblect.transform.rotation);
+        
+        await roomModel.MoveAsync(characterOblect.transform.position, characterOblect.transform.rotation,
+            characterOblect.GetComponent<Animator>().GetInteger("Speed"));
     }
 
 
@@ -170,7 +172,7 @@ public class GameManager : MonoBehaviour
     }
 
     //プレイヤーの移動
-    void OnMoveCharacter(JoinedUser user, Vector3 pos, Quaternion rot)
+    void OnMoveCharacter(JoinedUser user, Vector3 pos, Quaternion rot, int anim)
     {
         GameObject characterObject = characterList[user.ConnectionId];
 
@@ -178,11 +180,13 @@ public class GameManager : MonoBehaviour
         characterObject.transform.DORotateQuaternion(rot, 0.1f);
     }
 
-    //敵の移動
+    //敵の移動同期
     public async void EnemyMoveAsync(string enemyName, Vector3 pos, Quaternion rot)
     {
         await roomModel.MoveEnemyAsync(enemyName, pos, rot);
     }
+
+    //敵の移動回転の通知
     void OnMoveEnemy(string enemyName, Vector3 pos, Quaternion rot)
     {
         GameObject enemy = GameObject.Find(enemyName);

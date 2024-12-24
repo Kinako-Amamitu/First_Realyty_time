@@ -38,6 +38,9 @@ public class Enemy01 : MonoBehaviour
         if(num>500)
         {
             GameObject ball = (GameObject)Instantiate(snow, shotPoint.transform.position, Quaternion.identity);
+            ball.name = "Snow"+gameManager.snowCount;
+            gameManager.snowCount++;
+
             Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
             ballRigidbody.AddForce(transform.forward * speed);
             num = 0;
@@ -58,6 +61,7 @@ public class Enemy01 : MonoBehaviour
         }
     }
 
+    //ê∂ê¨Ç≥ÇÍÇΩå„ÇÃìGÇ™à⁄ìÆÇµÇΩÇÁ
     public void SpawnEnemy()
     {
         gameManager.EnemyMoveAsync(gameObject.name,gameObject.transform.position,gameObject.transform.rotation);

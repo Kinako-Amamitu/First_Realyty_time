@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Aさん->MagicOnion:待機アニメ
+Bさん<--MagicOnion:待機アニメ
+Aさん -> MagicOnion: 移動アニメ
+Bさん<--MagicOnion:移動アニメ
+@enduml

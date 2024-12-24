@@ -23,7 +23,7 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     public Action<JoinedUser> OnLeavedUser { get; set; }
 
     //位置回転同期
-    public Action<JoinedUser,Vector3,Quaternion> OnMoveCharacter {  get; set; }
+    public Action<JoinedUser,Vector3,Quaternion,int> OnMoveCharacter {  get; set; }
 
     //脱出通知
     public Action<JoinedUser> OnEscapeCharacter {  get; set; }
@@ -87,15 +87,15 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     }
 
     //移動
-    public async Task MoveAsync(Vector3 pos,Quaternion rot)
+    public async Task MoveAsync(Vector3 pos,Quaternion rot,int anim)
     {
-       await roomHub.MoveAsync(pos,rot);
+       await roomHub.MoveAsync(pos,rot,anim);
     }
 
     //移動通知
-    public void OnMove(JoinedUser user,Vector3 pos,Quaternion rot)
+    public void OnMove(JoinedUser user,Vector3 pos,Quaternion rot,int anim)
     {
-        OnMoveCharacter(user, pos, rot);
+        OnMoveCharacter(user, pos, rot,anim);
     }
 
 

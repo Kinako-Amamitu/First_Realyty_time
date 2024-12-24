@@ -59,7 +59,7 @@ namespace StreamingHubs
 
         }
 
-        public async Task MoveAsync(Vector3 pos,Quaternion rot)
+        public async Task MoveAsync(Vector3 pos,Quaternion rot, int anim)
         {
             //グループストレージからRoomData取得
             var roomStorage =this.room.GetInMemoryStorage<RoomData>();
@@ -72,7 +72,7 @@ namespace StreamingHubs
             var joinedUser = new JoinedUser() { ConnectionId = this.ConnectionId };
 
             //ルーム参加者全員に、ユーザーの移動回転を送信
-            this.BroadcastExceptSelf(room).OnMove(joinedUser,pos,rot);
+            this.BroadcastExceptSelf(room).OnMove(joinedUser,pos,rot,anim);
 
         }
 

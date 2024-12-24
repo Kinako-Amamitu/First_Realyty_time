@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/Document/アニメーションの同期.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Animation/Exo Gray@Walking.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Animation/Exo Gray@Walking.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Enemy01.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Enemy01.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/VirtualCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/VirtualCamera.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/RoomModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/RoomModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomHub.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHub.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" afterDir="false" />
-    </list>
+    <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +109,7 @@
       <workItem from="1734676546842" duration="2429000" />
       <workItem from="1734913942266" duration="1465000" />
       <workItem from="1734944805980" duration="726000" />
-      <workItem from="1734998909703" duration="820000" />
+      <workItem from="1734998909703" duration="825000" />
     </task>
     <servers />
   </component>

@@ -23,12 +23,16 @@ public class VirtualCamera : MonoBehaviour
     {
         
     }
-    public void CameraStart()
+    public void CameraStart(bool isself)
     {
-        player = GameObject.Find("Exo Gray@Walking(Clone)");
+        if (isself==true)
+        {
+            player = GameObject.Find("Player1");
+
+            cinemachine.Follow = player.transform;
+            cinemachine.LookAt = player.transform;
+        }
         
-        cinemachine.Follow=player.transform; 
-        cinemachine.LookAt=player.transform;
         //isCamera = true;
     }
 }

@@ -33,25 +33,26 @@ public class Player : MonoBehaviour
 
 
     //自分のプレイヤーかどうか
-    public bool isself=false;
+    public bool isself;
     public bool goal = false;
     public bool run = false;
 
     
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
-        rigidbody = GetComponent<Rigidbody>();
-        joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
-        hpSlider=GameObject.Find("HpSlider").GetComponent<Slider>();
-        hp = maxHp;
-        animator = GetComponent<Animator>();
+            gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
+            rigidbody = GetComponent<Rigidbody>();
+            joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
+            hpSlider = GameObject.Find("HpSlider").GetComponent<Slider>();
+            hp = maxHp;
+            animator = GetComponent<Animator>();
 
 
-        //カメラを探す
-        cam = GameObject.Find("Virtual Camera").GetComponent<VirtualCamera>();
-        cam.CameraStart();
-        mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
+            //カメラを探す
+            cam = GameObject.Find("Virtual Camera").GetComponent<VirtualCamera>();
+            cam.CameraStart(isself);
+            mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
+        
 
         /*if (me == false)
         {

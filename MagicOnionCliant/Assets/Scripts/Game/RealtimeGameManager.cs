@@ -24,12 +24,15 @@ public class RealtimeGameManager : MonoBehaviour
     Player player;
 
     public int snowCount = 0;
+    public int playerCount = 0;
     int num = 0;
     int enemyid = 0;
     bool isjoin = false;
     bool mine = false;
     async void Start()
     {
+        //接続
+        await roomModel.ConnectAsync();
         //Componentを扱えるようにする
         inputField = inputField.GetComponent<InputField>();
         //ユーザーが入室した時にOnJoinedUserメソッドを実行するよう、モデルに登録
@@ -40,8 +43,7 @@ public class RealtimeGameManager : MonoBehaviour
         roomModel.OnMoveCharacter += this.OnMoveCharacter;
         //敵が移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMovedEnemy += this.OnMoveEnemy;
-        //接続
-        await roomModel.ConnectAsync();
+       
     }
 
     async void Update()
@@ -116,11 +118,12 @@ public class RealtimeGameManager : MonoBehaviour
 
 
         player = characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
-        characterList[user.ConnectionId] = characterObject; //フィールドで保持
+        
 
         if (user.ConnectionId == roomModel.ConnectionId)
         {
             characterObject.GetComponent<Player>().isself = true;
+           
 
             if (characterList.Count == 0)
             {
@@ -136,7 +139,14 @@ public class RealtimeGameManager : MonoBehaviour
                 characterObject.transform.position = new Vector3(UnityEngine.Random.Range(-8, 8), 0, UnityEngine.Random.Range(-3, 3));
             }
         }
+        else
+        {
+            characterObject.GetComponent<Player>().isself= false;
+        }
 
+        characterList[user.ConnectionId] = characterObject; //フィールドで保持
+         playerCount++;
+            characterObject.name="Player"+playerCount;
 
         /*if (user.ConnectionId == roomModel.ConnectionId)
         {

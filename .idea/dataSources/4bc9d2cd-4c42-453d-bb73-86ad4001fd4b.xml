@@ -1127,8 +1127,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="297" parent="1" name="realtime_game">
       <Current>1</Current>
-      <IntrospectionTimestamp>2024-12-17.09:52:38</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2024-12-17.00:52:38</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2025-01-15.13:49:13</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2025-01-15.04:49:12</LocalIntrospectionTimestamp>
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
     <user id="298" parent="1" name="student"/>
@@ -1387,7 +1387,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="354" parent="309" name="id">
-      <AutoIncrement>1</AutoIncrement>
+      <AutoIncrement>11</AutoIncrement>
       <DasType>int unsigned|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1526,7 +1526,7 @@ tokenable_id</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="383" parent="312" name="id">
-      <AutoIncrement>4</AutoIncrement>
+      <AutoIncrement>5</AutoIncrement>
       <DasType>bigint unsigned|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>

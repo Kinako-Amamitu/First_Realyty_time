@@ -9,7 +9,7 @@ using UnityEngine;
 using DG.Tweening;	//DOTween‚ðŽg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ð“ü‚ê‚é
 using UnityEngine.UI;
 using MasicOnionServer00.Model.Entity;
-public class GameManager : MonoBehaviour
+public class RealtimeGameManager : MonoBehaviour
 {
     [SerializeField] InputField inputField;
     [SerializeField] GameObject[] characterPrefab;

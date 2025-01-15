@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    GameManager gameManager;
+    RealtimeGameManager gameManager;
     Player player;
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
         
     }
 
@@ -24,7 +24,7 @@ public class Goal : MonoBehaviour
     {
         if(collision.collider.tag == "Player")
         {
-            player = GameObject.Find("MyPlayer(Clone)").GetComponent<Player>();
+            player = GameObject.Find("Exo Gray@Walking(Clone)").GetComponent<Player>();
             player.goal = true;
             gameManager.Escape();
         }

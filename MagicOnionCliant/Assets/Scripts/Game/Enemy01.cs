@@ -8,14 +8,14 @@ public class Enemy01 : MonoBehaviour
     [SerializeField] GameObject[] itemPrehab;
     [SerializeField] GameObject snow;
     [SerializeField] GameObject shotPoint;
-    private GameManager gameManager;
+    private RealtimeGameManager gameManager;
     //‘Ò‹@ŽžŠÔ
     int num=0;
     
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
         // shotPoint = GameObject.Find("ShotPoint");
        
     }

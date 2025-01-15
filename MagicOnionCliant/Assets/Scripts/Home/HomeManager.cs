@@ -13,6 +13,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] GameObject pwPanel;
     [SerializeField] GameObject rankingPanel;
     [SerializeField] GameObject gatchaPanel;
+    [SerializeField] GameObject pluspoint;
 
 
     // Start is called before the first frame update
@@ -94,5 +95,10 @@ public class HomeManager : MonoBehaviour
     public void ItemGetChallenge()
     {
         gatchaPanel.SetActive(true);
+    }
+
+    public void GradeUp()
+    {
+        pluspoint.SetActive(true);
     }
 }

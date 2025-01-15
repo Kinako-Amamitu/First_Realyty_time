@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] GameObject snowball;
     [SerializeField] GameObject[] itemPrefab;
-    GameManager gameManager;
+    RealtimeGameManager gameManager;
     Animator animator;
 
     public Slider hpSlider;
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
         rigidbody = GetComponent<Rigidbody>();
         joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
         hpSlider=GameObject.Find("HpSlider").GetComponent<Slider>();

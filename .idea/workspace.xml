@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="" />
+    <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Home.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Home.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Title.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Title.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Goal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Goal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Home/HomeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Home/HomeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Title/TitleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Title/TitleManager.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,6 +119,8 @@
       <workItem from="1734913942266" duration="1465000" />
       <workItem from="1734944805980" duration="726000" />
       <workItem from="1734998909703" duration="825000" />
+      <workItem from="1736816415282" duration="612000" />
+      <workItem from="1736903697315" duration="411000" />
     </task>
     <servers />
   </component>

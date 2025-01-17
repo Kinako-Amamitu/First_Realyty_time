@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 
             //ƒJƒƒ‰‚ğ’T‚·
             cam = GameObject.Find("Virtual Camera").GetComponent<VirtualCamera>();
-            cam.CameraStart(isself);
+            //cam.CameraStart(isself);
             mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
         
 
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
             //ˆÚ“®æ‚ÉŒü‚¯‚Ä‰ñ“]
             transform.LookAt(destination);
 
-            if(move.magnitude>0.01f)
+            if(rigidbody.velocity.magnitude > 0.01f)
             {
                 animator.SetInteger("Speed", 1);
             }
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
             //ˆÚ“®æ‚ÉŒü‚¯‚Ä‰ñ“]
             transform.LookAt(destination);
 
-            if (move.magnitude > 0.01f)
+            if (rigidbody.velocity.magnitude > 0.01f)
             {
                 animator.SetInteger("Speed", 1);
             }

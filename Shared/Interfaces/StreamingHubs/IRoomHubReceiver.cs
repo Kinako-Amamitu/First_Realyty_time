@@ -20,7 +20,7 @@ namespace Shared.Interfaces.StreamingHubs
         void OnMove(JoinedUser user,Vector3 pos,Quaternion rot,int anim);
 
         //敵のスポーン
-        void OnSpawn();
+        void OnSpawn(string enemyName, Vector3 pos);
 
         //敵の移動同期
         void OnMoveEnemy( string enemyName,Vector3 pos, Quaternion rot);

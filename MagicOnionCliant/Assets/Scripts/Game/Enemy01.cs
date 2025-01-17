@@ -52,11 +52,9 @@ public class Enemy01 : MonoBehaviour
     {
         if (collision.gameObject.tag=="Snow")
         {
-
-
             Instantiate(itemPrehab[0], gameObject.transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
-            Destroy(collision.gameObject);
+            //Destroy(this.gameObject);
+            //Destroy(collision.gameObject);
 
         }
     }

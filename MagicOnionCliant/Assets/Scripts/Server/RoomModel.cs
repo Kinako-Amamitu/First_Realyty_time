@@ -29,7 +29,7 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     public Action<JoinedUser> OnEscapeCharacter {  get; set; }
 
     //“G‚ÌoŒ»ˆ—
-    public Action OnSpawnEnemy { get; set; }
+    public Action<string,Vector3> OnSpawnEnemy { get; set; }
 
     //“G‚ÌˆÚ“®“¯Šú
     public Action<string,Vector3,Quaternion> OnMovedEnemy { get; set; }
@@ -98,12 +98,19 @@ public class RoomModel : BaseModel, IRoomHubReceiver
         OnMoveCharacter(user, pos, rot,anim);
     }
 
-
-    public void OnSpawn()
+    //“G‚ÌoŒ»’Ê’m
+    public void OnSpawn(string enemyName, Vector3 pos)
     {
-        OnSpawnEnemy();
+        OnSpawnEnemy(enemyName,pos);
     }
 
+    //“G‚ÌoŒ»
+    public async UniTask SpawnEnemyAsync(string enemyName,Vector3 pos)
+    {
+        await roomHub.SpawnAsync(enemyName,pos);
+    }
+
+    //“G‚ÌˆÚ“®‰ñ“]
     public void OnMoveEnemy(string enemyName,Vector3 pos,Quaternion rot)
     {
         OnMovedEnemy(enemyName, pos,rot);

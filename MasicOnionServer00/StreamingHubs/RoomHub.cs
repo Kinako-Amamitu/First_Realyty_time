@@ -14,6 +14,8 @@ namespace StreamingHubs
     public class RoomHub : StreamingHubBase<IRoomHub, IRoomHubReceiver>, IRoomHub
     {
         private IGroup room;
+
+        //入室
         public async Task<JoinedUser[]>JoinedAsync(string roomName, int userId)
         {
             //ルームに参加＆ルームを保持
@@ -44,6 +46,7 @@ namespace StreamingHubs
             return joinedUserList;
         }
 
+        //退室
         public async Task LeavedAsync()
         {
             //グループデータから削除
@@ -59,6 +62,7 @@ namespace StreamingHubs
 
         }
 
+        //ユーザーの移動回転
         public async Task MoveAsync(Vector3 pos,Quaternion rot, int anim)
         {
             //グループストレージからRoomData取得
@@ -76,20 +80,22 @@ namespace StreamingHubs
 
         }
 
-        public async Task SpawnAsync()
+
+        public async Task SpawnAsync(string enemyName, Vector3 pos)
         {
             //グループストレージからRoomData取得
             var roomStorage = this.room.GetInMemoryStorage<RoomData>();
             var roomData = roomStorage.Get(this.ConnectionId);
 
-            //参加ユーザーを取得
-            var joinedUser = new JoinedUser() { ConnectionId = this.ConnectionId };
+            //位置と回転を保存
+            roomData.Position = pos;
 
-            //ルーム参加者全員に、ユーザーの移動回転を送信
-            this.BroadcastExceptSelf(room).OnSpawn();
+            //ルーム参加者全員に、敵の出現を送信
+            this.Broadcast(room).OnSpawn(enemyName, pos);
 
         }
 
+        //敵の移動回転処理
         public async Task EnemyMoveAsync(string enemyName, Vector3 pos,Quaternion rot)
         {
             //グループストレージからRoomData取得
@@ -104,6 +110,7 @@ namespace StreamingHubs
             this.BroadcastExceptSelf(room).OnMoveEnemy(enemyName,pos,rot);
         }
 
+        //切断時の処理
         protected override ValueTask OnDisconnected()
         {
             if (this.room != null) 

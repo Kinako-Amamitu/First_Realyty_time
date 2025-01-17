@@ -8,7 +8,21 @@
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow Man_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow Man_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Title.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Title.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Enemy01.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Enemy01.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/RealtimeGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/RealtimeGameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Generated/Serializer.generated.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Generated/Serializer.generated.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/BaseModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/BaseModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/RoomModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/RoomModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MasicOnionServer00/Model/Context/GameDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MasicOnionServer00/Model/Context/GameDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MasicOnionServer00/Properties/PublishProfiles/crge05.pubxml.user" beforeDir="false" afterPath="$PROJECT_DIR$/MasicOnionServer00/Properties/PublishProfiles/crge05.pubxml.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomHub.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHub.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +66,7 @@
     &quot;RunOnceActivity.laravel-idea.update-module-directories&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/student/git/First_Realyty_time&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/student/git/portfolio_kida&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -118,6 +132,9 @@
       <workItem from="1736816415282" duration="612000" />
       <workItem from="1736903697315" duration="2143000" />
       <workItem from="1736917716242" duration="1309000" />
+      <workItem from="1736986431214" duration="1567000" />
+      <workItem from="1737020584106" duration="620000" />
+      <workItem from="1737072673786" duration="2473000" />
     </task>
     <servers />
   </component>

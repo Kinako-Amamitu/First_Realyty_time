@@ -9,6 +9,8 @@ using UnityEngine;
 using DG.Tweening;	//DOTweenを使うときはこのusingを入れる
 using UnityEngine.UI;
 using MasicOnionServer00.Model.Entity;
+using Cysharp.Threading.Tasks;
+using Cinemachine;
 public class RealtimeGameManager : MonoBehaviour
 {
     [SerializeField] InputField inputField;
@@ -18,7 +20,10 @@ public class RealtimeGameManager : MonoBehaviour
     [SerializeField] GameObject leaveButton;
     [SerializeField] GameObject joinButton;
     [SerializeField] Text goalText;
+    [SerializeField] GameObject position;
     JoinedUser joinedUser;
+
+    private CinemachineVirtualCamera virtualCamera;
 
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
     Player player;
@@ -42,28 +47,41 @@ public class RealtimeGameManager : MonoBehaviour
         //ユーザーが移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMoveCharacter += this.OnMoveCharacter;
         //敵が移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
+        roomModel.OnSpawnEnemy += this.OnSpawnEnemy;
+        //敵が移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMovedEnemy += this.OnMoveEnemy;
-       
+
+        virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+
     }
 
     async void Update()
     {
-
+        
     }
 
 
-    public void RespownEnemy()
+    public async void RespownEnemy()
     {
         // num++;
         //if (num % 5000 == 0)
         //{
         GameObject enemy;
+
+        await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
+
         enemy = Instantiate(enemyPrefab);
 
         enemy.name = "Enemy" + enemyid++;
-        enemy.transform.position = new Vector3(UnityEngine.Random.Range(-8, 8), 4, UnityEngine.Random.Range(-3, 3));
+        enemy.transform.position = new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3));
 
+       
         // }
+    }
+
+    public async void EnemySpawn()
+    {
+        await roomModel.SpawnEnemyAsync(enemyPrefab.name, position.transform.position);
     }
 
 
@@ -80,6 +98,10 @@ public class RealtimeGameManager : MonoBehaviour
         joinButton.SetActive(false);
 
         InvokeRepeating("SendPos", 0.1f, 0.1f);
+        Invoke("EnemySpawn", 3.0f);
+        //await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
+
+
     }
     public async void LeaveRoom()
     {
@@ -116,9 +138,9 @@ public class RealtimeGameManager : MonoBehaviour
 
         characterObject = Instantiate(characterPrefab[0]);//インスタンス生成
 
-
-        player = characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
         
+
+        //player = characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
 
         if (user.ConnectionId == roomModel.ConnectionId)
         {
@@ -138,11 +160,12 @@ public class RealtimeGameManager : MonoBehaviour
             {
                 characterObject.transform.position = new Vector3(UnityEngine.Random.Range(-8, 8), 0, UnityEngine.Random.Range(-3, 3));
             }
+
+            Transform character = characterObject.transform;
+            virtualCamera.LookAt = character;
+            virtualCamera.Follow = character;
         }
-        else
-        {
-            characterObject.GetComponent<Player>().isself= false;
-        }
+       
 
         characterList[user.ConnectionId] = characterObject; //フィールドで保持
          playerCount++;
@@ -160,6 +183,8 @@ public class RealtimeGameManager : MonoBehaviour
            // player.NotMe();
             player.enabled = false;
         }*/
+
+        
     }
 
     //ユーザーが退出したときの処理
@@ -184,10 +209,13 @@ public class RealtimeGameManager : MonoBehaviour
     //プレイヤーの移動
     void OnMoveCharacter(JoinedUser user, Vector3 pos, Quaternion rot, int anim)
     {
-        GameObject characterObject = characterList[user.ConnectionId];
+        if(characterList.ContainsKey(user.ConnectionId)) 
+        {
+            GameObject characterObject = characterList[user.ConnectionId];
 
-        characterObject.transform.DOLocalMove(pos, 0.1f);
-        characterObject.transform.DORotateQuaternion(rot, 0.1f);
+            characterObject.transform.DOLocalMove(pos, 0.1f).SetEase(Ease.Linear);
+            characterObject.transform.DORotate(rot.eulerAngles, 0.1f);
+        }
     }
 
     //敵の移動同期
@@ -250,5 +278,15 @@ public class RealtimeGameManager : MonoBehaviour
             player.run = false;
         }
 
+    }
+
+    //敵が出現したとき
+    public void OnSpawnEnemy(string enemyName, Vector3 pos)
+    {
+        GameObject enemyObject=enemyPrefab;
+
+        Instantiate(enemyPrefab,position.transform.position,Quaternion.identity);
+
+        enemyObject.transform.position = pos;
     }
 }

@@ -179,6 +179,7 @@ public class Player : MonoBehaviour
         //if (me == false) { return; }
         //Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
 
+        if(isself==false) { return; }
         GameObject snow = (GameObject)Instantiate(snowball, gameObject.transform.position, Quaternion.identity);
         snow.name = "Snow" + gameManager.snowCount;
         gameManager.snowCount++;
@@ -206,7 +207,7 @@ public class Player : MonoBehaviour
         }
         if (other.gameObject.tag == "EnemySnow")
         {
-            Destroy(other.gameObject);
+            //sDestroy(other.gameObject);
             UpdateHP();
         }
         else if(other.gameObject.tag=="Item")

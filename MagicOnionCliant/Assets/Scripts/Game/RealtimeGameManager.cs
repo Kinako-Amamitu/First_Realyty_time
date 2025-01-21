@@ -20,7 +20,7 @@ public class RealtimeGameManager : MonoBehaviour
     [SerializeField] GameObject leaveButton;
     [SerializeField] GameObject joinButton;
     [SerializeField] Text goalText;
-    [SerializeField] GameObject position;
+    [SerializeField] GameObject Spawnpoint;
     JoinedUser joinedUser;
 
     private CinemachineVirtualCamera virtualCamera;
@@ -61,27 +61,27 @@ public class RealtimeGameManager : MonoBehaviour
     }
 
 
-    public async void RespownEnemy()
-    {
-        // num++;
-        //if (num % 5000 == 0)
-        //{
-        GameObject enemy;
+    //public async void RespownEnemy()
+    //{
+    //    // num++;
+    //    //if (num % 5000 == 0)
+    //    //{
+    //    GameObject enemy;
 
-        await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
+    //    await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
 
-        enemy = Instantiate(enemyPrefab);
+    //    enemy = Instantiate(enemyPrefab);
 
-        enemy.name = "Enemy" + enemyid++;
-        enemy.transform.position = new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3));
+    //    enemy.name = "Enemy" + enemyid++;
+    //    enemy.transform.position = new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3));
 
        
-        // }
-    }
+    //    // }
+    //}
 
     public async void EnemySpawn()
     {
-        await roomModel.SpawnEnemyAsync(enemyPrefab.name, position.transform.position);
+        await roomModel.SpawnEnemyAsync(enemyPrefab.name, new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3)));
     }
 
 
@@ -98,7 +98,7 @@ public class RealtimeGameManager : MonoBehaviour
         joinButton.SetActive(false);
 
         InvokeRepeating("SendPos", 0.1f, 0.1f);
-        Invoke("EnemySpawn", 3.0f);
+        InvokeRepeating("EnemySpawn", 8.0f,8.0f);
         //await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
 
 
@@ -107,6 +107,7 @@ public class RealtimeGameManager : MonoBehaviour
     {
         //‘ÞŽº
         CancelInvoke("SendPos");
+        CancelInvoke("EnemySpawn");
         await roomModel.LeaveAsync();
         leaveButton.SetActive(false);
         joinButton.SetActive(true);
@@ -144,6 +145,7 @@ public class RealtimeGameManager : MonoBehaviour
 
         if (user.ConnectionId == roomModel.ConnectionId)
         {
+            player=characterObject.GetComponent<Player>();
             characterObject.GetComponent<Player>().isself = true;
            
 
@@ -229,6 +231,9 @@ public class RealtimeGameManager : MonoBehaviour
     {
         GameObject enemy = GameObject.Find(enemyName);
 
+        //enemy.transform.DOLocalMove(pos,0.1f).SetEase(Ease.Linear);
+        //enemy.transform.DORotate(rot.eulerAngles,0.1f);
+
         enemy.transform.position = pos;
         enemy.transform.rotation = rot;
     }
@@ -285,7 +290,9 @@ public class RealtimeGameManager : MonoBehaviour
     {
         GameObject enemyObject=enemyPrefab;
 
-        Instantiate(enemyPrefab,position.transform.position,Quaternion.identity);
+        Instantiate(enemyObject, pos, Quaternion.identity);
+
+        enemyObject.name = "Enemy" + enemyid++;
 
         enemyObject.transform.position = pos;
     }

@@ -136,13 +136,13 @@ public class RealtimeGameManager : MonoBehaviour
     {
         GameObject characterObject;
         joinedUser = user;
-
+        
         characterObject = Instantiate(characterPrefab[0]);//インスタンス生成
 
         
 
         //player = characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
-
+        if(joinedUser.IsMaster==true) { InvokeRepeating("EnemySpawn", 8.0f, 8.0f); }
         if (user.ConnectionId == roomModel.ConnectionId)
         {
             player=characterObject.GetComponent<Player>();

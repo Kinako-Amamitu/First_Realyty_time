@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Document/マスタークライアントの譲渡.puml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Healing Item.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Healing Item.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow Man_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow Man_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/RealtimeGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/RealtimeGameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Generated/Serializer.generated.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Generated/Serializer.generated.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/RoomModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/RoomModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomHub.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/JoinedUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/JoinedUser.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +130,7 @@
       <workItem from="1737072673786" duration="3090000" />
       <workItem from="1737339550185" duration="607000" />
       <workItem from="1737419972326" duration="1676000" />
-      <workItem from="1737505041779" duration="1231000" />
+      <workItem from="1737505041779" duration="4572000" />
     </task>
     <servers />
   </component>

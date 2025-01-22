@@ -28,19 +28,31 @@ namespace StreamingHubs
             //グループストレージにユーザーデータを格納
             var roomStorage=this.room.GetInMemoryStorage<RoomData>();
             var joinedUser = new JoinedUser() { ConnectionId = this.ConnectionId, UserData = user};
-            var roomData = new RoomData() { JoinedUser = joinedUser };
-            roomStorage.Set(this.ConnectionId, roomData);
+            //1人目をマスタークライアントにする
+            if (roomStorage.AllValues.Count==0) { joinedUser.IsMaster = true; }
 
             //ルーム参加者全員に、ユーザーの入室通知を送信
             this.BroadcastExceptSelf(room).Onjoin(joinedUser);
 
+            var roomData = new RoomData() { JoinedUser = joinedUser };
+            roomStorage.Set(this.ConnectionId, roomData);
+
+          
+
             RoomData[] roomDataList = roomStorage.AllValues.ToArray<RoomData>();
             //参加中のユーザー情報を返す
             JoinedUser[] joinedUserList = new JoinedUser[roomDataList.Length];
+            
             for (int i = 0; i < roomDataList.Length; i++)
             {
                 joinedUserList[i] = roomDataList[i].JoinedUser;
             }
+
+            
+        
+
+
+            
           
 
             return joinedUserList;
@@ -54,6 +66,8 @@ namespace StreamingHubs
 
             var joinedUser = new JoinedUser() { ConnectionId = this.ConnectionId };
 
+            //if (joinedUser.IsMaster == true) {await OnMasterClient(); }
+
             //ルーム参加者全員に、ユーザーの退室通知を送信
             this.Broadcast(room).OnLeave(joinedUser);
 
@@ -61,6 +75,19 @@ namespace StreamingHubs
             await room.RemoveAsync(this.Context);
 
         }
+
+        ////マスタークライアント譲渡
+        //public async Task OnMasterClient()
+        //{
+        //    //グループストレージからRoomData取得
+        //    var roomStorage = this.room.GetInMemoryStorage<RoomData>();
+        //    var roomData = roomStorage.Get(this.ConnectionId);
+
+        //    roomData.JoinedUser.ConnectionId
+
+        //    //参加ユーザーを取得
+        //    //var joinedUser = new JoinedUser() { ConnectionId = this.ConnectionId };
+        //}
 
         //ユーザーの移動回転
         public async Task MoveAsync(Vector3 pos,Quaternion rot, int anim)

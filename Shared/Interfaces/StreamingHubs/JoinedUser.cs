@@ -16,6 +16,9 @@ namespace Shared.Interfaces.StreamingHubs
         public User UserData {  get; set; }//ユーザー情報
         [Key(2)]
         public int JoinOrder { get; set; } //参加順番
+
+        [Key(3)]
+        public bool IsMaster {  get; set; } //マスタークライアントを判断
     }
 
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.ProBuilder.Shapes;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class Player : MonoBehaviour
     RealtimeGameManager gameManager;
     Animator animator;
 
-    public Slider hpSlider;
+    //public Slider hpSlider;
+    public ProgressBar hpSlider;
     Snow snow;
 
     int maxHp = 100;
@@ -43,8 +45,9 @@ public class Player : MonoBehaviour
             gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
             rigidbody = GetComponent<Rigidbody>();
             joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
-            hpSlider = GameObject.Find("HpSlider").GetComponent<Slider>();
+        hpSlider = GameObject.Find("UI ProgressBar").GetComponent<ProgressBar>();
             hp = maxHp;
+            
             animator = GetComponent<Animator>();
 
 
@@ -74,6 +77,8 @@ public class Player : MonoBehaviour
         {
             return; 
         }
+
+        hpSlider.BarValue = hp;
 
         //ジョイスティック移動処理
         if (run==false) 
@@ -156,7 +161,7 @@ public class Player : MonoBehaviour
         // if(me == false) { return; }
         hp -= 20;
         //hpSlider.value = hp;
-        hpSlider.DOValue(hp, 0.5f);
+        //hpSlider.DOValue(hp, 0.5f);
 
         if (hp <= 0)
         {

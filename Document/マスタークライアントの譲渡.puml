@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Aさん->MagicOnion:入室
+MagicOnion-->Aさん:マスタークライアント権限と入室処理
+Bさん->MagicOnion:入室
+MagicOnion-->Bさん:入室処理
+MagicOnion-->Aさん:Bさんの入室を受信
+Aさん->MagicOnion:退室
+MagicOnion->Bさん:マスタークライアント権限を譲渡、退室通知
+@enduml

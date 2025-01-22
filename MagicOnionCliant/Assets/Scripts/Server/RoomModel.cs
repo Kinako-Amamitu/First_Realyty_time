@@ -13,6 +13,7 @@ public class RoomModel : BaseModel, IRoomHubReceiver
 {
     private GrpcChannel channel;
     private IRoomHub roomHub;
+    public bool IsMaster { get; set; }
 
     //接続ID
     public Guid ConnectionId { get; set; }
@@ -63,9 +64,12 @@ public class RoomModel : BaseModel, IRoomHubReceiver
         JoinedUser[] users = await roomHub.JoinedAsync(roomName, userId);
         foreach(var user in users)
         {
-            if (user.UserData.Id == userId) this.ConnectionId = user.ConnectionId;
+            if (user.UserData.Id == userId) 
+                this.ConnectionId = user.ConnectionId;
+                this.IsMaster=user.IsMaster;
             OnJoinedUser(user);
         }
+
     }
 
     //入室通知(IRoomHubReceiverインターフェイスの実装)

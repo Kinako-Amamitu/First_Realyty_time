@@ -291,10 +291,11 @@ namespace MessagePack.Formatters.Shared.Interfaces.StreamingHubs
             }
 
             global::MessagePack.IFormatterResolver formatterResolver = options.Resolver;
-            writer.WriteArrayHeader(3);
+            writer.WriteArrayHeader(4);
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Guid>(formatterResolver).Serialize(ref writer, value.ConnectionId, options);
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::MasicOnionServer00.Model.Entity.User>(formatterResolver).Serialize(ref writer, value.UserData, options);
             writer.Write(value.JoinOrder);
+            writer.Write(value.IsMaster);
         }
 
         public global::Shared.Interfaces.StreamingHubs.JoinedUser Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -321,6 +322,9 @@ namespace MessagePack.Formatters.Shared.Interfaces.StreamingHubs
                         break;
                     case 2:
                         ____result.JoinOrder = reader.ReadInt32();
+                        break;
+                    case 3:
+                        ____result.IsMaster = reader.ReadBoolean();
                         break;
                     default:
                         reader.Skip();

@@ -21,16 +21,6 @@ public class EnemyScope : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-
-
-            Vector3 playerPos= other.transform.position;
-            enemy01.Shoot(playerPos, speed);
-        }
-    }
 
     private void OnTriggerStay(Collider other)
     {

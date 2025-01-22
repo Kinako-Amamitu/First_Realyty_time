@@ -6,10 +6,12 @@ public class Snow : MonoBehaviour
 {
     int surviveTime=0;
 
+    Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
-        Shoot();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,8 @@ public class Snow : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
     }
 
     public void Shoot()
@@ -32,6 +36,15 @@ public class Snow : MonoBehaviour
     {
 
         if (collision.gameObject.tag == "Object")
+        {
+
+
+
+            Destroy(gameObject);
+
+
+        }        
+        if (collision.gameObject.tag == "Player")
         {
 
 

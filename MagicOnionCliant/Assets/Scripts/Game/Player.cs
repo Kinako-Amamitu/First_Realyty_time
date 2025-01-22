@@ -160,17 +160,23 @@ public class Player : MonoBehaviour
 
         if (hp <= 0)
         {
-           
+            GameObject[] dropItem=itemPrefab;
+            Instantiate(dropItem[0]);
             goal = true;
             gameManager.GameOver();
-            for (int i = 0; i < itemPrefab.Length; i++) 
+
+            for (int i = 1; i < itemPrefab.Length; i++) 
             {
-                itemPrefab[i].transform.position = gameObject.transform.position
+                if (itemPrefab[i] == null) {  break; }
+                dropItem[i] = itemPrefab[i];
+
+               
+                dropItem[i].transform.position = gameObject.transform.position
                     + new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
-                itemPrefab[i].SetActive(true);
-                
+                dropItem[i].SetActive(true);
+
             }
-            gameObject.SetActive(false);
+            goal = true;
         }
     }
 
@@ -178,7 +184,7 @@ public class Player : MonoBehaviour
     {
         //if (me == false) { return; }
         //Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
-
+        if (goal == true) { return; }
         if(isself==false) { return; }
         GameObject snow = (GameObject)Instantiate(snowball, gameObject.transform.position, Quaternion.identity);
         snow.name = "Snow" + gameManager.snowCount;
@@ -205,25 +211,22 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        if (other.gameObject.tag == "EnemySnow")
+        if (other.gameObject.tag == "EnemySnow"&&isself==true)
         {
             //sDestroy(other.gameObject);
             UpdateHP();
         }
         else if(other.gameObject.tag=="Item")
         {
-          
-                for (int i = 0; i <= itemPrefab.Length; i++)
+            for (int i = 0; i < itemPrefab.Length; i++) 
+            {
+                if (itemPrefab[i]==null)
                 {
-
-
-                    if (itemPrefab[i] == null)
-                    {
-                        itemPrefab[i] = GameObject.Find("Item(Clone)");
-                        other.gameObject.SetActive(false);
+                    itemPrefab[i] = GameObject.Find(other.gameObject.name);
+                    other.gameObject.SetActive(false);
                     break;
-                    }
                 }
+            }
         }
     }
 }

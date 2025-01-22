@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,9 +41,11 @@ public class Enemy01 : MonoBehaviour
             GameObject ball = (GameObject)Instantiate(snow, shotPoint.transform.position, Quaternion.identity);
             ball.name = "Snow"+gameManager.snowCount;
             gameManager.snowCount++;
+            
+            ball.transform.DOLocalMove(pos,2.0f);
 
-            Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
-            ballRigidbody.AddForce(transform.forward * speed);
+            //Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
+            //ballRigidbody.AddForce(new Vector3(pos.x, 0,0)*speed);
             num = 0;
         }
         

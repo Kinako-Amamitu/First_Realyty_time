@@ -98,7 +98,7 @@ public class RealtimeGameManager : MonoBehaviour
         joinButton.SetActive(false);
 
         InvokeRepeating("SendPos", 0.1f, 0.1f);
-        InvokeRepeating("EnemySpawn", 8.0f,8.0f);
+        //InvokeRepeating("EnemySpawn", 8.0f,8.0f);
         //await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
 
 

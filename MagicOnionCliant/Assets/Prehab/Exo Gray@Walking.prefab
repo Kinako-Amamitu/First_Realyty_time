@@ -206,6 +206,7 @@ MonoBehaviour:
   snowball: {fileID: 4206868241966701608, guid: 6fc03579f96f78a49973755bf789fbdc,
     type: 3}
   itemPrefab:
+  - {fileID: 8278934108020304327, guid: bc566472dc27c8b42ba10d0d118fcf2e, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

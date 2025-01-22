@@ -87,7 +87,7 @@ namespace StreamingHubs
             var roomStorage = this.room.GetInMemoryStorage<RoomData>();
             var roomData = roomStorage.Get(this.ConnectionId);
 
-            //位置と回転を保存
+            //位置を保存
             roomData.Position = pos;
 
             //ルーム参加者全員に、敵の出現を送信

@@ -35,6 +35,8 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     //“G‚ÌˆÚ“®“¯Šú
     public Action<string,Vector3,Quaternion> OnMovedEnemy { get; set; }
 
+    public Action<JoinedUser> OnMasteredClient { get; set; }
+
     //MagicOnionÚ‘±ˆ—
     public async UniTask ConnectAsync()
     {
@@ -90,6 +92,11 @@ public class RoomModel : BaseModel, IRoomHubReceiver
         OnLeavedUser(user);
     }
 
+    public void OnMasterClient(JoinedUser user)
+    {
+        OnMasteredClient(user);
+    }
+
     //ˆÚ“®
     public async Task MoveAsync(Vector3 pos,Quaternion rot,int anim)
     {
@@ -123,5 +130,10 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     public async UniTask MoveEnemyAsync(string enemyName, Vector3 pos, Quaternion rot) 
     {
         await roomHub.EnemyMoveAsync(enemyName, pos, rot);
+    }
+
+    public async UniTask MasterLostAsync(JoinedUser user)
+    {
+        await roomHub.MasterLostAsync(user);
     }
 }

@@ -50,6 +50,8 @@ public class RealtimeGameManager : MonoBehaviour
         roomModel.OnSpawnEnemy += this.OnSpawnEnemy;
         //敵が移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMovedEnemy += this.OnMoveEnemy;
+        //マスタークライアント譲渡
+        roomModel.OnMasteredClient += this.OnMasterdClient;
 
         virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
 
@@ -198,14 +200,21 @@ public class RealtimeGameManager : MonoBehaviour
             {
                 Destroy(cube.Value);
             }
-
+            if (user.IsMaster == true) { roomModel.MasterLostAsync(user); }
         }
         else
         {
             Destroy(characterList[user.ConnectionId]);
+
+            
         }
 
 
+    }
+
+    public void OnMasterdClient(JoinedUser user)
+    {
+        user.IsMaster = true;
     }
 
     //プレイヤーの移動

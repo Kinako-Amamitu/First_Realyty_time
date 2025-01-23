@@ -24,7 +24,7 @@ public class Goal : MonoBehaviour
     {
         if(collision.collider.tag == "Player")
         {
-            player = GameObject.Find("Exo Gray@Walking(Clone)").GetComponent<Player>();
+            player = GameObject.Find(collision.gameObject.name).GetComponent<Player>();
             player.goal = true;
             gameManager.Escape();
         }

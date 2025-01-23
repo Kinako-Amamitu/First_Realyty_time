@@ -61,6 +61,7 @@ namespace StreamingHubs
         //退室
         public async Task LeavedAsync()
         {
+
             //グループデータから削除
             this.room.GetInMemoryStorage<RoomData>().Remove(this.ConnectionId);
 
@@ -71,8 +72,22 @@ namespace StreamingHubs
             //ルーム参加者全員に、ユーザーの退室通知を送信
             this.Broadcast(room).OnLeave(joinedUser);
 
+
+
             //ルーム内のメンバーから自分を削除
             await room.RemoveAsync(this.Context);
+
+        }
+
+        public async Task MasterLostAsync(JoinedUser joinedUser)
+        {
+
+            //マスタークライアントにする
+            joinedUser.IsMaster = true; 
+
+
+            //ルーム参加者全員に、ユーザーのマスタークライアント譲渡を送信
+            this.BroadcastExceptSelf(room).OnMasterClient(joinedUser);
 
         }
 

@@ -28,5 +28,6 @@ namespace Shared.Interfaces.StreamingHubs
         //マスタークライアント譲渡処理
         void OnMasterClient(JoinedUser joinedUser);
 
+        //雪玉の生成・
     }
 }

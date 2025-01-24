@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 
     int maxHp = 100;
     int hp;
+    int shotRate = 0;
     bool isDie;
 
     //移動速度
@@ -78,7 +79,7 @@ public class Player : MonoBehaviour
             return; 
         }
 
-        
+        shotRate++;
 
         //ジョイスティック移動処理
         if (run==false) 
@@ -188,6 +189,8 @@ public class Player : MonoBehaviour
 
     public void SlowSnow()
     {
+        if (shotRate < 300) { return; }
+
         //if (me == false) { return; }
         //Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
         if (goal == true) { return; }
@@ -197,6 +200,7 @@ public class Player : MonoBehaviour
         gameManager.snowCount++;
         Rigidbody snowRigidbody = snow.GetComponent<Rigidbody>();
         snowRigidbody.AddForce(gameObject.transform.forward * snowball_speed,ForceMode.Impulse);
+        shotRate = 0;
     }
 
     private void OnCollisionEnter(Collision collision)

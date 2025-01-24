@@ -8,10 +8,14 @@ public class Snow : MonoBehaviour
 
     Rigidbody rb;
 
+    Player player;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        player = GameObject.Find("Player1").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -48,7 +52,7 @@ public class Snow : MonoBehaviour
         {
 
 
-
+            if (player.isself == true) { return; }
             Destroy(gameObject);
 
 

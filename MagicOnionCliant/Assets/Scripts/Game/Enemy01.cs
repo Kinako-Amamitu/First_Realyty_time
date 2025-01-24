@@ -56,8 +56,8 @@ public class Enemy01 : MonoBehaviour
         if (collision.gameObject.tag=="Snow")
         {
             Instantiate(itemPrehab[0], gameObject.transform.position, Quaternion.identity);
-            //Destroy(this.gameObject);
-            //Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+            Destroy(collision.gameObject);
 
         }
     }
@@ -65,6 +65,6 @@ public class Enemy01 : MonoBehaviour
     //ê∂ê¨Ç≥ÇÍÇΩå„ÇÃìGÇ™à⁄ìÆÇµÇΩÇÁ
     public void SpawnEnemy()
     {
-        gameManager.EnemyMoveAsync(gameObject.name,gameObject.transform.position,gameObject.transform.rotation);
+        gameManager.EnemyMoveAsync(this.name,this.transform.position,this.transform.rotation);
     }
 }

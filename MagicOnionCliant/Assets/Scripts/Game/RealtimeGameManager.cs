@@ -246,6 +246,11 @@ public class RealtimeGameManager : MonoBehaviour
     {
         GameObject enemy = GameObject.Find(enemyName);
 
+        if (enemy==null)
+        {
+            return;
+        }
+
         //enemy.transform.DOLocalMove(pos,0.1f).SetEase(Ease.Linear);
         //enemy.transform.DORotate(rot.eulerAngles,0.1f);
 
@@ -305,9 +310,11 @@ public class RealtimeGameManager : MonoBehaviour
     {
         GameObject enemyObject=enemyPrefab;
 
+        enemyObject.name = "Enemy" + enemyid++;
+
         Instantiate(enemyObject, pos, Quaternion.identity);
 
-        enemyObject.name = "Enemy" + enemyid++;
+       
 
         enemyObject.transform.position = pos;
     }

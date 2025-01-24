@@ -40,6 +40,7 @@ namespace StreamingHubs
           
 
             RoomData[] roomDataList = roomStorage.AllValues.ToArray<RoomData>();
+
             //参加中のユーザー情報を返す
             JoinedUser[] joinedUserList = new JoinedUser[roomDataList.Length];
             
@@ -61,6 +62,15 @@ namespace StreamingHubs
         //退室
         public async Task LeavedAsync()
         {
+            //グループストレージからRoomData取得
+            var roomStorage = this.room.GetInMemoryStorage<RoomData>();
+            var roomData = roomStorage.Get(this.ConnectionId);
+
+            //マスタークライアントだったら次の人に譲渡する
+            if(roomData.JoinedUser.IsMaster==true)
+            {
+                await MasterLostAsync();
+            }
 
             //グループデータから削除
             this.room.GetInMemoryStorage<RoomData>().Remove(this.ConnectionId);
@@ -79,16 +89,33 @@ namespace StreamingHubs
 
         }
 
-        public async Task MasterLostAsync(JoinedUser joinedUser)
+        public async Task MasterLostAsync()
         {
+            //グループストレージからRoomData取得
+            var roomStorage = this.room.GetInMemoryStorage<RoomData>();
 
-            //マスタークライアントにする
-            joinedUser.IsMaster = true; 
+            //すべてのルームデータ取得
+            RoomData [] roomDataList = roomStorage.AllValues.ToArray<RoomData>();
 
+            //参加中のユーザー情報を返す
+            JoinedUser[] joinedUserList = new JoinedUser[roomDataList.Length];
 
-            //ルーム参加者全員に、ユーザーのマスタークライアント譲渡を送信
-            this.BroadcastExceptSelf(room).OnMasterClient(joinedUser);
+                for (int i = 0; i<roomDataList.Length; i++)
+                {
+                    joinedUserList[i] = roomDataList[i].JoinedUser;
 
+                    if (joinedUserList[i].IsMaster!=true) 
+                    {
+                        joinedUserList[i].IsMaster = true;
+
+                        JoinedUser newMaster = joinedUserList[i];
+                        //ルーム参加者全員に、ユーザーのマスタークライアント化を送信
+                        this.Broadcast(room).OnMasterClient(newMaster);
+                    break;
+                    }
+                }
+
+            
         }
 
         ////マスタークライアント譲渡

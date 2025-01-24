@@ -132,8 +132,8 @@ public class RoomModel : BaseModel, IRoomHubReceiver
         await roomHub.EnemyMoveAsync(enemyName, pos, rot);
     }
 
-    public async UniTask MasterLostAsync(JoinedUser user)
+    public async UniTask MasterLostAsync()
     {
-        await roomHub.MasterLostAsync(user);
+        await roomHub.MasterLostAsync();
     }
 }

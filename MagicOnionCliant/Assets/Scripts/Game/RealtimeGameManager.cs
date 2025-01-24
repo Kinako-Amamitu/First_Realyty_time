@@ -144,6 +144,8 @@ public class RealtimeGameManager : MonoBehaviour
         
 
         //player = characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
+
+        //マスタークライアントのみ敵を生成させる
         if(joinedUser.IsMaster==true) { InvokeRepeating("EnemySpawn", 8.0f, 8.0f); }
         if (user.ConnectionId == roomModel.ConnectionId)
         {
@@ -200,7 +202,7 @@ public class RealtimeGameManager : MonoBehaviour
             {
                 Destroy(cube.Value);
             }
-            if (user.IsMaster == true) { roomModel.MasterLostAsync(user); }
+           
         }
         else
         {
@@ -214,7 +216,11 @@ public class RealtimeGameManager : MonoBehaviour
 
     public void OnMasterdClient(JoinedUser user)
     {
-        user.IsMaster = true;
+        if (user.ConnectionId == roomModel.ConnectionId)
+        {
+            roomModel.IsMaster = true;
+            InvokeRepeating("EnemySpawn", 8.0f, 8.0f);
+        }
     }
 
     //プレイヤーの移動

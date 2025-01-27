@@ -29,5 +29,11 @@ namespace Shared.Interfaces.StreamingHubs
         //マスタークライアントが退室したときの処理
         Task MasterLostAsync();
 
+
+        //オブジェクトの生成同期
+        Task ObjectSpawnAsync(string objectName,Vector3 pos);
+
+        //オブジェクトの位置回転同期
+        Task ObjectMoveAsync(string objectName,Vector3 pos,Quaternion rot);
     }
 }

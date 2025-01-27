@@ -3622,6 +3622,8 @@ MonoBehaviour:
   - {fileID: 7085433412848802653, guid: 8b3fd39844ef529468ddb57fb6efc34b, type: 3}
   enemyPrefab: {fileID: 8822474594666508531, guid: cd99cc0257b1db648a9ca93c9b0e42e8,
     type: 3}
+  snowPrefab: {fileID: 4206868241966701608, guid: 6fc03579f96f78a49973755bf789fbdc,
+    type: 3}
   roomModel: {fileID: 1577764777}
   leaveButton: {fileID: 507691212}
   joinButton: {fileID: 1825602073}

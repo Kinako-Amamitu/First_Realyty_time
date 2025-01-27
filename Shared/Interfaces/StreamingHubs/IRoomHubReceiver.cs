@@ -28,6 +28,10 @@ namespace Shared.Interfaces.StreamingHubs
         //マスタークライアント譲渡処理
         void OnMasterClient(JoinedUser joinedUser);
 
-        //雪玉の生成・
+        //オブジェクトの生成同期
+        void OnObjectSpawn(string objectName, Vector3 pos);
+
+        //オブジェクトの移動回転同期
+        void OnObjectMove(string objectName, Vector3 pos, Quaternion rot);
     }
 }

@@ -89,6 +89,7 @@ namespace StreamingHubs
 
         }
 
+        //マスタークライアント譲渡
         public async Task MasterLostAsync()
         {
             //グループストレージからRoomData取得
@@ -177,6 +178,35 @@ namespace StreamingHubs
 
             //ルーム参加者全員に、ユーザーの移動回転を送信
             this.BroadcastExceptSelf(room).OnMoveEnemy(enemyName,pos,rot);
+        }
+
+        //オブジェクトの生成同期
+        public async Task ObjectSpawnAsync(string objectName,Vector3 pos)
+        {
+            //グループストレージからRoomData取得
+            var roomStorage = this.room.GetInMemoryStorage<RoomData>();
+            var roomData = roomStorage.Get(this.ConnectionId);
+
+            //位置を保存
+            roomData.Position = pos;
+
+            //ルーム参加者全員に、オブジェクトの生成を送信
+            this.BroadcastExceptSelf(room).OnObjectSpawn(objectName, pos);
+        }
+
+        //オブジェクトの移動回転同期
+        public async Task ObjectMoveAsync(string objectName,Vector3 pos,Quaternion rot)
+        {
+            //グループストレージからRoomData取得
+            var roomStorage = this.room.GetInMemoryStorage<RoomData>();
+            var roomData = roomStorage.Get(this.ConnectionId);
+
+            //位置と回転を保存
+            roomData.Position = pos;
+            roomData.Rotation = rot;
+
+            //ルーム参加者全員に、ユーザーの移動回転を送信
+            this.BroadcastExceptSelf(room).OnObjectMove(objectName, pos, rot);
         }
 
         //切断時の処理

@@ -10,13 +10,25 @@ public class Snow : MonoBehaviour
 
     Player player;
 
+    RealtimeGameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
         player = GameObject.Find("Player1").GetComponent<Player>();
+
+        gameManager= GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
+
+        gameManager.ObjectSpawn(name, transform.position);
+
+        InvokeRepeating("MoveSnow", 0.1f, 0.1f);
+
     }
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -59,4 +71,8 @@ public class Snow : MonoBehaviour
         }
     }
     
+    public void MoveSnow()
+    {
+        gameManager.MoveObjAsync(name,transform.position,transform.rotation);
+    }
 }

@@ -16,6 +16,7 @@ public class RealtimeGameManager : MonoBehaviour
     [SerializeField] InputField inputField;
     [SerializeField] GameObject[] characterPrefab;
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject snowPrefab;
     [SerializeField] RoomModel roomModel;
     [SerializeField] GameObject leaveButton;
     [SerializeField] GameObject joinButton;
@@ -32,6 +33,7 @@ public class RealtimeGameManager : MonoBehaviour
     public int playerCount = 0;
     int num = 0;
     int enemyid = 0;
+    int objectid = 0;
     bool isjoin = false;
     bool mine = false;
     async void Start()
@@ -52,6 +54,10 @@ public class RealtimeGameManager : MonoBehaviour
         roomModel.OnMovedEnemy += this.OnMoveEnemy;
         //マスタークライアント譲渡
         roomModel.OnMasteredClient += this.OnMasterdClient;
+
+        roomModel.OnSpawnObject += this.OnSpawnObject;
+
+        roomModel.OnMovedObject += this.OnMovedObject;
 
         virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
 
@@ -86,6 +92,10 @@ public class RealtimeGameManager : MonoBehaviour
         await roomModel.SpawnEnemyAsync(enemyPrefab.name, new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3)));
     }
 
+    public async void ObjectSpawn(string objectName,Vector3 pos)
+    {
+        await roomModel.ObjectSpawnAsync(objectName, pos);
+    }
 
     public async void JoinRoom()
     {
@@ -241,6 +251,11 @@ public class RealtimeGameManager : MonoBehaviour
         await roomModel.MoveEnemyAsync(enemyName, pos, rot);
     }
 
+    public async void MoveObjAsync(string objectName, Vector3 pos, Quaternion rot)
+    {
+        await roomModel.ObjectMoveAsync(objectName, pos, rot);
+    }
+
     //敵の移動回転の通知
     void OnMoveEnemy(string enemyName, Vector3 pos, Quaternion rot)
     {
@@ -317,5 +332,33 @@ public class RealtimeGameManager : MonoBehaviour
        
 
         enemyObject.transform.position = pos;
+    }
+
+    public void OnSpawnObject(string objectName,Vector3 pos) 
+    {
+        GameObject objectSnow = snowPrefab;
+
+
+        Instantiate(objectSnow, pos, Quaternion.identity);
+
+
+
+        objectSnow.transform.position = pos;
+    }
+
+    public void OnMovedObject(string objectName,Vector3 pos,Quaternion rot)
+    {
+        GameObject objectSnow = GameObject.Find(objectName);
+
+        if (objectSnow == null)
+        {
+            return;
+        }
+
+        //enemy.transform.DOLocalMove(pos,0.1f).SetEase(Ease.Linear);
+        //enemy.transform.DORotate(rot.eulerAngles,0.1f);
+
+        objectSnow.transform.position = pos;
+        objectSnow.transform.rotation = rot;
     }
 }

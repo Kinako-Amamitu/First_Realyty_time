@@ -34,8 +34,14 @@ public class RoomModel : BaseModel, IRoomHubReceiver
 
     //敵の移動同期
     public Action<string,Vector3,Quaternion> OnMovedEnemy { get; set; }
-
+    //マスタークライアント譲渡
     public Action<JoinedUser> OnMasteredClient { get; set; }
+
+    //オブジェクトの生成同期
+    public Action<string,Vector3> OnSpawnObject { get; set; }
+
+    //オブジェクトの移動回転同期
+    public Action<string,Vector3,Quaternion> OnMovedObject { get; set; }
 
     //MagicOnion接続処理
     public async UniTask ConnectAsync()
@@ -127,13 +133,36 @@ public class RoomModel : BaseModel, IRoomHubReceiver
         OnMovedEnemy(enemyName, pos,rot);
     }
 
+    //敵の移動回転同期
     public async UniTask MoveEnemyAsync(string enemyName, Vector3 pos, Quaternion rot) 
     {
         await roomHub.EnemyMoveAsync(enemyName, pos, rot);
     }
 
+    //マスタークライアント譲渡
     public async UniTask MasterLostAsync()
     {
         await roomHub.MasterLostAsync();
+    }
+
+    //オブジェクトの生成同期
+    public async UniTask ObjectSpawnAsync(string objectName,Vector3 pos)
+    {
+        await roomHub.ObjectSpawnAsync(objectName, pos);
+    }
+
+    public void OnObjectSpawn(string objectName,Vector3 pos)
+    {
+        OnSpawnObject(objectName, pos);
+    }
+
+    public async UniTask ObjectMoveAsync(string objectName,Vector3 pos,Quaternion rot)
+    {
+        await roomHub.ObjectMoveAsync(objectName,pos,rot);
+    }
+
+    public void OnObjectMove(string objectName,Vector3 pos,Quaternion rot)
+    {
+        OnMovedObject(objectName, pos, rot);
     }
 }

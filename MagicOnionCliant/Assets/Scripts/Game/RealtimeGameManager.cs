@@ -16,7 +16,7 @@ public class RealtimeGameManager : MonoBehaviour
     [SerializeField] InputField inputField;
     [SerializeField] GameObject[] characterPrefab;
     [SerializeField] GameObject enemyPrefab;
-    [SerializeField] GameObject snowPrefab;
+    [SerializeField] GameObject[] objectPrefab;
     [SerializeField] RoomModel roomModel;
     [SerializeField] GameObject leaveButton;
     [SerializeField] GameObject joinButton;
@@ -31,6 +31,7 @@ public class RealtimeGameManager : MonoBehaviour
 
     public int snowCount = 0;
     public int playerCount = 0;
+    public float snowball_speed;
     int num = 0;
     int enemyid = 0;
     int objectid = 0;
@@ -92,9 +93,9 @@ public class RealtimeGameManager : MonoBehaviour
         await roomModel.SpawnEnemyAsync(enemyPrefab.name, new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3)));
     }
 
-    public async void ObjectSpawn(string objectName,Vector3 pos)
+    public async void ObjectSpawn(string objectName,Vector3 pos,Quaternion rot)
     {
-        await roomModel.ObjectSpawnAsync(objectName, pos);
+        await roomModel.ObjectSpawnAsync(objectName, pos,rot);
     }
 
     public async void JoinRoom()
@@ -155,8 +156,8 @@ public class RealtimeGameManager : MonoBehaviour
 
         //player = characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
 
-        //マスタークライアントのみ敵を生成させる
-        if(joinedUser.IsMaster==true) { InvokeRepeating("EnemySpawn", 8.0f, 8.0f); }
+        ////マスタークライアントのみ敵を生成させる
+        //if(joinedUser.IsMaster==true) { InvokeRepeating("EnemySpawn", 8.0f, 8.0f); }
         if (user.ConnectionId == roomModel.ConnectionId)
         {
             player=characterObject.GetComponent<Player>();
@@ -334,16 +335,25 @@ public class RealtimeGameManager : MonoBehaviour
         enemyObject.transform.position = pos;
     }
 
-    public void OnSpawnObject(string objectName,Vector3 pos) 
+    public void OnSpawnObject(Guid connectionId,string objectName,Vector3 pos, Quaternion rot) 
     {
-        GameObject objectSnow = snowPrefab;
+        
+
+        GameObject[] objectSnow = objectPrefab;
+
+        int objectid=0;
+
+        if (connectionId != roomModel.ConnectionId) { objectid = 1; }
+
+        Instantiate(objectSnow[objectid], pos,rot);
 
 
-        Instantiate(objectSnow, pos, Quaternion.identity);
 
+        objectSnow[objectid].transform.position = pos;
+        objectSnow[objectid].transform.rotation = rot;
 
-
-        objectSnow.transform.position = pos;
+        Rigidbody snowRigidbody = objectSnow[objectid].GetComponent<Rigidbody>();
+        snowRigidbody.AddForce(objectSnow[objectid].transform.forward * snowball_speed,ForceMode.Impulse);
     }
 
     public void OnMovedObject(string objectName,Vector3 pos,Quaternion rot)

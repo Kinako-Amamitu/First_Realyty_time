@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class RoomModel : BaseModel, IRoomHubReceiver
@@ -38,7 +39,7 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     public Action<JoinedUser> OnMasteredClient { get; set; }
 
     //オブジェクトの生成同期
-    public Action<string,Vector3> OnSpawnObject { get; set; }
+    public Action<Guid,string,Vector3,Quaternion> OnSpawnObject { get; set; }
 
     //オブジェクトの移動回転同期
     public Action<string,Vector3,Quaternion> OnMovedObject { get; set; }
@@ -146,14 +147,14 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     }
 
     //オブジェクトの生成同期
-    public async UniTask ObjectSpawnAsync(string objectName,Vector3 pos)
+    public async UniTask ObjectSpawnAsync(string objectName,Vector3 pos,Quaternion rot)
     {
-        await roomHub.ObjectSpawnAsync(objectName, pos);
+        await roomHub.ObjectSpawnAsync(ConnectionId,objectName, pos,rot);
     }
 
-    public void OnObjectSpawn(string objectName,Vector3 pos)
+    public void OnObjectSpawn(Guid connectionId,string objectName,Vector3 pos,Quaternion rot)
     {
-        OnSpawnObject(objectName, pos);
+        OnSpawnObject(connectionId,objectName, pos,rot);
     }
 
     public async UniTask ObjectMoveAsync(string objectName,Vector3 pos,Quaternion rot)

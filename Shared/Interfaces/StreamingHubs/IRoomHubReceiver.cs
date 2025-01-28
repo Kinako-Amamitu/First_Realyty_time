@@ -29,7 +29,7 @@ namespace Shared.Interfaces.StreamingHubs
         void OnMasterClient(JoinedUser joinedUser);
 
         //オブジェクトの生成同期
-        void OnObjectSpawn(string objectName, Vector3 pos);
+        void OnObjectSpawn(Guid connectionId,string objectName, Vector3 pos,Quaternion rot);
 
         //オブジェクトの移動回転同期
         void OnObjectMove(string objectName, Vector3 pos, Quaternion rot);

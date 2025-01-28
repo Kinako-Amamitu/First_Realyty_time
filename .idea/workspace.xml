@@ -6,7 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/EnemySnow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/EnemySnow.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow Man_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow Man_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/RealtimeGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/RealtimeGameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Snow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Snow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Generated/Serializer.generated.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Generated/Serializer.generated.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/RoomModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Server/RoomModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MasicOnionServer00/StreamingHubs/RoomHub.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHub.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Interfaces/StreamingHubs/IRoomHubReceiver.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +136,7 @@
       <workItem from="1737590699107" duration="1246000" />
       <workItem from="1737676910218" duration="1013000" />
       <workItem from="1737936756460" duration="609000" />
+      <workItem from="1738024942415" duration="882000" />
     </task>
     <servers />
   </component>

@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     //ˆÚ“®‘¬“x
     public float player_speed;
-    public float snowball_speed;
+   
 
     Rigidbody rigidbody;
     FixedJoystick joystick;
@@ -195,11 +195,11 @@ public class Player : MonoBehaviour
         //Instantiate(snowball, shootPoint.transform.position, Quaternion.identity);
         if (goal == true) { return; }
         if(isself==false) { return; }
-        GameObject snow = (GameObject)Instantiate(snowball, gameObject.transform.position, Quaternion.identity);
-        snow.name = "Snow" + gameManager.snowCount;
+        //GameObject snow = (GameObject)Instantiate(snowball, gameObject.transform.position, Quaternion.identity);
+        gameManager.ObjectSpawn("Snow" + gameManager.snowCount, this.transform.position, this.transform.rotation);
         gameManager.snowCount++;
-        Rigidbody snowRigidbody = snow.GetComponent<Rigidbody>();
-        snowRigidbody.AddForce(gameObject.transform.forward * snowball_speed,ForceMode.Impulse);
+       // Rigidbody snowRigidbody = snow.GetComponent<Rigidbody>();
+        //snowRigidbody.AddForce(gameObject.transform.forward * snowball_speed,ForceMode.Impulse);
         shotRate = 0;
     }
 

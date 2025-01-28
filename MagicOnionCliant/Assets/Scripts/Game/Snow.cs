@@ -21,7 +21,6 @@ public class Snow : MonoBehaviour
 
         gameManager= GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
 
-        gameManager.ObjectSpawn(name, transform.position);
 
         InvokeRepeating("MoveSnow", 0.1f, 0.1f);
 
@@ -64,7 +63,7 @@ public class Snow : MonoBehaviour
         {
 
 
-            if (player.isself == true) { return; }
+            if (player.isself == false) { return; }
             Destroy(gameObject);
 
 

@@ -1,3 +1,12 @@
+
+////////////////////////////////////////////////////////////////
+///
+/// プレイヤーの動作を管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +30,7 @@ public class Player : MonoBehaviour
     int maxHp = 100;
     int hp;
     int shotRate = 0;
+    int damageTime = 0;
     bool isDie;
 
     //移動速度
@@ -80,6 +90,7 @@ public class Player : MonoBehaviour
         }
 
         shotRate++;
+        damageTime++;
 
         //ジョイスティック移動処理
         if (run==false) 
@@ -159,9 +170,11 @@ public class Player : MonoBehaviour
 
     public void UpdateHP()
     {
+        if (damageTime < 500) { return; }
         // if(me == false) { return; }
         hp -= 20;
         hpSlider.BarValue = hp;
+        damageTime = 0;
         //hpSlider.value = hp;
         //hpSlider.DOValue(hp, 0.5f);
 
@@ -196,7 +209,7 @@ public class Player : MonoBehaviour
         if (goal == true) { return; }
         if(isself==false) { return; }
         //GameObject snow = (GameObject)Instantiate(snowball, gameObject.transform.position, Quaternion.identity);
-        gameManager.ObjectSpawn("Snow" + gameManager.snowCount, this.transform.position, this.transform.rotation);
+        gameManager.ObjectSpawn("Snow" + gameManager.snowCount, shootPoint.transform.position, Quaternion.identity);
         gameManager.snowCount++;
        // Rigidbody snowRigidbody = snow.GetComponent<Rigidbody>();
         //snowRigidbody.AddForce(gameObject.transform.forward * snowball_speed,ForceMode.Impulse);

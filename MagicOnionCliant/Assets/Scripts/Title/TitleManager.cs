@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////////
+///
+/// タイトルの動作を管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,20 +17,6 @@ public class TitleManager : BaseModel
     [SerializeField] InputField passwordSpace;
 
     [SerializeField] UserModel userModel;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 
     public async void OnMakeAccount()
     {

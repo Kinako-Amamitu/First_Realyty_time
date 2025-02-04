@@ -1,10 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+////////////////////////////////////////////////////////////////
+///
+/// 雪玉(オブジェクト)の動作管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
+using DG.Tweening;
 using UnityEngine;
 
 public class Snow : MonoBehaviour
 {
-    int surviveTime=0;
+    public float speed;
+    public Vector3 pos;
+
+    int surviveTime = 0;
 
     Rigidbody rb;
 
@@ -19,10 +29,12 @@ public class Snow : MonoBehaviour
 
         player = GameObject.Find("Player1").GetComponent<Player>();
 
-        gameManager= GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
 
 
-        InvokeRepeating("MoveSnow", 0.1f, 0.1f);
+        //MoveSnow();
+
+        //InvokeRepeating("MoveSnow", 0.1f, 0.1f);
 
     }
 
@@ -34,7 +46,10 @@ public class Snow : MonoBehaviour
     {
         surviveTime++;
 
-        if ( surviveTime >1000)
+        rb.AddForce(player.transform.forward, ForceMode.Impulse);
+        //rb.AddForce(player.transform.position * speed);
+
+        if (surviveTime > 1000)
         {
             Destroy(gameObject);
         }
@@ -42,9 +57,15 @@ public class Snow : MonoBehaviour
 
     }
 
+    void FixedUpdate()
+    {
+        //rb.AddForce(player.transform.forward * speed);
+    }
+
+
     public void Shoot()
     {
-       // GetComponent<Rigidbody>().AddForce(0,0,150.0f);
+        // GetComponent<Rigidbody>().AddForce(0,0,150.0f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -58,20 +79,34 @@ public class Snow : MonoBehaviour
             Destroy(gameObject);
 
 
-        }        
-        if (collision.gameObject.tag == "Player")
+        }
+        if (this.gameObject.tag=="EnemySnow"&&collision.gameObject.tag == "Player")
         {
 
 
-            if (player.isself == false) { return; }
+            //if (player.isself == true) { return; }
             Destroy(gameObject);
 
 
         }
     }
-    
+
     public void MoveSnow()
     {
-        gameManager.MoveObjAsync(name,transform.position,transform.rotation);
+        rb = GetComponent<Rigidbody>();
+
+        if(player==null)
+        {
+            player = GameObject.Find("Player1").GetComponent<Player>();
+        }
+
+        
+         rb.AddForce(new Vector3(0,0,90), ForceMode.Impulse);
+        
+
+
+        //gameObject.transform.DOLocalMove(pos,2.0f);
+        //rb.AddForce(player.transform.forward * speed);
+        // gameManager.MoveObjAsync(name, transform.position, transform.rotation);
     }
 }

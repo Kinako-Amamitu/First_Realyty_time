@@ -1,3 +1,12 @@
+
+////////////////////////////////////////////////////////////////
+///
+/// ゲームの状態を総合管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
 using Shared.Interfaces.StreamingHubs;
 using System;
 using System.Collections;
@@ -13,30 +22,35 @@ using Cysharp.Threading.Tasks;
 using Cinemachine;
 public class RealtimeGameManager : MonoBehaviour
 {
-    [SerializeField] InputField inputField;
-    [SerializeField] GameObject[] characterPrefab;
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] GameObject[] objectPrefab;
-    [SerializeField] RoomModel roomModel;
-    [SerializeField] GameObject leaveButton;
-    [SerializeField] GameObject joinButton;
-    [SerializeField] Text goalText;
-    [SerializeField] GameObject Spawnpoint;
-    JoinedUser joinedUser;
+    [SerializeField] InputField inputField;         //IDの入力フィールド
+    [SerializeField] GameObject[] characterPrefab;  //プレイヤーのプレハブ
+    [SerializeField] GameObject enemyPrefab;        //敵のプレハブ
+    [SerializeField] GameObject[] objectPrefab;     //オブジェクトすべてのプレハブ
+    [SerializeField] RoomModel roomModel;           //RoomModelクラスを使用
+    [SerializeField] GameObject leaveButton;        //退室ボタン
+    [SerializeField] GameObject joinButton;         //入室ボタン
+    [SerializeField] Text goalText;                 //ゴールを表示するテキスト
+    [SerializeField] GameObject Spawnpoint;         //生成ポジション
+    JoinedUser joinedUser;                          //JoinedUserクラスを使用
 
-    private CinemachineVirtualCamera virtualCamera;
+    private CinemachineVirtualCamera virtualCamera; //CinemachineVirtualCameraを使用
 
+    //ユーザーIDとゲームオブジェクトを同時に格納
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
-    Player player;
+    Player player;                                  //プレイヤークラスを使用
 
-    public int snowCount = 0;
-    public int playerCount = 0;
-    public float snowball_speed;
-    int num = 0;
-    int enemyid = 0;
-    int objectid = 0;
-    bool isjoin = false;
-    bool mine = false;
+    public int snowCount = 0;       //雪玉が何回使われたか
+    public int playerCount = 0;     //プレイヤーが何回使われたか
+    public float snowball_speed;    //雪玉のスピード
+    int num = 0;                    //待機時間
+    int enemyid = 0;                //敵が何回使われたか
+    int objectid = 0;               //オブジェクトが何回使われたか
+    bool isjoin = false;            //入室しているか
+    bool mine = false;              //自身か判定
+
+    /// <summary>
+    /// 起動時１回だけ実行する
+    /// </summary>
     async void Start()
     {
         //接続
@@ -55,49 +69,29 @@ public class RealtimeGameManager : MonoBehaviour
         roomModel.OnMovedEnemy += this.OnMoveEnemy;
         //マスタークライアント譲渡
         roomModel.OnMasteredClient += this.OnMasterdClient;
-
+        //敵が生成した時にOnSpawnObjectメソッドを実行するよう、モデルに登録
         roomModel.OnSpawnObject += this.OnSpawnObject;
-
+        //敵が移動したときにOnMovedObjectメソッドを実行するよう、モデルに登録
         roomModel.OnMovedObject += this.OnMovedObject;
 
+        //プレイヤー用の追従カメラを探す
         virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
 
     }
 
-    async void Update()
-    {
-        
-    }
-
-
-    //public async void RespownEnemy()
-    //{
-    //    // num++;
-    //    //if (num % 5000 == 0)
-    //    //{
-    //    GameObject enemy;
-
-    //    await UniTask.Delay(TimeSpan.FromSeconds(3.0f));
-
-    //    enemy = Instantiate(enemyPrefab);
-
-    //    enemy.name = "Enemy" + enemyid++;
-    //    enemy.transform.position = new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3));
-
-       
-    //    // }
-    //}
-
+    //敵を生成
     public async void EnemySpawn()
     {
         await roomModel.SpawnEnemyAsync(enemyPrefab.name, new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3)));
     }
 
+    //オブジェクトを生成
     public async void ObjectSpawn(string objectName,Vector3 pos,Quaternion rot)
     {
         await roomModel.ObjectSpawnAsync(objectName, pos,rot);
     }
 
+    //入室処理
     public async void JoinRoom()
     {
         // 入室
@@ -116,6 +110,8 @@ public class RealtimeGameManager : MonoBehaviour
 
 
     }
+
+    //退室処理
     public async void LeaveRoom()
     {
         //退室
@@ -132,7 +128,7 @@ public class RealtimeGameManager : MonoBehaviour
         Initiate.Fade("Home", Color.black, 0.5f);
     }
 
-
+    //移動先の座標を送る
     public async void SendPos()
     {
         //移動同期
@@ -152,14 +148,11 @@ public class RealtimeGameManager : MonoBehaviour
         
         characterObject = Instantiate(characterPrefab[0]);//インスタンス生成
 
-        
+        //マスタークライアントのみ敵を生成させる
+        if (joinedUser.IsMaster == true) { InvokeRepeating("EnemySpawn", 8.0f, 8.0f); }
 
-        //player = characterObject.GetComponent<Player>(); //Unityのプレイヤー情報を取得
-
-        ////マスタークライアントのみ敵を生成させる
-        //if(joinedUser.IsMaster==true) { InvokeRepeating("EnemySpawn", 8.0f, 8.0f); }
         if (user.ConnectionId == roomModel.ConnectionId)
-        {
+        {//接続IDと一致したら
             player=characterObject.GetComponent<Player>();
             characterObject.GetComponent<Player>().isself = true;
            
@@ -187,20 +180,6 @@ public class RealtimeGameManager : MonoBehaviour
         characterList[user.ConnectionId] = characterObject; //フィールドで保持
          playerCount++;
             characterObject.name="Player"+playerCount;
-
-        /*if (user.ConnectionId == roomModel.ConnectionId)
-        {
-            
-           // player.Me();
-            
-        }
-        else
-        {
-
-           // player.NotMe();
-            player.enabled = false;
-        }*/
-
         
     }
 
@@ -208,7 +187,7 @@ public class RealtimeGameManager : MonoBehaviour
     public void OnLeavedUser(JoinedUser user)
     {
         if (user.ConnectionId == roomModel.ConnectionId)
-        {
+        {//自分が退室した場合
             foreach (var cube in characterList)
             {
                 Destroy(cube.Value);
@@ -225,6 +204,7 @@ public class RealtimeGameManager : MonoBehaviour
 
     }
 
+    //マスタークライアント譲渡
     public void OnMasterdClient(JoinedUser user)
     {
         if (user.ConnectionId == roomModel.ConnectionId)
@@ -252,6 +232,7 @@ public class RealtimeGameManager : MonoBehaviour
         await roomModel.MoveEnemyAsync(enemyName, pos, rot);
     }
 
+    //オブジェクトの移動同期
     public async void MoveObjAsync(string objectName, Vector3 pos, Quaternion rot)
     {
         await roomModel.ObjectMoveAsync(objectName, pos, rot);
@@ -335,6 +316,7 @@ public class RealtimeGameManager : MonoBehaviour
         enemyObject.transform.position = pos;
     }
 
+    //オブジェクトが生成されたら
     public void OnSpawnObject(Guid connectionId,string objectName,Vector3 pos, Quaternion rot) 
     {
         
@@ -344,18 +326,27 @@ public class RealtimeGameManager : MonoBehaviour
         int objectid=0;
 
         if (connectionId != roomModel.ConnectionId) { objectid = 1; }
+        if (objectName == "Item") {  objectid = 2; }
+
+        
 
         Instantiate(objectSnow[objectid], pos,rot);
 
-
+        
 
         objectSnow[objectid].transform.position = pos;
         objectSnow[objectid].transform.rotation = rot;
 
-        Rigidbody snowRigidbody = objectSnow[objectid].GetComponent<Rigidbody>();
-        snowRigidbody.AddForce(objectSnow[objectid].transform.forward * snowball_speed,ForceMode.Impulse);
+        if (objectid > 1) { return; }
+        Snow snow = objectSnow[objectid].GetComponent<Snow>();
+       
+
+
+
+        snow.MoveSnow();
     }
 
+    //オブジェクトが動いたら
     public void OnMovedObject(string objectName,Vector3 pos,Quaternion rot)
     {
         GameObject objectSnow = GameObject.Find(objectName);

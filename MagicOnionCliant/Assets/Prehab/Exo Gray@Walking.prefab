@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3816988702475154896}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -217,7 +217,6 @@ MonoBehaviour:
   - {fileID: 0}
   hpSlider: {fileID: 0}
   player_speed: 10
-  snowball_speed: 30
   shootPoint: {fileID: 3816988702475154896}
   isself: 0
   goal: 0

@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////
+///
+/// 敵の動作を管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -53,15 +61,31 @@ public class Enemy01 : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag=="Snow")
+        if (collision.gameObject.tag == "Snow")
         {
-            Instantiate(itemPrehab[0], gameObject.transform.position, Quaternion.identity);
+
+            gameManager.ObjectSpawn(itemPrehab[0].name, this.transform.position, this.transform.rotation);
+            //Instantiate(itemPrehab[0], gameObject.transform.position, Quaternion.identity);
             CancelInvoke("SpawnEnemy");
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
 
         }
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Snow")
+    //    {
+
+    //        gameManager.ObjectSpawn(itemPrehab[0].name, this.transform.position, this.transform.rotation);
+    //        //Instantiate(itemPrehab[0], gameObject.transform.position, Quaternion.identity);
+    //        CancelInvoke("SpawnEnemy");
+    //        Destroy(this.gameObject);
+    //        Destroy(other.gameObject);
+
+    //    }
+    //}
 
     //生成された後の敵が移動したら
     public void SpawnEnemy()

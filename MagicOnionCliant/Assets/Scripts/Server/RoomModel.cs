@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////
+///
+/// RoomHubへの接続を管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
 using Cysharp.Net.Http;
 using Cysharp.Threading.Tasks;
 using Grpc.Net.Client;
@@ -7,7 +15,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class RoomModel : BaseModel, IRoomHubReceiver
@@ -152,16 +159,19 @@ public class RoomModel : BaseModel, IRoomHubReceiver
         await roomHub.ObjectSpawnAsync(ConnectionId,objectName, pos,rot);
     }
 
+    //オブジェクトの生成
     public void OnObjectSpawn(Guid connectionId,string objectName,Vector3 pos,Quaternion rot)
     {
         OnSpawnObject(connectionId,objectName, pos,rot);
     }
 
+    //オブジェクトの移動同期
     public async UniTask ObjectMoveAsync(string objectName,Vector3 pos,Quaternion rot)
     {
         await roomHub.ObjectMoveAsync(objectName,pos,rot);
     }
 
+    //オブジェクトの移動
     public void OnObjectMove(string objectName,Vector3 pos,Quaternion rot)
     {
         OnMovedObject(objectName, pos, rot);

@@ -150,7 +150,7 @@ namespace StreamingHubs
 
         }
 
-
+        //敵の生成処理
         public async Task SpawnAsync(string enemyName, Vector3 pos)
         {
             //グループストレージからRoomData取得
@@ -178,6 +178,17 @@ namespace StreamingHubs
 
             //ルーム参加者全員に、ユーザーの移動回転を送信
             this.BroadcastExceptSelf(room).OnMoveEnemy(enemyName,pos,rot);
+        }
+
+        //敵の撃破同期
+        public async Task EnemyExcusionAsync(string enemyName)
+        {
+            //グループストレージからRoomData取得
+            var roomStorage = this.room.GetInMemoryStorage<RoomData>();
+            var roomData = roomStorage.Get(this.ConnectionId);
+
+            //ルーム参加者全員に、ユーザーの移動回転を送信
+            this.BroadcastExceptSelf(room).OnExcusionEnemy(enemyName);
         }
 
         //オブジェクトの生成同期

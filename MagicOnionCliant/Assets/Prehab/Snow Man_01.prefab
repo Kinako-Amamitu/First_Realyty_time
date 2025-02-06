@@ -443,7 +443,7 @@ Transform:
   m_GameObject: {fileID: 8822474594666508531}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 2, z: -1}
+  m_LocalPosition: {x: 6, y: 2, z: -2}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -520,6 +520,7 @@ MonoBehaviour:
   - {fileID: 7775479872891815965, guid: 2b5e057df7b35c943a1303b27abb6532, type: 3}
   snow: {fileID: 4206868241966701608, guid: b43c1c44efa3cfc4e92019f1486ba0f1, type: 3}
   shotPoint: {fileID: 331157124766281814}
+  lookAt: 0
 --- !u!1 &8999332461297275618
 GameObject:
   m_ObjectHideFlags: 0

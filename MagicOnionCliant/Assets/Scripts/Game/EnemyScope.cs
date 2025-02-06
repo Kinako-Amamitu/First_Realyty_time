@@ -39,6 +39,7 @@ public class EnemyScope : MonoBehaviour
             Vector3 playerPos = other.transform.position;
 
             
+            
             enemy01.Shoot(playerPos, speed);
         }
     }

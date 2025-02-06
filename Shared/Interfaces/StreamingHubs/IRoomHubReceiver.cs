@@ -25,6 +25,9 @@ namespace Shared.Interfaces.StreamingHubs
         //敵の移動同期
         void OnMoveEnemy( string enemyName,Vector3 pos, Quaternion rot);
 
+        //敵の撃破処理
+        void OnExcusionEnemy(string enemyName);
+
         //マスタークライアント譲渡処理
         void OnMasterClient(JoinedUser joinedUser);
 

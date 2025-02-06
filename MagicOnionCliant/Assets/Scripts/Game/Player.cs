@@ -19,7 +19,7 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject snowball;
-    [SerializeField] GameObject[] itemPrefab;
+    [SerializeField] public GameObject[] itemPrefab;
     RealtimeGameManager gameManager;
     Animator animator;
 
@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
 
             //ˆÚ“®‹——£‚ğŒvZ
             float distance = player_speed * Time.deltaTime;
+
             //ˆÚ“®æ‚ğŒvZ
             Vector3 destination = transform.position + direction * distance;
 

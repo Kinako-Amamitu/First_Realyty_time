@@ -20,13 +20,15 @@ public class Enemy01 : MonoBehaviour
     private RealtimeGameManager gameManager;
     //ë“ã@éûä‘
     int num=0;
-    
+
+    public bool lookAt=false; //å©ÇƒÇ¢ÇÈèÛë‘
+
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
         // shotPoint = GameObject.Find("ShotPoint");
-        InvokeRepeating("SpawnEnemy",0.1f, 0.1f);
+        InvokeRepeating("MoveEnemy", 0.1f, 0.1f);
     }
 
     // Update is called once per frame
@@ -66,7 +68,8 @@ public class Enemy01 : MonoBehaviour
 
             gameManager.ObjectSpawn(itemPrehab[0].name, this.transform.position, this.transform.rotation);
             //Instantiate(itemPrehab[0], gameObject.transform.position, Quaternion.identity);
-            CancelInvoke("SpawnEnemy");
+            CancelInvoke("MoveEnemy");
+            gameManager.ExcusionEnemy(this.gameObject.name);
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
 
@@ -88,7 +91,7 @@ public class Enemy01 : MonoBehaviour
     //}
 
     //ê∂ê¨Ç≥ÇÍÇΩå„ÇÃìGÇ™à⁄ìÆÇµÇΩÇÁ
-    public void SpawnEnemy()
+    public void MoveEnemy()
     {
         gameManager.EnemyMoveAsync(this.name,this.transform.position,this.transform.rotation);
     }

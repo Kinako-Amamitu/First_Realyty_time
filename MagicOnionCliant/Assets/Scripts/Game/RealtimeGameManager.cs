@@ -29,9 +29,14 @@ public class RealtimeGameManager : MonoBehaviour
     [SerializeField] RoomModel roomModel;           //RoomModelクラスを使用
     [SerializeField] GameObject leaveButton;        //退室ボタン
     [SerializeField] GameObject joinButton;         //入室ボタン
+    [SerializeField] GameObject menuButton;         //メニューボタン
+    [SerializeField] GameObject menuPannel;         //メニュー画面
+    [SerializeField] Text item00Text;               //テストアイテムの数表示テキスト
     [SerializeField] Text goalText;                 //ゴールを表示するテキスト
     [SerializeField] GameObject Spawnpoint;         //生成ポジション
     JoinedUser joinedUser;                          //JoinedUserクラスを使用
+
+    [SerializeField] GameObject image;               //アイテム表示テスト用
 
     private CinemachineVirtualCamera virtualCamera; //CinemachineVirtualCameraを使用
 
@@ -47,6 +52,19 @@ public class RealtimeGameManager : MonoBehaviour
     int objectid = 0;               //オブジェクトが何回使われたか
     bool isjoin = false;            //入室しているか
     bool mine = false;              //自身か判定
+    public static int item000 = 0;   //手持ちアイテムの数
+
+    public int Item000
+    {
+        get { return item000; }
+    }
+    
+    public static int item00 = 0;   //手持ちアイテムの数
+
+    public int Item00
+    {
+        get { return item00; }
+    }
 
     /// <summary>
     /// 起動時１回だけ実行する
@@ -67,6 +85,8 @@ public class RealtimeGameManager : MonoBehaviour
         roomModel.OnSpawnEnemy += this.OnSpawnEnemy;
         //敵が移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMovedEnemy += this.OnMoveEnemy;
+        //敵が撃破された時にOnMoveUserメソッドを実行するよう、モデルに登録
+        roomModel.OnExcusionedEnemy += this.OnExcusionEnemy;
         //マスタークライアント譲渡
         roomModel.OnMasteredClient += this.OnMasterdClient;
         //敵が生成した時にOnSpawnObjectメソッドを実行するよう、モデルに登録
@@ -76,7 +96,6 @@ public class RealtimeGameManager : MonoBehaviour
 
         //プレイヤー用の追従カメラを探す
         virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
-
     }
 
     //敵を生成
@@ -85,10 +104,16 @@ public class RealtimeGameManager : MonoBehaviour
         await roomModel.SpawnEnemyAsync(enemyPrefab.name, new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3)));
     }
 
-    //オブジェクトを生成
-    public async void ObjectSpawn(string objectName,Vector3 pos,Quaternion rot)
+    //敵を撃破
+    public async void ExcusionEnemy(string enemyName)
     {
-        await roomModel.ObjectSpawnAsync(objectName, pos,rot);
+        await roomModel.ExcusionEnemyAsync(enemyName);
+    }
+
+    //オブジェクトを生成
+    public async void ObjectSpawn(string objectName, Vector3 pos, Quaternion rot)
+    {
+        await roomModel.ObjectSpawnAsync(objectName, pos, rot);
     }
 
     //入室処理
@@ -123,6 +148,20 @@ public class RealtimeGameManager : MonoBehaviour
         isjoin = false;
         goalText.text = "";
 
+        for (int i = 0; i < player.itemPrefab.Length; i++)
+        {
+            if (player.itemPrefab[i] == null) { break; }
+            if (player.itemPrefab[i].name == objectPrefab[2].name)
+            {
+                item000++;
+            }
+            else
+            {
+
+            }
+
+        }
+
         //画面遷移
         Initiate.DoneFading();
         Initiate.Fade("Home", Color.black, 0.5f);
@@ -133,7 +172,7 @@ public class RealtimeGameManager : MonoBehaviour
     {
         //移動同期
         GameObject characterOblect = characterList[roomModel.ConnectionId];
-        
+
         await roomModel.MoveAsync(characterOblect.transform.position, characterOblect.transform.rotation,
             characterOblect.GetComponent<Animator>().GetInteger("Speed"));
     }
@@ -145,7 +184,7 @@ public class RealtimeGameManager : MonoBehaviour
     {
         GameObject characterObject;
         joinedUser = user;
-        
+
         characterObject = Instantiate(characterPrefab[0]);//インスタンス生成
 
         //マスタークライアントのみ敵を生成させる
@@ -153,9 +192,9 @@ public class RealtimeGameManager : MonoBehaviour
 
         if (user.ConnectionId == roomModel.ConnectionId)
         {//接続IDと一致したら
-            player=characterObject.GetComponent<Player>();
+            player = characterObject.GetComponent<Player>();
             characterObject.GetComponent<Player>().isself = true;
-           
+
 
             if (characterList.Count == 0)
             {
@@ -175,12 +214,12 @@ public class RealtimeGameManager : MonoBehaviour
             virtualCamera.LookAt = character;
             virtualCamera.Follow = character;
         }
-       
+
 
         characterList[user.ConnectionId] = characterObject; //フィールドで保持
-         playerCount++;
-            characterObject.name="Player"+playerCount;
-        
+        playerCount++;
+        characterObject.name = "Player" + playerCount;
+
     }
 
     //ユーザーが退出したときの処理
@@ -192,13 +231,13 @@ public class RealtimeGameManager : MonoBehaviour
             {
                 Destroy(cube.Value);
             }
-           
+
         }
         else
         {
             Destroy(characterList[user.ConnectionId]);
 
-            
+
         }
 
 
@@ -217,7 +256,7 @@ public class RealtimeGameManager : MonoBehaviour
     //プレイヤーの移動
     void OnMoveCharacter(JoinedUser user, Vector3 pos, Quaternion rot, int anim)
     {
-        if(characterList.ContainsKey(user.ConnectionId)) 
+        if (characterList.ContainsKey(user.ConnectionId))
         {
             GameObject characterObject = characterList[user.ConnectionId];
 
@@ -243,7 +282,7 @@ public class RealtimeGameManager : MonoBehaviour
     {
         GameObject enemy = GameObject.Find(enemyName);
 
-        if (enemy==null)
+        if (enemy == null)
         {
             return;
         }
@@ -255,7 +294,17 @@ public class RealtimeGameManager : MonoBehaviour
         enemy.transform.rotation = rot;
     }
 
+    void OnExcusionEnemy(string enemyName)
+    {
+        GameObject enemy = GameObject.Find(enemyName);
 
+        if (enemy == null)
+        {
+            return;
+        }
+
+        Destroy(enemy);
+    }
 
     //プレイヤーがゴールに到達したとき
     public void Escape()
@@ -305,41 +354,41 @@ public class RealtimeGameManager : MonoBehaviour
     //敵が出現したとき
     public void OnSpawnEnemy(string enemyName, Vector3 pos)
     {
-        GameObject enemyObject=enemyPrefab;
+        GameObject enemyObject = enemyPrefab;
 
         enemyObject.name = "Enemy" + enemyid++;
 
         Instantiate(enemyObject, pos, Quaternion.identity);
 
-       
+
 
         enemyObject.transform.position = pos;
     }
 
     //オブジェクトが生成されたら
-    public void OnSpawnObject(Guid connectionId,string objectName,Vector3 pos, Quaternion rot) 
+    public void OnSpawnObject(Guid connectionId, string objectName, Vector3 pos, Quaternion rot)
     {
-        
+
 
         GameObject[] objectSnow = objectPrefab;
 
-        int objectid=0;
+        int objectid = 0;
 
         if (connectionId != roomModel.ConnectionId) { objectid = 1; }
-        if (objectName == "Item") {  objectid = 2; }
+        if (objectName == "Item") { objectid = 2; }
 
-        
 
-        Instantiate(objectSnow[objectid], pos,rot);
 
-        
+        Instantiate(objectSnow[objectid], pos, rot);
+
+
 
         objectSnow[objectid].transform.position = pos;
         objectSnow[objectid].transform.rotation = rot;
 
         if (objectid > 1) { return; }
         Snow snow = objectSnow[objectid].GetComponent<Snow>();
-       
+
 
 
 
@@ -347,7 +396,7 @@ public class RealtimeGameManager : MonoBehaviour
     }
 
     //オブジェクトが動いたら
-    public void OnMovedObject(string objectName,Vector3 pos,Quaternion rot)
+    public void OnMovedObject(string objectName, Vector3 pos, Quaternion rot)
     {
         GameObject objectSnow = GameObject.Find(objectName);
 
@@ -362,4 +411,41 @@ public class RealtimeGameManager : MonoBehaviour
         objectSnow.transform.position = pos;
         objectSnow.transform.rotation = rot;
     }
+
+    //メニューを開く
+    public void OpenMenu()
+    {
+        menuPannel.SetActive(true);
+        image.SetActive(true);
+
+        for(int i=0;i<player.itemPrefab.Length;i++)
+        {
+            if (player.itemPrefab[i] == null) { break; }
+            if (player.itemPrefab[i].name == objectPrefab[2].name)
+            {
+                item00++;
+            }
+            else
+            {
+                
+            }
+            
+        }
+
+        item00Text.text = "×" + item00.ToString();
+    }
+
+    //メニューを閉じる
+    public void CloseMenu()
+    {
+        menuPannel.SetActive(false);
+        item00 = 0;
+    }
+
+    //アイテムをホームに継承
+    public static int Itemset()
+    {
+        return item000;
+    }
+
 }

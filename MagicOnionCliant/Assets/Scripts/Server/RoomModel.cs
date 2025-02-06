@@ -42,6 +42,10 @@ public class RoomModel : BaseModel, IRoomHubReceiver
 
     //敵の移動同期
     public Action<string,Vector3,Quaternion> OnMovedEnemy { get; set; }
+
+    //敵の撃破同期
+    public Action<string> OnExcusionedEnemy { get; set; }
+
     //マスタークライアント譲渡
     public Action<JoinedUser> OnMasteredClient { get; set; }
 
@@ -145,6 +149,18 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     public async UniTask MoveEnemyAsync(string enemyName, Vector3 pos, Quaternion rot) 
     {
         await roomHub.EnemyMoveAsync(enemyName, pos, rot);
+    }
+
+    //敵の撃破
+    public void OnExcusionEnemy(string enemyName)
+    {
+        OnExcusionedEnemy(enemyName);
+    }
+
+    //敵の撃破同期
+    public async UniTask ExcusionEnemyAsync(string enemyName)
+    {
+        await roomHub.EnemyExcusionAsync(enemyName);
     }
 
     //マスタークライアント譲渡

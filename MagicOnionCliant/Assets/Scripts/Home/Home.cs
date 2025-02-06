@@ -23,7 +23,9 @@ public class HomeManager : MonoBehaviour
     [SerializeField] GameObject gatchaPanel;
     [SerializeField] GameObject boxPanel;
     [SerializeField] GameObject pluspoint;
+    [SerializeField] Text item00Text;
 
+    int item00;
 
     // Start is called before the first frame update
     async void Start()
@@ -37,6 +39,9 @@ public class HomeManager : MonoBehaviour
 
         ////ê⁄ë±
         //await roomModel.ConnectAsync();
+
+
+        item00 = RealtimeGameManager.Itemset();
     }
 
     // Update is called once per frame
@@ -114,6 +119,7 @@ public class HomeManager : MonoBehaviour
     public void BoxOpen()
     {
         boxPanel.SetActive(true);
+        item00Text.text = "Å~"+item00.ToString();
     }
 
     public void BoxClose() 

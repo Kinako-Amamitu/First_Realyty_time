@@ -26,6 +26,9 @@ namespace Shared.Interfaces.StreamingHubs
         //敵の位置回転
         Task EnemyMoveAsync(string enemyName,Vector3 pos,Quaternion rot);
 
+        //敵の撃破処理
+        Task EnemyExcusionAsync(string enemyName);
+
         //マスタークライアントが退室したときの処理
         Task MasterLostAsync();
 

@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] GameObject snowball;
     [SerializeField] public GameObject[] itemPrefab;
+    
+    
     RealtimeGameManager gameManager;
     Animator animator;
 
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
+        
             gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
             rigidbody = GetComponent<Rigidbody>();
             joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
@@ -148,10 +151,12 @@ public class Player : MonoBehaviour
             if (rigidbody.velocity.magnitude > 0.01f)
             {
                 animator.SetInteger("Speed", 1);
+                Running();
             }
             else
             {
                 animator.SetInteger("Speed", 0);
+                Walking();
             }
         }
         
@@ -215,6 +220,16 @@ public class Player : MonoBehaviour
        // Rigidbody snowRigidbody = snow.GetComponent<Rigidbody>();
         //snowRigidbody.AddForce(gameObject.transform.forward * snowball_speed,ForceMode.Impulse);
         shotRate = 0;
+    }
+
+    public void Walking()
+    {
+        gameManager.Walking();
+    }
+
+    public void Running()
+    {
+        gameManager.Running();
     }
 
     private void OnCollisionEnter(Collision collision)

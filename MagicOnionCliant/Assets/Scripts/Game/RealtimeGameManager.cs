@@ -44,6 +44,20 @@ public class RealtimeGameManager : MonoBehaviour
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
     Player player;                                  //プレイヤークラスを使用
 
+    /// <summary>
+    /// 音関連
+    /// </summary>
+    AudioSource audioSource;
+
+
+    //SE
+    public AudioClip walkSE;
+    public AudioClip runSE;
+    public AudioClip snowhitSE;
+    public AudioClip gameOverSE;
+    public AudioClip escapeSE;
+    public AudioClip damageSE;
+
     public int snowCount = 0;       //雪玉が何回使われたか
     public int playerCount = 0;     //プレイヤーが何回使われたか
     public float snowball_speed;    //雪玉のスピード
@@ -96,6 +110,8 @@ public class RealtimeGameManager : MonoBehaviour
 
         //プレイヤー用の追従カメラを探す
         virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+
+        audioSource=GetComponent<AudioSource>();
     }
 
     //敵を生成
@@ -312,14 +328,14 @@ public class RealtimeGameManager : MonoBehaviour
 
         leaveButton.SetActive(true);
         goalText.text = "GOAL!!";
+        audioSource.PlayOneShot(escapeSE);
 
     }
 
-    //デバッグ用プレイヤーにダメージ
+    //プレイヤーにダメージ
     public void Damege()
     {
-
-        player.UpdateHP();
+        audioSource.PlayOneShot(damageSE);
     }
 
     //プレイヤーのHPが0
@@ -328,6 +344,7 @@ public class RealtimeGameManager : MonoBehaviour
 
         leaveButton.SetActive(true);
         goalText.text = "GameOver!!";
+        audioSource.PlayOneShot(gameOverSE);
 
     }
 
@@ -448,4 +465,20 @@ public class RealtimeGameManager : MonoBehaviour
         return item000;
     }
 
+    //プレイヤーが歩いている
+    public void Walking()
+    {
+        audioSource.PlayOneShot(walkSE);
+    }
+
+    //プレイヤーが走っている
+    public void Running()
+    {
+        audioSource.PlayOneShot(runSE);
+    }
+
+    public void Hit()
+    {
+        audioSource.PlayOneShot(snowhitSE);
+    }
 }

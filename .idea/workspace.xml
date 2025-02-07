@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a87dc465-b684-4a6d-b0d0-95d280e3bbe8" name="変更" comment="">
-      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scenes/Map1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4bc9d2cd-4c42-453d-bb73-86ad4001fd4b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/EnemySnow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/EnemySnow.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Item.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Item.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow Man_01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow Man_01.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Prehab/Snow.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Snow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MagicOnionCliant/Assets/Scripts/Game/Snow.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,6 +135,8 @@
       <workItem from="1738111354170" duration="674000" />
       <workItem from="1738542064377" duration="639000" />
       <workItem from="1738658980428" duration="1203000" />
+      <workItem from="1738825462097" duration="605000" />
+      <workItem from="1738888474838" duration="607000" />
     </task>
     <servers />
   </component>

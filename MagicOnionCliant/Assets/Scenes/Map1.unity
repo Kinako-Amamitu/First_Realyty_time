@@ -3735,6 +3735,12 @@ MonoBehaviour:
   goalText: {fileID: 202824020}
   Spawnpoint: {fileID: 0}
   image: {fileID: 1845809272}
+  walkSE: {fileID: 8300000, guid: 2640543fe0091ae4aa92841a7719792d, type: 3}
+  runSE: {fileID: 8300000, guid: 2228a746ae5e4af48bdae02d5ac6cbd3, type: 3}
+  snowhitSE: {fileID: 8300000, guid: 80c22587931f4d441a7945883c440b2a, type: 3}
+  gameOverSE: {fileID: 8300000, guid: 9ae69e4b83c407843af50aa927773ae3, type: 3}
+  escapeSE: {fileID: 8300000, guid: 99d31bfa80f265b42bf213adc6802c34, type: 3}
+  damageSE: {fileID: 8300000, guid: 53c9b4b3cc4733848994dd301fb515bb, type: 3}
   snowCount: 0
   playerCount: 0
   snowball_speed: 50
@@ -4095,8 +4101,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: ed46bfaeb37422d41b288431e409cf7d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11614,7 +11620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

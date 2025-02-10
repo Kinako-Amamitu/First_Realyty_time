@@ -11,10 +11,19 @@ namespace Shared.Interfaces.StreamingHubs
         //ここにサーバー～クライアントの定義
 
         //ユーザーの入室通知
-       void Onjoin(JoinedUser user);
+        void Onjoin(JoinedUser user);
 
         //ユーザーの退室通知
         void OnLeave(JoinedUser user);
+
+        ////プレイヤーアニメーションの状態(列挙型)
+        //public enum CaracterState
+        //{
+        //    Idol=0,
+        //    Wark,
+        //    Idol=1,
+        //    Run
+        //}
 
         //プレイヤーの位置・回転・アニメーション同期
         void OnMove(JoinedUser user,Vector3 pos,Quaternion rot,int anim);

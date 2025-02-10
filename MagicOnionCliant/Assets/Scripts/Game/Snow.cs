@@ -97,10 +97,10 @@ public class Snow : MonoBehaviour
         if (gameObject.tag != "Snow") { return; }
         rb = GetComponent<Rigidbody>();
 
-        if (player == null)
-        {
-            player = GameObject.Find("Player" + gameManager.playerCount + 1).GetComponent<Player>();
-        }
+        //if (player == null)
+        //{
+        //    player = GameObject.Find("Player" + gameManager.playerCount + 1).GetComponent<Player>();
+        //}
 
 
         rb.AddForce(new Vector3(0,0,90), ForceMode.Impulse);

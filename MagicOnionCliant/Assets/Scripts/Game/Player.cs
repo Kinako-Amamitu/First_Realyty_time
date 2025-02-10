@@ -91,6 +91,10 @@ public class Player : MonoBehaviour
         {
             return; 
         }
+        if (isself== false)
+        {
+            return;
+        }
 
         shotRate++;
         damageTime++;

@@ -21,6 +21,9 @@ public class Enemy01 : MonoBehaviour
     //ë“ã@éûä‘
     int num=0;
 
+    GameObject playerObject = null;
+    float speed = 300.0f;
+
     public bool lookAt=false; //å©ÇƒÇ¢ÇÈèÛë‘
 
     // Start is called before the first frame update
@@ -35,9 +38,29 @@ public class Enemy01 : MonoBehaviour
     void Update()
     {
         num++;
-   
+        if(playerObject!=null)
+        {
+            Shoot(playerObject.transform.position, speed);
+        }
+        
     }
 
+    public void LockOn(GameObject playerObj)
+    {
+        if(playerObject==null) 
+        {
+            playerObject = playerObj;
+        }
+        
+    }
+
+    public void LockOff(GameObject playerObj)
+    {
+        if (playerObj==playerObject) 
+        {
+            playerObject = null;
+        }
+    }
 
     public void Shoot(Vector3 pos,float speed)
     {

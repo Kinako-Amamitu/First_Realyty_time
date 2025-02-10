@@ -278,6 +278,8 @@ public class RealtimeGameManager : MonoBehaviour
 
             characterObject.transform.DOLocalMove(pos, 0.1f).SetEase(Ease.Linear);
             characterObject.transform.DORotate(rot.eulerAngles, 0.1f);
+
+            characterObject.GetComponent<Animator>().SetInteger("Speed", anim);
         }
     }
 

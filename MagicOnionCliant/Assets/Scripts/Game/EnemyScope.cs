@@ -36,11 +36,19 @@ public class EnemyScope : MonoBehaviour
         {
 
 
-            Vector3 playerPos = other.transform.position;
+            //Vector3 playerPos = other.transform.position;
 
+            enemy01.LockOn(other.gameObject);
             
-            
-            enemy01.Shoot(playerPos, speed);
+            //enemy01.Shoot(playerPos, speed);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            enemy01.LockOff(other.gameObject);
         }
     }
 }

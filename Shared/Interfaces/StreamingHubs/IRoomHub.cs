@@ -34,7 +34,7 @@ namespace Shared.Interfaces.StreamingHubs
 
 
         //オブジェクトの生成同期
-        Task ObjectSpawnAsync(Guid connectionId,string objectName,Vector3 pos,Quaternion rot);
+        Task ObjectSpawnAsync(Guid connectionId,string objectName,Vector3 pos,Quaternion rot, Vector3 fow);
 
         //オブジェクトの位置回転同期
         Task ObjectMoveAsync(string objectName,Vector3 pos,Quaternion rot);

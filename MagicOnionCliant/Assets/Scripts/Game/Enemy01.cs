@@ -89,7 +89,7 @@ public class Enemy01 : MonoBehaviour
         if (collision.gameObject.tag == "Snow")
         {
 
-            gameManager.ObjectSpawn(itemPrehab[0].name, this.transform.position, this.transform.rotation);
+            gameManager.ObjectSpawn(itemPrehab[0].name, this.transform.position, this.transform.rotation,this.transform.forward);
             //Instantiate(itemPrehab[0], gameObject.transform.position, Quaternion.identity);
             CancelInvoke("MoveEnemy");
             gameManager.ExcusionEnemy(this.gameObject.name);

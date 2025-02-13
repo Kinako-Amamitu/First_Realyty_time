@@ -50,7 +50,7 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     public Action<JoinedUser> OnMasteredClient { get; set; }
 
     //オブジェクトの生成同期
-    public Action<Guid,string,Vector3,Quaternion> OnSpawnObject { get; set; }
+    public Action<Guid,string,Vector3,Quaternion,Vector3> OnSpawnObject { get; set; }
 
     //オブジェクトの移動回転同期
     public Action<string,Vector3,Quaternion> OnMovedObject { get; set; }
@@ -170,15 +170,15 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     }
 
     //オブジェクトの生成同期
-    public async UniTask ObjectSpawnAsync(string objectName,Vector3 pos,Quaternion rot)
+    public async UniTask ObjectSpawnAsync(string objectName,Vector3 pos,Quaternion rot, Vector3 fow)
     {
-        await roomHub.ObjectSpawnAsync(ConnectionId,objectName, pos,rot);
+        await roomHub.ObjectSpawnAsync(ConnectionId,objectName, pos,rot,fow);
     }
 
     //オブジェクトの生成
-    public void OnObjectSpawn(Guid connectionId,string objectName,Vector3 pos,Quaternion rot)
+    public void OnObjectSpawn(Guid connectionId,string objectName,Vector3 pos,Quaternion rot, Vector3 fow)
     {
-        OnSpawnObject(connectionId,objectName, pos,rot);
+        OnSpawnObject(connectionId,objectName, pos,rot,fow);
     }
 
     //オブジェクトの移動同期

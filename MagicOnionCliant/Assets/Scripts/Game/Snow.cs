@@ -7,34 +7,36 @@
 ////////////////////////////////////////////////////////////////
 
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 public class Snow : MonoBehaviour
 {
     public float speed;
-    public Vector3 pos;
+    public Vector3 snowPos;
+    public Vector3 playerForword;
 
     int surviveTime = 0;
 
     Rigidbody rb;
 
-    Player player;
+    //Player player;
 
     RealtimeGameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
 
-        player = GameObject.Find("Player1").GetComponent<Player>();
 
+        
         gameManager = GameObject.Find("GameManager").GetComponent<RealtimeGameManager>();
+        //player = GameObject.Find("Player" + gameManager.playerCount).GetComponent<Player>();
 
 
         //MoveSnow();
 
-        //InvokeRepeating("MoveSnow", 0.1f, 0.1f);
+        InvokeRepeating("SnowAsync", 0.1f, 0.1f);
 
     }
 
@@ -46,7 +48,12 @@ public class Snow : MonoBehaviour
     {
         surviveTime++;
 
-        rb.AddForce(player.transform.forward, ForceMode.Impulse);
+
+        if (playerForword != null)
+        {
+            rb = GetComponent<Rigidbody>();
+            rb.AddForce(playerForword * speed);
+        }
         //rb.AddForce(player.transform.position * speed);
 
         if (surviveTime > 1000)
@@ -92,23 +99,32 @@ public class Snow : MonoBehaviour
         }
     }
 
-    public void MoveSnow()
+    public void MoveSnow(Vector3 pos,Vector3 fow)
     {
         if (gameObject.tag != "Snow") { return; }
-        rb = GetComponent<Rigidbody>();
+        this.snowPos=pos;
+        this.playerForword=fow;
 
         //if (player == null)
         //{
         //    player = GameObject.Find("Player" + gameManager.playerCount + 1).GetComponent<Player>();
         //}
 
-
-        rb.AddForce(new Vector3(0,0,90), ForceMode.Impulse);
         
 
+        //rb.velocity=playerForword*speed;
 
-        //gameObject.transform.DOLocalMove(pos,2.0f);
-        //rb.AddForce(player.transform.forward * speed);
+        //rb.velocity =  playerForword*fow.magnitude;
+
+
+        // gameObject.transform.DOLocalMove(pos*speed,2.0f);
+        //rb.AddForce(playerForword* speed*500);
         // gameManager.MoveObjAsync(name, transform.position, transform.rotation);
+    }
+
+    //ˆÊ’u“¯Šú
+    public void SnowAsync()
+    {
+        gameManager.ObjectMove(this.gameObject.name, this.gameObject.transform.position, this.gameObject.transform.rotation);
     }
 }

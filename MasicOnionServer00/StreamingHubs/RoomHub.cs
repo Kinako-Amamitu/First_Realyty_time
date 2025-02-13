@@ -192,7 +192,7 @@ namespace StreamingHubs
         }
 
         //オブジェクトの生成同期
-        public async Task ObjectSpawnAsync(Guid connectionId,string objectName,Vector3 pos, Quaternion rot)
+        public async Task ObjectSpawnAsync(Guid connectionId,string objectName,Vector3 pos, Quaternion rot, Vector3 fow)
         {
             //グループストレージからRoomData取得
             var roomStorage = this.room.GetInMemoryStorage<RoomData>();
@@ -201,9 +201,10 @@ namespace StreamingHubs
             //位置を保存
             roomData.Position = pos;
             roomData.Rotation= rot;
+            roomData.Forword = fow;
 
             //ルーム参加者全員に、オブジェクトの生成を送信
-            this.Broadcast(room).OnObjectSpawn(connectionId,objectName, pos,rot);
+            this.Broadcast(room).OnObjectSpawn(connectionId,objectName, pos,rot,fow);
         }
 
         //オブジェクトの移動回転同期

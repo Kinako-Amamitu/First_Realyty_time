@@ -14,7 +14,7 @@ namespace StreamingHubs
         public Vector3 Position { get; set; }
         public Quaternion Rotation{ get; set; }
 
-
+        public Vector3 Forword { get; set; }
 
     }
 }

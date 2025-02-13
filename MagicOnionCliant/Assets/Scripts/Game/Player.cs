@@ -219,7 +219,7 @@ public class Player : MonoBehaviour
         if (goal == true) { return; }
         if(isself==false) { return; }
         //GameObject snow = (GameObject)Instantiate(snowball, gameObject.transform.position, Quaternion.identity);
-        gameManager.ObjectSpawn("Snow" + gameManager.snowCount, shootPoint.transform.position, Quaternion.identity);
+        gameManager.ObjectSpawn("Snow" + gameManager.snowCount, shootPoint.transform.position, Quaternion.identity,this.gameObject.transform.forward);
         gameManager.snowCount++;
        // Rigidbody snowRigidbody = snow.GetComponent<Rigidbody>();
         //snowRigidbody.AddForce(gameObject.transform.forward * snowball_speed,ForceMode.Impulse);

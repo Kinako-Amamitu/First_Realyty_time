@@ -80,6 +80,8 @@ public class RealtimeGameManager : MonoBehaviour
         get { return item00; }
     }
 
+   public static GameObject[] objectSnow;
+
     /// <summary>
     /// 起動時１回だけ実行する
     /// </summary>
@@ -103,9 +105,9 @@ public class RealtimeGameManager : MonoBehaviour
         roomModel.OnExcusionedEnemy += this.OnExcusionEnemy;
         //マスタークライアント譲渡
         roomModel.OnMasteredClient += this.OnMasterdClient;
-        //敵が生成した時にOnSpawnObjectメソッドを実行するよう、モデルに登録
+        //オブジェクトが生成した時にOnSpawnObjectメソッドを実行するよう、モデルに登録
         roomModel.OnSpawnObject += this.OnSpawnObject;
-        //敵が移動したときにOnMovedObjectメソッドを実行するよう、モデルに登録
+        //オブジェクトが移動したときにOnMovedObjectメソッドを実行するよう、モデルに登録
         roomModel.OnMovedObject += this.OnMovedObject;
 
         //プレイヤー用の追従カメラを探す
@@ -127,9 +129,15 @@ public class RealtimeGameManager : MonoBehaviour
     }
 
     //オブジェクトを生成
-    public async void ObjectSpawn(string objectName, Vector3 pos, Quaternion rot)
+    public async void ObjectSpawn(string objectName, Vector3 pos, Quaternion rot, Vector3 fow)
     {
-        await roomModel.ObjectSpawnAsync(objectName, pos, rot);
+        await roomModel.ObjectSpawnAsync(objectName, pos, rot, fow);
+    }
+
+    //オブジェクトを移動
+    public async void ObjectMove(string objectName,Vector3 pos,Quaternion rot)
+    {
+        await roomModel.ObjectMoveAsync(objectName,pos,rot);
     }
 
     //入室処理
@@ -385,11 +393,11 @@ public class RealtimeGameManager : MonoBehaviour
     }
 
     //オブジェクトが生成されたら
-    public void OnSpawnObject(Guid connectionId, string objectName, Vector3 pos, Quaternion rot)
+    public void OnSpawnObject(Guid connectionId, string objectName, Vector3 pos, Quaternion rot, Vector3 fow)
     {
 
 
-        GameObject[] objectSnow = objectPrefab;
+        objectSnow = objectPrefab;
 
         int objectid = 0;
 
@@ -411,7 +419,7 @@ public class RealtimeGameManager : MonoBehaviour
 
 
 
-        snow.MoveSnow();
+        snow.MoveSnow(pos,fow);
     }
 
     //オブジェクトが動いたら

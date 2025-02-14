@@ -76,10 +76,13 @@ public class Enemy01 : MonoBehaviour
             gameManager.snowCount++;
             
             ball.transform.DOLocalMove(pos,2.0f);
+            //Invoke("Destroy(ball)", 2.0f);
+                num = 0;
+            
 
             //Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
             //ballRigidbody.AddForce(new Vector3(pos.x, 0,0)*speed);
-            num = 0;
+            
         }
         
     }

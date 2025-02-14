@@ -14,23 +14,28 @@ public class TitleManager : BaseModel
 {
     [SerializeField] GameObject accountPanel;
     [SerializeField] InputField nameSpace;
-    [SerializeField] InputField passwordSpace;
+    //[SerializeField] InputField passwordSpace;
 
     [SerializeField] UserModel userModel;
 
-    public async void OnMakeAccount()
+    public async void OnMakeAccount(string name)
     {
-        string name;
         name = nameSpace.text;
 
-        await userModel.RegistAsync(name);
+        
+
+        await userModel.RegistUserAsync(name);
 
         accountPanel.SetActive(false);
 
-        userModel.SaveUserData();
-        //‰æ–Ê‘JˆÚ
-        Initiate.DoneFading();
-        Initiate.Fade("Home", Color.black, 0.5f);
+        if (name != null)
+        {
+            //‰æ–Ê‘JˆÚ
+            Initiate.DoneFading();
+            Initiate.Fade("Home", Color.black, 0.5f);
+        }
+        else
+        { Debug.Log("–¼‘O‚ð‰½‚©“ü—Í‚µ‚Ä‚­‚¾‚³‚¢"); }
     }
 
 

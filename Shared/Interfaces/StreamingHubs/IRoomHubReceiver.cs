@@ -31,6 +31,9 @@ namespace Shared.Interfaces.StreamingHubs
         //敵のスポーン
         void OnSpawn(string enemyName, Vector3 pos);
 
+        //敵のID同期
+        void OnIdEnemy(int enemyId);
+
         //敵の移動同期
         void OnMoveEnemy( string enemyName,Vector3 pos, Quaternion rot);
 

@@ -16,18 +16,18 @@ class UserTableSeeder extends Seeder
     {
         User::create([
             'name' => "kidakosuke",
-            'token' => Hash::make('122084'),
-            'password' => 'ksk6217myon'
+            'token' => Hash::make('122084')
+
         ]);
         User::create([
             'name' => "kosukekida",
-            'token' => Hash::make('679364'),
-            'password' => 'Amaru259a'
+            'token' => Hash::make('679364')
+
         ]);
         User::create([
             'name' => "ikeda",
-            'token' => Hash::make('672579'),
-            'password' => 'tibaCreater78'
+            'token' => Hash::make('672579')
+
         ]);
     }
 }

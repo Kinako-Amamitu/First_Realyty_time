@@ -1,4 +1,5 @@
 ﻿using MagicOnion;
+using MasicOnionServer00.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;

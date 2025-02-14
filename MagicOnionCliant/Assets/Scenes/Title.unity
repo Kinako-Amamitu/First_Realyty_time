@@ -2473,6 +2473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11389ba43f1bfa048aa414a0f2b7d083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userId: 0
 --- !u!4 &642581081
 Transform:
   m_ObjectHideFlags: 0
@@ -3121,11 +3122,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2052506089}
-  - {fileID: 955031822}
   - {fileID: 1135701094}
-  - {fileID: 629453662}
+  - {fileID: 955031822}
   - {fileID: 1959311378}
+  - {fileID: 629453662}
+  - {fileID: 2052506089}
   m_Father: {fileID: 1795946061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3926,7 +3927,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1028143701}
         m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
         m_MethodName: OnMakeAccount
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5256,7 +5257,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accountPanel: {fileID: 629453661}
   nameSpace: {fileID: 225239789}
-  passwordSpace: {fileID: 0}
   userModel: {fileID: 642581080}
 --- !u!4 &1028143702
 Transform:

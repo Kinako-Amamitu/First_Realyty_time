@@ -165,6 +165,17 @@ namespace StreamingHubs
 
         }
 
+        //敵のIDを同期する
+        public async Task EnemyIdAsync(int enemyId)
+        {
+            //グループストレージからRoomData取得
+            var roomStorage = this.room.GetInMemoryStorage<RoomData>();
+            var roomData = roomStorage.Get(this.ConnectionId);
+
+            //ルーム参加者全員に、敵の出現を送信
+            this.BroadcastExceptSelf(room).OnIdEnemy(enemyId);
+        }
+
         //敵の移動回転処理
         public async Task EnemyMoveAsync(string enemyName, Vector3 pos,Quaternion rot)
         {

@@ -38,4 +38,15 @@ public class Goal : MonoBehaviour
             gameManager.Escape();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            player = GameObject.Find(other.gameObject.name).GetComponent<Player>();
+            if (player.isself != true) { return; }
+            player.goal = true;
+            gameManager.Escape();
+        }
+    }
 }

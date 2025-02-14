@@ -34,6 +34,7 @@ public class RealtimeGameManager : MonoBehaviour
     [SerializeField] Text item00Text;               //テストアイテムの数表示テキスト
     [SerializeField] Text goalText;                 //ゴールを表示するテキスト
     [SerializeField] GameObject Spawnpoint;         //生成ポジション
+    [SerializeField] GameObject[] EnemySpawnpoint;  //敵生成ポジション
     JoinedUser joinedUser;                          //JoinedUserクラスを使用
 
     [SerializeField] GameObject image;               //アイテム表示テスト用
@@ -43,6 +44,22 @@ public class RealtimeGameManager : MonoBehaviour
     //ユーザーIDとゲームオブジェクトを同時に格納
     Dictionary<Guid, GameObject> characterList = new Dictionary<Guid, GameObject>();
     Player player;                                  //プレイヤークラスを使用
+
+
+    public int snowCount = 0;       //雪玉が何回使われたか
+    public int playerCount = 0;     //プレイヤーが何回使われたか
+    public float snowball_speed;    //雪玉のスピード
+    int num = 0;                    //待機時間
+    int enemyid = 0;                //敵が何回使われたか
+    int enemyAlive = 0;             //敵が何体いるか
+    int objectid = 0;               //オブジェクトが何回使われたか
+    bool isjoin = false;            //入室しているか
+    bool isMaster = false;          //マスタークライアントか
+    bool enemyAsync = false;        //敵の同期をしたか
+    bool mine = false;              //自身か判定
+    public static int item000 = 0;   //手持ちアイテムの数
+    public float speed;
+
 
     /// <summary>
     /// 音関連
@@ -58,15 +75,7 @@ public class RealtimeGameManager : MonoBehaviour
     public AudioClip escapeSE;
     public AudioClip damageSE;
 
-    public int snowCount = 0;       //雪玉が何回使われたか
-    public int playerCount = 0;     //プレイヤーが何回使われたか
-    public float snowball_speed;    //雪玉のスピード
-    int num = 0;                    //待機時間
-    int enemyid = 0;                //敵が何回使われたか
-    int objectid = 0;               //オブジェクトが何回使われたか
-    bool isjoin = false;            //入室しているか
-    bool mine = false;              //自身か判定
-    public static int item000 = 0;   //手持ちアイテムの数
+   
 
     public int Item000
     {
@@ -97,8 +106,10 @@ public class RealtimeGameManager : MonoBehaviour
         roomModel.OnLeavedUser += this.OnLeavedUser;
         //ユーザーが移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMoveCharacter += this.OnMoveCharacter;
-        //敵が移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
+        //敵が生成した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnSpawnEnemy += this.OnSpawnEnemy;
+        //敵のIdを受け取った時にOnIdAsyncEnemyrメソッドを実行するよう、モデルに登録
+        roomModel.OnIdAsyncEnemy += this.OnIdAsyncEnemy;
         //敵が移動した時にOnMoveUserメソッドを実行するよう、モデルに登録
         roomModel.OnMovedEnemy += this.OnMoveEnemy;
         //敵が撃破された時にOnMoveUserメソッドを実行するよう、モデルに登録
@@ -114,12 +125,30 @@ public class RealtimeGameManager : MonoBehaviour
         virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
 
         audioSource=GetComponent<AudioSource>();
+
+        ////ログインユーザーで入室する
+        //await JoinRoom();
+    }
+
+    //接続開始
+    public async void Connect()
+    {
+        //ログインユーザーで入室する
+        await JoinRoom();
     }
 
     //敵を生成
     public async void EnemySpawn()
     {
-        await roomModel.SpawnEnemyAsync(enemyPrefab.name, new Vector3(UnityEngine.Random.Range(-8, 8), 2.0f, UnityEngine.Random.Range(-3, 3)));
+        await roomModel.SpawnEnemyAsync(enemyPrefab.name, 
+                                        EnemySpawnpoint[UnityEngine.Random.Range(0,4)].transform.position 
+                                        + new Vector3(UnityEngine.Random.Range(-30, 30), 2.0f, UnityEngine.Random.Range(-30, 30)));
+    }
+
+    //敵のId送信
+    public async void EnemySetId(int enemyId)
+    {
+        await roomModel.EnemyIdAsync(enemyId);
     }
 
     //敵を撃破
@@ -141,17 +170,17 @@ public class RealtimeGameManager : MonoBehaviour
     }
 
     //入室処理
-    public async void JoinRoom()
+    public async UniTask JoinRoom()
     {
-        // 入室
+        //入室
         int id;
         string pid = inputField.text;
-        if (pid == null) { return; }
         int.TryParse(pid, out id);
-        if (id <= 0) { return; }
-        await roomModel.JoinedAsync("sampleRoom", id);
+        if (id == 0) { await roomModel.JoinedAsync("sampleRoom", UserModel.Instance.userId); }
+        else { await roomModel.JoinedAsync("sampleRoom", id); }
 
         joinButton.SetActive(false);
+        inputField.gameObject.SetActive(false);
 
         InvokeRepeating("SendPos", 0.1f, 0.1f);
         //InvokeRepeating("EnemySpawn", 8.0f,8.0f);
@@ -168,9 +197,9 @@ public class RealtimeGameManager : MonoBehaviour
         CancelInvoke("EnemySpawn");
         await roomModel.LeaveAsync();
         leaveButton.SetActive(false);
-        joinButton.SetActive(true);
+        //joinButton.SetActive(true);
         isjoin = false;
-        goalText.text = "";
+        //goalText.text = "";
 
         for (int i = 0; i < player.itemPrefab.Length; i++)
         {
@@ -212,7 +241,15 @@ public class RealtimeGameManager : MonoBehaviour
         characterObject = Instantiate(characterPrefab[0]);//インスタンス生成
 
         //マスタークライアントのみ敵を生成させる
-        if (joinedUser.IsMaster == true) { InvokeRepeating("EnemySpawn", 8.0f, 8.0f); }
+        if (joinedUser.IsMaster == true) 
+        {
+            enemyAsync = true;
+            InvokeRepeating("EnemySpawn", 8.0f, 8.0f); 
+        }
+        else
+        {
+            enemyAsync= false;
+        }
 
         if (user.ConnectionId == roomModel.ConnectionId)
         {//接続IDと一致したら
@@ -237,12 +274,20 @@ public class RealtimeGameManager : MonoBehaviour
             Transform character = characterObject.transform;
             virtualCamera.LookAt = character;
             virtualCamera.Follow = character;
+
+            
         }
 
 
         characterList[user.ConnectionId] = characterObject; //フィールドで保持
         playerCount++;
         characterObject.name = "Player" + playerCount;
+
+        if (enemyid>0 && enemyAsync == false)
+        {
+            //enemyIdを送る
+            EnemySetId(enemyid);
+        }
 
     }
 
@@ -330,16 +375,18 @@ public class RealtimeGameManager : MonoBehaviour
         }
 
         Destroy(enemy);
+        enemyAlive--;
     }
 
     //プレイヤーがゴールに到達したとき
     public void Escape()
     {
 
-        leaveButton.SetActive(true);
+        //leaveButton.SetActive(true);
         goalText.text = "GOAL!!";
         audioSource.PlayOneShot(escapeSE);
 
+        LeaveRoom();
     }
 
     //プレイヤーにダメージ
@@ -387,9 +434,15 @@ public class RealtimeGameManager : MonoBehaviour
 
         Instantiate(enemyObject, pos, Quaternion.identity);
 
-
+        enemyAlive++;
 
         enemyObject.transform.position = pos;
+    }
+
+    //敵のIdが送られてきた
+    public void OnIdAsyncEnemy(int enemyId)
+    {
+        enemyid = enemyId;
     }
 
     //オブジェクトが生成されたら
@@ -417,7 +470,10 @@ public class RealtimeGameManager : MonoBehaviour
         Snow snow = objectSnow[objectid].GetComponent<Snow>();
 
 
+        Rigidbody rb = objectSnow[objectid].GetComponent<Rigidbody>();
 
+        rb.velocity = fow * speed;
+        rb.AddForce(fow * speed);
 
         snow.MoveSnow(pos,fow);
     }

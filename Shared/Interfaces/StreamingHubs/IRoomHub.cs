@@ -23,6 +23,9 @@ namespace Shared.Interfaces.StreamingHubs
         //敵の出現処理
         Task SpawnAsync(string enemyName, Vector3 pos);
 
+        //敵のID同期
+        Task EnemyIdAsync(int enemyid);
+
         //敵の位置回転
         Task EnemyMoveAsync(string enemyName,Vector3 pos,Quaternion rot);
 

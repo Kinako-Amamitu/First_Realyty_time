@@ -12,9 +12,10 @@ using UnityEngine;
 
 public class Snow : MonoBehaviour
 {
-    public float speed;
+    
     public Vector3 snowPos;
     public Vector3 playerForword;
+    public float speed;
 
     int surviveTime = 0;
 
@@ -36,7 +37,7 @@ public class Snow : MonoBehaviour
 
         //MoveSnow();
 
-        InvokeRepeating("SnowAsync", 0.1f, 0.1f);
+        //InvokeRepeating("SnowAsync", 0.1f, 0.1f);
 
     }
 
@@ -54,7 +55,7 @@ public class Snow : MonoBehaviour
             rb = GetComponent<Rigidbody>();
             rb.AddForce(playerForword * speed);
         }
-        //rb.AddForce(player.transform.position * speed);
+
 
         if (surviveTime > 1000)
         {
@@ -101,25 +102,10 @@ public class Snow : MonoBehaviour
 
     public void MoveSnow(Vector3 pos,Vector3 fow)
     {
-        if (gameObject.tag != "Snow") { return; }
         this.snowPos=pos;
         this.playerForword=fow;
 
-        //if (player == null)
-        //{
-        //    player = GameObject.Find("Player" + gameManager.playerCount + 1).GetComponent<Player>();
-        //}
-
         
-
-        //rb.velocity=playerForword*speed;
-
-        //rb.velocity =  playerForword*fow.magnitude;
-
-
-        // gameObject.transform.DOLocalMove(pos*speed,2.0f);
-        //rb.AddForce(playerForword* speed*500);
-        // gameManager.MoveObjAsync(name, transform.position, transform.rotation);
     }
 
     //ˆÊ’u“¯Šú

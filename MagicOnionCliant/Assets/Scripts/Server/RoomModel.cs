@@ -40,6 +40,9 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     //“G‚ÌoŒ»ˆ—
     public Action<string,Vector3> OnSpawnEnemy { get; set; }
 
+    //‚Ä‚«‚ÌId“¯Šú
+    public Action<int> OnIdAsyncEnemy { get; set; }
+
     //“G‚ÌˆÚ“®“¯Šú
     public Action<string,Vector3,Quaternion> OnMovedEnemy { get; set; }
 
@@ -137,6 +140,18 @@ public class RoomModel : BaseModel, IRoomHubReceiver
     public async UniTask SpawnEnemyAsync(string enemyName,Vector3 pos)
     {
         await roomHub.SpawnAsync(enemyName,pos);
+    }
+
+    //‚Ä‚«‚ÌId‘—M
+    public async UniTask EnemyIdAsync(int enemyId)
+    {
+        await roomHub.EnemyIdAsync(enemyId);
+    }
+
+    //“G‚ÌID’Ê’m
+    public void@OnIdEnemy(int enemyId)
+    {
+        OnIdAsyncEnemy(enemyId);
     }
 
     //“G‚ÌˆÚ“®‰ñ“]

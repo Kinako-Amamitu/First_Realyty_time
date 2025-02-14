@@ -25,7 +25,7 @@ public class UserModel : BaseModel
 {
     //const string ServerURL = "http://localhost:7000";
     //const string ServerURL = "http://realtime-game.japaneast.cloudapp.azure.com:7000";
-    int userId; //登録ユーザーID
+    public int userId; //登録ユーザーID
     string userName; //登録ユーザーネーム
     string authToken; //トークン
     string password; //登録パスワード
@@ -113,7 +113,7 @@ public class UserModel : BaseModel
         responce?.Invoke(request.result == UnityWebRequest.Result.Success);
     }
 
-    public async UniTask<bool> RegistAsync(string name)
+    public async UniTask<bool> RegistUserAsync(string name)
     {
         var handler = new YetAnotherHttpHandler() { Http2Only = true };
         var channel = GrpcChannel.ForAddress(ServerURL, new GrpcChannelOptions() { HttpHandler = handler });

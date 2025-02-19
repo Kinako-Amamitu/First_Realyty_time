@@ -35,6 +35,7 @@ public class RealtimeGameManager : MonoBehaviour
     [SerializeField] Text goalText;                 //ゴールを表示するテキスト
     [SerializeField] GameObject Spawnpoint;         //生成ポジション
     [SerializeField] GameObject[] EnemySpawnpoint;  //敵生成ポジション
+    [SerializeField] GameObject Texts;               //接続方法テキスト
     JoinedUser joinedUser;                          //JoinedUserクラスを使用
 
     [SerializeField] GameObject image;               //アイテム表示テスト用
@@ -181,6 +182,7 @@ public class RealtimeGameManager : MonoBehaviour
 
         joinButton.SetActive(false);
         inputField.gameObject.SetActive(false);
+        Texts.SetActive(false);
 
         InvokeRepeating("SendPos", 0.1f, 0.1f);
         //InvokeRepeating("EnemySpawn", 8.0f,8.0f);
